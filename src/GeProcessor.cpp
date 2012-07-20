@@ -40,58 +40,70 @@ namespace dammIds {
 	// clovers
 	const unsigned int MAX_CLOVERS = 4; // for *_DETX spectra
 
-	const unsigned int BETA_OFFSET    = 10;
-	const unsigned int DECAY_OFFSET   = 20;
-	const unsigned int ADDBACK_OFFSET = 50;
+    /*
+     * Beta offset = 10
+     * Decay offset = 20
+     * Addback offset = 50
+     */
 
-	const int D_ENERGY              = 1500;
-	const int D_ENERGY_CLOVERX      = 1501; // leaf by clover for X detectors
+	const int D_ENERGY              = 0;
+	const int D_ENERGY_CLOVERX      = 1; // leaf by clover for X detectors
 
-	const int D_ENERGY_LOWGAIN      = 1507;
-	const int D_ENERGY_HIGHGAIN     = 1508;
-	const int D_MULT                = 1509;
+	const int D_ENERGY_LOWGAIN      = 7;
+	const int D_ENERGY_HIGHGAIN     = 8;
+	const int D_MULT                = 9;
 
-	const int D_ENERGY_WITH_DECAY   = D_ENERGY + DECAY_OFFSET;
+	const int D_ENERGY_WITH_DECAY   = 20;
 	// These spectra are squeezed into a gap in IDs
-	const int D_ENERGY_WITH_IMPLANT = 1525;
-	const int D_ENERGY_WITH_EXT0    = 1526; // with external detector (e.g. 3hen, vandle) 
-	const int D_ENERGY_WITH_EXT1    = 1527; // with external detector (e.g. 3hen, vandle) 
+	const int D_ENERGY_WITH_IMPLANT = 25;
+	const int D_ENERGY_WITH_EXT0    = 26; // with external detector (e.g. 3hen, vandle) 
+	const int D_ENERGY_WITH_EXT1    = 27; // with external detector (e.g. 3hen, vandle) 
 
-	const int D_ADD_ENERGY          = D_ENERGY         + ADDBACK_OFFSET;
-	const int D_ADD_ENERGY_CLOVERX  = D_ENERGY_CLOVERX + ADDBACK_OFFSET ; // addback for X detectors
-	const int D_ADD_ENERGY_TOTAL    = D_ADD_ENERGY_CLOVERX + MAX_CLOVERS;
+	const int D_ADD_ENERGY          = 50; 
+	const int D_ADD_ENERGY_CLOVERX  = 51;
+	const int D_ADD_ENERGY_TOTAL    = 55;
 
 	// 2D spectra
-	const int DD_ENERGY                = 1600;
-	const int DD_CLOVER_ENERGY_RATIO   = 1607;
-	const int DD_ADD_ENERGY            = DD_ENERGY       + ADDBACK_OFFSET; // NOT DECLARED but useful to keep the scheme in mind
-	const int DD_ENERGY_WITH_DECAY     = DD_ENERGY       + DECAY_OFFSET;
-	const int DD_ADD_ENERGY_WITH_DECAY = DD_ADD_ENERGY   + DECAY_OFFSET;
-	// note these only make sense with decay (so they fall in the decay assigned block 1620-1629)
-	const int DD_ENERGY__TIMEX         = 1621; // with x granularities
-	const int DD_ADD_ENERGY__TIMEX     = DD_ENERGY__TIMEX + ADDBACK_OFFSET; // with x granularities
+	const int DD_ENERGY                = 100;
+	const int DD_CLOVER_ENERGY_RATIO   = 107;
+	const int DD_ENERGY_WITH_DECAY     = 120;
+	const int DD_ADD_ENERGY            = 150;
+	const int DD_ADD_ENERGY_EARLY      = 151;
+	const int DD_ADD_ENERGY_LATE       = 152;
+    // Gamma-Gamma angular distribution
+    const int DD_ANGLE__GATEX         = 155;
+    const int DD_ENERGY__GATEX        = 156;
+
+	const int DD_ADD_ENERGY_WITH_DECAY = 170;
+	// note these only make sense with decay 
+	const int DD_ENERGY__TIMEX           = 121; // with x granularities
+	const int DD_ADD_ENERGY__TIMEX       = 171; // with x granularities
 
 	// corresponds to ungated specra ID's + 10 where applicable
 	namespace betaGated {
-	    const int D_ENERGY             = dammIds::ge::D_ENERGY         + dammIds::ge::BETA_OFFSET;
-	    const int D_ENERGY_CLOVERX     = dammIds::ge::D_ENERGY_CLOVERX + dammIds::ge::BETA_OFFSET;
-	    const int D_ENERGY_BETA0       = 1516;
-	    const int D_ENERGY_BETA1       = 1517;
-	    const int D_ENERGY_WITH_EXT0   = dammIds::ge::D_ENERGY_WITH_EXT0   + dammIds::ge::BETA_OFFSET;
-	    const int D_ENERGY_WITH_EXT1   = dammIds::ge::D_ENERGY_WITH_EXT1   + dammIds::ge::BETA_OFFSET;
-	    const int D_ADD_ENERGY         = dammIds::ge::D_ADD_ENERGY         + dammIds::ge::BETA_OFFSET;
-	    const int D_ADD_ENERGY_CLOVERX = dammIds::ge::D_ADD_ENERGY_CLOVERX + dammIds::ge::BETA_OFFSET;
-	    const int D_ADD_ENERGY_TOTAL   = dammIds::ge::D_ADD_ENERGY_TOTAL   + dammIds::ge::BETA_OFFSET;
+	    const int D_ENERGY             = 10;
+	    const int D_ENERGY_CLOVERX     = 11;
+	    const int D_ENERGY_BETA0       = 15; 
+	    const int D_ENERGY_BETA1       = 16; 
+	    const int D_ENERGY_WITH_EXT0   = 36; 
+	    const int D_ENERGY_WITH_EXT1   = 37; 
+	    const int D_ADD_ENERGY         = 60; 
+	    const int D_ADD_ENERGY_CLOVERX = 61; 
+	    const int D_ADD_ENERGY_TOTAL   = 65; 
 
 	    // 2d spectra
-	    const int DD_ENERGY              = dammIds::ge::DD_ENERGY + dammIds::ge::BETA_OFFSET;
-	    const int DD_TDIFF__GAMMA_ENERGY = 1615;
-	    const int DD_TDIFF__BETA_ENERGY  = 1616;
-	    const int DD_ADD_ENERGY_PROMPT   = 1668;
-	    const int DD_ADD_ENERGY_DELAYED  = 1669;
-	    const int DD_ADD_ENERGY          = DD_ENERGY + dammIds::ge::DECAY_OFFSET;
-	    const int DD_ENERGY__TIMEX       = dammIds::ge::DD_ENERGY__TIMEX + dammIds::ge::BETA_OFFSET;
-	    const int DD_ADD_ENERGY__TIMEX   = DD_ENERGY__TIMEX + dammIds::ge::ADDBACK_OFFSET;
+	    const int DD_ENERGY              = 110; 
+	    const int DD_TDIFF__GAMMA_ENERGY = 105;
+	    const int DD_TDIFF__BETA_ENERGY  = 106;
+	    const int DD_ADD_ENERGY          = 160; 
+        const int DD_ADD_ENERGY_EARLY    = 161;
+        const int DD_ADD_ENERGY_LATE     = 162;
+	    const int DD_ADD_ENERGY_PROMPT   = 163;
+	    const int DD_ADD_ENERGY_DELAYED  = 164;
+        const int DD_ANGLE__GATEX        = 165; 
+        const int DD_ENERGY__GATEX       = 166; 
+	    const int DD_ENERGY__TIMEX       = 131; 
+	    const int DD_ADD_ENERGY__TIMEX   = 181;
 	}
     } // end namespace ge
 }
@@ -123,7 +135,7 @@ double GeProcessor::WalkCorrection(double e) {
         const double a0 = 11.2287;
         const double a1 = -0.000939443;
         
-	const double b0 = 38.8912;
+        const double b0 = 38.8912;
         const double b1 = -0.121784;
         const double b2 = 0.000268339;
 
@@ -145,6 +157,56 @@ using namespace dammIds::ge;
 GeProcessor::GeProcessor() : EventProcessor(OFFSET, RANGE), leafToClover() {
     name = "ge";
     associatedTypes.insert("ge"); // associate with germanium detectors
+
+    // previously used:
+    // in seconds/bin
+    // 1e-6, 10e-6, 100e-6, 1e-3, 10e-3, 100e-3 
+    timeResolution.push_back(10e-3); 
+
+#ifdef GGATES
+    /* 
+     * Load GammaGates.txt defining gamma-gamma gates for anular
+     * distributions and for g-g-g spectra
+     *
+     */
+    ifstream ggFile("GammaGates.txt");
+    string line;
+    while (getline(ggFile, line) ) {
+        istringstream iss;
+        iss.str(line);
+        if (line[0] != '#' && line.size() > 1) {
+            vector<double> gms;
+            double g;
+            while (iss >> g) {
+                gms.push_back(g);
+            }
+            GGate gate;
+            if (gms.size() == 2) {
+                double dE = 1.0;
+                gate.g1min = gms[0] - dE;
+                gate.g1max = gms[0] + dE;
+                gate.g2min = gms[1] - dE;
+                gate.g2max = gms[1] + dE;
+            } else if (gms.size() == 4) {
+                gate.g1min = gms[0];
+                gate.g1max = gms[1];
+                gate.g2min = gms[2];
+                gate.g2max = gms[3];
+            } else {
+                cout << "Incomplete gates definition" << endl;
+            }
+            if (gate.check()) {
+                gGates.push_back(gate);
+                cout << "(" << gate.g1min << ", " << gate.g1max << ") <-> " 
+                     << "(" << gate.g2min << ", " << gate.g2max << ") " 
+                     << " gate loaded " << endl;
+            } else {
+                cout << "Wrong gates definition" << endl;
+            }
+        }
+    }
+    ggFile.close();
+#endif
 }
 
 /** 
@@ -250,16 +312,27 @@ void GeProcessor::DeclarePlots(void)
     DeclareHistogram2D(DD_ENERGY                       , energyBins2, energyBins2, "Gamma gamma");
     DeclareHistogram2D(betaGated::DD_ENERGY            , energyBins2, energyBins2, "Gamma gamma beta gated");
     DeclareHistogram2D(DD_ENERGY_WITH_DECAY            , energyBins2, energyBins2, "Gamma gamma decay gated");
+    DeclareHistogram2D(DD_ADD_ENERGY                   , energyBins2, energyBins2, "Gamma gamma addback");
+    DeclareHistogram2D(DD_ADD_ENERGY_EARLY             , energyBins2, energyBins2, "Gamma gamma addback");
+    DeclareHistogram2D(DD_ADD_ENERGY_LATE              , energyBins2, energyBins2, "Gamma gamma addback");
 
-    DeclareHistogram2D(betaGated::DD_ADD_ENERGY        , energyBins2, energyBins2, "Gamma gamma addback");
-    DeclareHistogram2D(betaGated::DD_ADD_ENERGY_PROMPT , energyBins2, energyBins2, "Gamma gamma addback, beta prompt");
-    DeclareHistogram2D(betaGated::DD_ADD_ENERGY_DELAYED, energyBins2, energyBins2, "Gamma gamma addback, beta delayed");
+    DeclareHistogram2D(betaGated::DD_ADD_ENERGY        , energyBins2, energyBins2, "Beta-gated Gamma gamma addback");
+    DeclareHistogram2D(betaGated::DD_ADD_ENERGY_PROMPT , energyBins2, energyBins2, "Beta-gated Gamma gamma addback, beta prompt");
+    DeclareHistogram2D(betaGated::DD_ADD_ENERGY_DELAYED, energyBins2, energyBins2, "Beta-gated Gamma gamma addback, beta delayed");
+    DeclareHistogram2D(betaGated::DD_ADD_ENERGY_EARLY   , energyBins2, energyBins2, "Beta-gated Gamma gamma addback early");
+    DeclareHistogram2D(betaGated::DD_ADD_ENERGY_LATE    , energyBins2, energyBins2, "Beta-gated Gamma gamma addback late");
+
     DeclareHistogram2D(DD_ADD_ENERGY_WITH_DECAY        , energyBins2, energyBins2, "Gamma gamma addback, decay gated");
 
     DeclareHistogram2D(betaGated::DD_TDIFF__GAMMA_ENERGY, timeBins2, energyBins2, "Gamma energy, beta time diff");
     DeclareHistogram2D(betaGated::DD_TDIFF__BETA_ENERGY, timeBins2, energyBins2, "Beta energy, gamma time diff"); //? reduce energy bins
 
     DeclareHistogram2D(DD_CLOVER_ENERGY_RATIO, S4, S6, "high/low energy ratio (x10)");
+
+    DeclareHistogram2D(DD_ANGLE__GATEX, S2, S5, "g_g angular distrubution vs g_g gate number");
+    DeclareHistogram2D(betaGated::DD_ANGLE__GATEX, S2, S5, "beta gated g_g angular distrubution vs g_g gate number");
+    DeclareHistogram2D(DD_ENERGY__GATEX, energyBins2, S5, "g_g gated gamma energy");
+    DeclareHistogram2D(betaGated::DD_ENERGY__GATEX, energyBins2, S5, "g_g_beta gated gamma energy");
 
     DeclareHistogramGranY(DD_ENERGY__TIMEX               , energyBins2, granTimeBins, "E - Time", 2, timeResolution, "s");
     DeclareHistogramGranY(DD_ADD_ENERGY__TIMEX           , energyBins2, granTimeBins, "Addback E - Time", 2, timeResolution, "s");
@@ -302,7 +375,7 @@ bool GeProcessor::Process(RawEvent &event) {
 	    betaTime   = chan->GetTime();
         }
     } // beta summary present
-    const double betaThresh = 1;
+    const double betaThresh = 10;
     bool hasBeta = (betaEnergy > betaThresh);
 
     //? make a search for tagged events for external detectors
@@ -358,7 +431,7 @@ bool GeProcessor::Process(RawEvent &event) {
         
         double gEnergy = chan->GetCalEnergy();	
         double gTime   = chan->GetTime() - WalkCorrection(gEnergy);	
-	chan->SetCorrectedTime(gTime);
+        chan->SetCorrectedTime(gTime);
 
         plot(D_ENERGY, gEnergy);
 	if (hasImplant) {
@@ -416,13 +489,19 @@ bool GeProcessor::Process(RawEvent &event) {
     
     double subEventWindow = 10.0; // pixie units
     // guarantee the first event will be greater than the subevent window delayed from reference
-    double refTime = -1.1 * subEventWindow; 
+    double refTime = -2.0 * subEventWindow; 
+
+    // Do not take into account events with too low energy (avoid summing of noise with real gammas) 
+    const double addbackEnergyCut = 25;
     
     for (vector<ChanEvent*>::iterator it = geEvents.begin(); it != geEvents.end(); it++) {
 	ChanEvent *ch = *it;
-	double energy = ch->GetCalEnergy(); 
+        double energy = ch->GetCalEnergy(); 
         double time = ch->GetCorrectedTime();
         int clover = leafToClover[ch->GetChanID().GetLocation()];
+
+        if (energy < addbackEnergyCut)
+            continue;
 
         // entries in map are sorted by time
         // if event time is outside of subEventWindow, we start new 
@@ -473,12 +552,36 @@ bool GeProcessor::Process(RawEvent &event) {
                 plot(betaGated::D_ADD_ENERGY_CLOVERX + det, gEnergy);
             }
 
-            for (unsigned int det2 = det + 1; det2 < numClovers; ++det2) {
+        for (unsigned int det2 = det + 1; det2 < numClovers; ++det2) {
 		double gEnergy2 = addbackEvents[det2][ev].energy;
 		if (gEnergy2 < 1) 
 		    continue;
 
 		symplot(DD_ADD_ENERGY, gEnergy, gEnergy2);
+        /*
+         * Early and late coincidences
+         * Only decay part of cycle can be taken
+         * Early coin. are between decay cycle start and some arb. point
+         * Late are between arb. point and end of cycle
+         */
+        if (hasDecay) {
+            double decayCycleStart = 1.0;
+            double decayCycleEarly = 1.5;
+            double decayCycleEnd   = 2.0;
+            double decayTime = event.GetCorrelator().GetDecayTime() * pixie::clockInSeconds;
+            if (decayTime > decayCycleStart) {
+                if (decayTime < decayCycleEarly) {
+                    symplot(DD_ADD_ENERGY_EARLY, gEnergy, gEnergy2);
+                    if (hasBeta)
+                        symplot(betaGated::DD_ADD_ENERGY_EARLY, gEnergy, gEnergy2);
+                } else if (decayTime < decayCycleEnd) {
+                    symplot(DD_ADD_ENERGY_LATE, gEnergy, gEnergy2);
+                    if (hasBeta)
+                        symplot(betaGated::DD_ADD_ENERGY_LATE, gEnergy, gEnergy2);
+                }
+
+            }
+        }
 		if (hasBeta) {
 		    symplot(betaGated::DD_ADD_ENERGY, gEnergy, gEnergy2);
 		    double dTime = (int)(gTime - betaTime);
@@ -496,6 +599,51 @@ bool GeProcessor::Process(RawEvent &event) {
 			symplot(betaGated::DD_ADD_ENERGY_PROMPT, gEnergy, gEnergy2);
 		    }
                 } // has beta
+#ifdef GGATES
+            // Gamma-gamma angular
+            // and gamma-gamma gate
+            unsigned ngg = gGates.size();
+            for (unsigned ig = 0; ig < ngg; ++ig) {
+                double g1min = 0;
+                double g1max = 0;
+                double g2min = 0;
+                double g2max = 0;
+                if (gGates[ig].g1min < gGates[ig].g2min) {
+                    g1min = gGates[ig].g1min;
+                    g1max = gGates[ig].g1max;
+                    g2min = gGates[ig].g2min;
+                    g2max = gGates[ig].g2max;
+                } else {
+                    g1min = gGates[ig].g2min;
+                    g1max = gGates[ig].g2max;
+                    g2min = gGates[ig].g1min;
+                    g2max = gGates[ig].g1max;
+                }
+                double e1 = min(gEnergy, gEnergy2);
+                double e2 = max(gEnergy, gEnergy2);
+                if ( (e1 >= g1min && e1 <= g1max) &&
+                        (e2 >= g2min && e2 <= g2max) ) {
+                    if (det % 2 != det2 % 2) {
+                        plot(DD_ANGLE__GATEX, 1, ig);
+                        if (hasBeta)
+                            plot(betaGated::DD_ANGLE__GATEX, 1, ig);
+                    } else {
+                       plot(DD_ANGLE__GATEX, 2, ig);
+                        if (hasBeta)
+                            plot(betaGated::DD_ANGLE__GATEX, 2, ig);
+                    }
+                    for (unsigned det3 = det2 + 1;
+                            det3 < numClovers; ++det3) {
+                        double gEnergy3 = addbackEvents[det3][ev].energy;
+                        if (gEnergy3 < 1)
+                            continue;
+                        plot(DD_ENERGY__GATEX, gEnergy3, ig);
+                        if (hasBeta)
+                            plot(betaGated::DD_ENERGY__GATEX, gEnergy3, ig);
+                    }
+                }
+            } //for ig
+#endif
             } // iteration over other clovers
         } // itertaion over clovers
     } // iteration over events

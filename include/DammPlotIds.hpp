@@ -46,28 +46,28 @@ namespace dammIds {
 
     namespace logic {
         const int OFFSET = 3000;
-        const int RANGE = 80;
+        const int RANGE = 100;
         const int MAX_LOGIC = 10; /*< maximum number of logic signals */
     }
 
     namespace triggerlogic {
-        const int OFFSET = 3080;
-        const int RANGE = 20;
+        const int OFFSET = 3100;
+        const int RANGE = 100;
     }
 
-    namespace vandle{ 
-        const int OFFSET = 3100;
+    namespace vandle{ //The RANGE can be greatly reduced. -SVP
+        const int OFFSET = 3200;
         const int RANGE = 200;
     }
 
     //in PulserProcessor.cpp 
     namespace pulser{ 
-        const int OFFSET = 3300;
+        const int OFFSET = 3400;
         const int RANGE = 20;
     } 
    
     namespace waveformanalyzer{ 
-        const int OFFSET = 3320;
+        const int OFFSET = 3420;
         const int RANGE = 20;
     }
 
