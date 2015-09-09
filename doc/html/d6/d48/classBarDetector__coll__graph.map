@@ -1,0 +1,7 @@
+<map id="BarDetector" name="BarDetector">
+<area shape="rect" id="node2" href="$d2/d78/classHighResTimingData.html" title="Class for holding information for high resolution timing. " alt="" coords="1133,320,1281,347"/>
+<area shape="rect" id="node3" href="$d4/d8b/classTrace.html" title="Store the information for a trace. " alt="" coords="894,320,953,347"/>
+<area shape="rect" id="node7" href="$dd/da1/classPlots.html" title="Holds pointers to all Histograms. " alt="" coords="575,195,628,221"/>
+<area shape="rect" id="node9" href="$db/daf/classPlotsRegister.html" title="Holds ranges and offsets of all plots. Singleton class. " alt="" coords="233,384,340,411"/>
+<area shape="rect" id="node18" href="$d9/d09/classTimingCalibration.html" title="A class to hold the timing calibration for a detector. " alt="" coords="1142,57,1273,84"/>
+</map>

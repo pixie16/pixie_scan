@@ -1,0 +1,36 @@
+<map id="include/TreeCorrelator.hpp" name="include/TreeCorrelator.hpp">
+<area shape="rect" id="node2" href="$d7/d81/EventProcessor_8hpp.html" title="Generic event processor. " alt="" coords="2735,80,2933,107"/>
+<area shape="rect" id="node3" href="$d9/dd1/BeamLogicProcessor_8hpp.html" title="include/BeamLogicProcessor.hpp" alt="" coords="5,155,236,181"/>
+<area shape="rect" id="node4" href="$dd/d65/BetaProcessor_8hpp.html" title="include/BetaProcessor.hpp" alt="" coords="260,155,451,181"/>
+<area shape="rect" id="node5" href="$d9/d6e/BetaScintProcessor_8hpp.html" title="include/BetaScintProcessor.hpp" alt="" coords="475,155,697,181"/>
+<area shape="rect" id="node6" href="$d0/d9d/CrosstalkProcessor_8hpp.html" title="A Crosstalk class to be used to build others. " alt="" coords="561,229,781,256"/>
+<area shape="rect" id="node7" href="$d2/dfa/VandleProcessor_8hpp.html" title="A class to handle VANDLE bars. " alt="" coords="771,155,977,181"/>
+<area shape="rect" id="node8" href="$d9/d38/VandleAtLeribssProcessor_8hpp.html" title="A class to process data from the LeRIBSS 2012 campaign. " alt="" coords="805,229,1068,256"/>
+<area shape="rect" id="node9" href="$db/d6a/WalkVandleBetaProcessor_8hpp.html" title="A class to determine the walk between Vandle and the LeRIBSS betas. " alt="" coords="1092,229,1357,256"/>
+<area shape="rect" id="node10" href="$db/de2/DoubleBetaProcessor_8hpp.html" title="A Template class to be used to build others. " alt="" coords="1103,155,1336,181"/>
+<area shape="rect" id="node11" href="$d6/d4f/DssdProcessor_8hpp.html" title="Header file for DSSD analysis. " alt="" coords="1360,155,1553,181"/>
+<area shape="rect" id="node12" href="$df/de4/E11006Processor_8hpp.html" title="A class specific to the e11006 experiment. " alt="" coords="1578,155,1789,181"/>
+<area shape="rect" id="node13" href="$df/dd8/Ge4Hen3Processor_8hpp.html" title="include/Ge4Hen3Processor.hpp" alt="" coords="1719,229,1941,256"/>
+<area shape="rect" id="node14" href="$d7/df8/GeProcessor_8hpp.html" title="Processor for germanium detectors. " alt="" coords="1864,155,2044,181"/>
+<area shape="rect" id="node15" href="$d3/d40/GeCalibProcessor_8hpp.html" title="Processor for germanium detectors &#45; calibration. " alt="" coords="1973,229,2183,256"/>
+<area shape="rect" id="node16" href="$de/d06/Hen3Processor_8hpp.html" title="include/Hen3Processor.hpp" alt="" coords="2119,155,2314,181"/>
+<area shape="rect" id="node17" href="$d3/de9/ImplantSsdProcessor_8hpp.html" title="Header file for an SSD detector for implantation and correlation. " alt="" coords="2339,155,2569,181"/>
+<area shape="rect" id="node18" href="$df/d11/IonChamberProcessor_8hpp.html" title="Processor for ion chamber. " alt="" coords="2593,155,2832,181"/>
+<area shape="rect" id="node19" href="$d1/df1/LiquidProcessor_8hpp.html" title="include/LiquidProcessor.hpp" alt="" coords="2856,155,3055,181"/>
+<area shape="rect" id="node20" href="$d4/d74/LiquidScintProcessor_8hpp.html" title="include/LiquidScintProcessor.hpp" alt="" coords="3079,155,3309,181"/>
+<area shape="rect" id="node21" href="$d7/dd9/LitePositionProcessor_8hpp.html" title="Handle QDCs for the position sensitive detector, a minimal number of spectra are created. " alt="" coords="3333,155,3567,181"/>
+<area shape="rect" id="node22" href="$d2/d8b/LogicProcessor_8hpp.html" title="Class to handle logic signals derived originally from MTC processor. " alt="" coords="3591,155,3786,181"/>
+<area shape="rect" id="node24" href="$d5/df4/McpProcessor_8hpp.html" title="Class for handling position&#45;sensitive mcp signals. " alt="" coords="3811,155,3999,181"/>
+<area shape="rect" id="node25" href="$d6/d55/MtcProcessor_8hpp.html" title="class to handle mtc signals " alt="" coords="4023,155,4207,181"/>
+<area shape="rect" id="node26" href="$df/dda/NeutronProcessor_8hpp.html" title="include/NeutronProcessor.hpp" alt="" coords="4231,155,4442,181"/>
+<area shape="rect" id="node27" href="$d8/d74/NeutronScintProcessor_8hpp.html" title="include/NeutronScintProcessor.hpp" alt="" coords="4466,155,4709,181"/>
+<area shape="rect" id="node28" href="$db/dd5/PositionProcessor_8hpp.html" title="Handle QDCs for the position sensitive detector. " alt="" coords="4733,155,4943,181"/>
+<area shape="rect" id="node29" href="$db/d30/PulserProcessor_8hpp.html" title="Class for handling Pulser Signals. " alt="" coords="4967,155,5167,181"/>
+<area shape="rect" id="node30" href="$d9/de3/RootProcessor_8hpp.html" title="Processor to dump data from events into a root tree. " alt="" coords="5192,155,5383,181"/>
+<area shape="rect" id="node31" href="$d6/d1d/ScintProcessor_8hpp.html" title="include/ScintProcessor.hpp" alt="" coords="5407,155,5599,181"/>
+<area shape="rect" id="node32" href="$dd/d49/SsdProcessor_8hpp.html" title="Header file for SSD analysis. " alt="" coords="5624,155,5809,181"/>
+<area shape="rect" id="node33" href="$d1/d6b/TeenyVandleProcessor_8hpp.html" title="A Template class to be used to build others. " alt="" coords="5834,155,6079,181"/>
+<area shape="rect" id="node34" href="$dc/deb/TemplateProcessor_8hpp.html" title="A Template class to be used to build others. " alt="" coords="6104,155,6324,181"/>
+<area shape="rect" id="node35" href="$d2/d41/ValidProcessor_8hpp.html" title="Class for handling Valid Signals For the VANDLE&#45;MoNA experiment at MSU. " alt="" coords="6349,155,6541,181"/>
+<area shape="rect" id="node23" href="$dd/d8f/TriggerLogicProcessor_8hpp.html" title="include/TriggerLogicProcessor.hpp" alt="" coords="3568,229,3809,256"/>
+</map>

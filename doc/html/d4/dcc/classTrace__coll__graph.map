@@ -1,0 +1,4 @@
+<map id="Trace" name="Trace">
+<area shape="rect" id="node5" href="$dd/da1/classPlots.html" title="Holds pointers to all Histograms. " alt="" coords="575,188,628,215"/>
+<area shape="rect" id="node7" href="$db/daf/classPlotsRegister.html" title="Holds ranges and offsets of all plots. Singleton class. " alt="" coords="233,247,340,273"/>
+</map>

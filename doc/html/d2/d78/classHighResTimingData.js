@@ -1,0 +1,28 @@
+var classHighResTimingData =
+[
+    [ "HighResTimingData", "d2/d78/classHighResTimingData.html#ad2404f214094630031890f80c2d69dbf", null ],
+    [ "~HighResTimingData", "d2/d78/classHighResTimingData.html#a1ca37e180a1eaeafd14518477157d20e", null ],
+    [ "HighResTimingData", "d2/d78/classHighResTimingData.html#ac2e32ef01cd26f78665055fc5a7cd4f1", null ],
+    [ "CalcEnergy", "d2/d78/classHighResTimingData.html#a36e0cbbffdc4aa1fa9349c6fb9f94d28", null ],
+    [ "GetAveBaseline", "d2/d78/classHighResTimingData.html#a9a451f539ba43bc1af2950e63041070c", null ],
+    [ "GetDiscrimination", "d2/d78/classHighResTimingData.html#a5c37acd4af0aca55fa830e31d6d803df", null ],
+    [ "GetHighResTime", "d2/d78/classHighResTimingData.html#af1cb742a90259b8e5310e85b9164acb9", null ],
+    [ "GetIsValidData", "d2/d78/classHighResTimingData.html#abf115ab3884f5d0076b771fceaf17133", null ],
+    [ "GetMaximumPosition", "d2/d78/classHighResTimingData.html#a38d19413ed2efb9f623393a2519f5040", null ],
+    [ "GetMaximumValue", "d2/d78/classHighResTimingData.html#ab06b6f703b5aa89f55e6e41428e69003", null ],
+    [ "GetNumAboveThresh", "d2/d78/classHighResTimingData.html#adca37d865da50506c2f0e07e70d25920", null ],
+    [ "GetPhase", "d2/d78/classHighResTimingData.html#ab7c22ad8d2691d5683edcfe01e36e207", null ],
+    [ "GetPixieEnergy", "d2/d78/classHighResTimingData.html#ab760cee4f222a070a67ca72f78f4de8c", null ],
+    [ "GetSignalToNoiseRatio", "d2/d78/classHighResTimingData.html#ac647c9d3c4cd83b0b7671139c2b07a31", null ],
+    [ "GetStdDevBaseline", "d2/d78/classHighResTimingData.html#a3263be14be1ea123751ceb90e4de14ab", null ],
+    [ "GetTrace", "d2/d78/classHighResTimingData.html#a7461d2e8e2060b4daaac6b08238b507d", null ],
+    [ "GetTraceQdc", "d2/d78/classHighResTimingData.html#ae030857390e4ad2262e30f896c9f03b3", null ],
+    [ "GetWalk", "d2/d78/classHighResTimingData.html#a7e870682bbe0cecec4fb4a79799db60c", null ],
+    [ "GetWalkCorrectedTime", "d2/d78/classHighResTimingData.html#ac00490095e2f24c1e7444565362f9136", null ],
+    [ "SetDataValid", "d2/d78/classHighResTimingData.html#a87bbec2d29cef3441e68099d5009992b", null ],
+    [ "highResTime_", "d2/d78/classHighResTimingData.html#a3cb5101e957cd4ce32cb4c55881ae51f", null ],
+    [ "isValidData_", "d2/d78/classHighResTimingData.html#ab5688a3015f0c7b06a02ba9090b73808", null ],
+    [ "pixieEnergy_", "d2/d78/classHighResTimingData.html#aaeee345f8ee8d2eaaf9bf3793c100e0e", null ],
+    [ "snr_", "d2/d78/classHighResTimingData.html#aa964cfde71b6db991a058f722265b3cd", null ],
+    [ "trace_", "d2/d78/classHighResTimingData.html#a0346328f997a1fe8efd8d43d4f010e96", null ]
+];

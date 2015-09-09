@@ -1,0 +1,6 @@
+<map id="TriggerLogicProcessor" name="TriggerLogicProcessor">
+<area shape="rect" id="node2" href="$d7/dbe/classLogicProcessor.html" title="Class to handle logic signals. " alt="" coords="1144,599,1264,625"/>
+<area shape="rect" id="node3" href="$d2/d58/classEventProcessor.html" title="Class to handle event processing. " alt="" coords="860,225,983,252"/>
+<area shape="rect" id="node10" href="$dd/da1/classPlots.html" title="Holds pointers to all Histograms. " alt="" coords="565,369,619,396"/>
+<area shape="rect" id="node13" href="$db/daf/classPlotsRegister.html" title="Holds ranges and offsets of all plots. Singleton class. " alt="" coords="233,408,340,435"/>
+</map>

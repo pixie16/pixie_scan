@@ -1,0 +1,18 @@
+<map id="include/BarDetector.hpp" name="include/BarDetector.hpp">
+<area shape="rect" id="node3" href="$d6/d1a/HighResTimingData_8hpp.html" title="Class to hold all of the information for high resolution timing. " alt="" coords="1185,80,1359,107"/>
+<area shape="rect" id="node33" href="$dd/d67/TimingCalibrator_8hpp.html" title="A class to handle the timing calibration parameters. " alt="" coords="1833,528,1985,555"/>
+<area shape="rect" id="node4" href="$d0/dab/ChanEvent_8hpp.html" title="A Class to define what a channel event is. " alt="" coords="775,155,894,181"/>
+<area shape="rect" id="node18" href="$d5/d64/Globals_8hpp.html" title="constant parameters used in pixie16 analysis " alt="" coords="1393,603,1489,629"/>
+<area shape="rect" id="node30" href="$da/d72/Trace_8hpp.html" title="A simple class to store the traces. " alt="" coords="681,453,767,480"/>
+<area shape="rect" id="node6" href="$d9/def/DetectorLibrary_8hpp.html" title="This is an extension of the vector of the identifiers that was previously used. " alt="" coords="761,229,908,256"/>
+<area shape="rect" id="node9" href="$d9/dec/Identifier_8hpp.html" title="Defines identifying information for channels. " alt="" coords="1592,379,1696,405"/>
+<area shape="rect" id="node23" href="$d4/d61/pixie16app__defs_8h_source.html" title="pixie16app_defs.h" alt="" coords="573,677,710,704"/>
+<area shape="rect" id="node11" href="$d7/d4b/RawEvent_8hpp.html" title="Header file for the rawevent. " alt="" coords="889,304,1002,331"/>
+<area shape="rect" id="node13" href="$d8/daa/Correlator_8hpp.html" title="Header file for correlation. " alt="" coords="1114,453,1227,480"/>
+<area shape="rect" id="node32" href="$d9/dee/DetectorSummary_8hpp.html" title="The class that generates the summary of the detectors in the analysis. " alt="" coords="474,379,635,405"/>
+<area shape="rect" id="node16" href="$d0/d7d/Plots_8hpp.html" title="A container to request a block of plots and plot respective spectra through the plots register..." alt="" coords="779,528,859,555"/>
+<area shape="rect" id="node29" href="$df/dd7/DammPlotIds_8hpp.html" title="Lists Offsets and Ranges for various Processors. " alt="" coords="985,528,1117,555"/>
+<area shape="rect" id="node28" href="$d6/d10/PlotsRegister_8hpp.html" title="PlotsRegister.hpp" alt="" coords="755,603,888,629"/>
+<area shape="rect" id="node24" href="$d2/de9/Exceptions_8hpp.html" title="Class to handle errors occurring during the execution of the code. " alt="" coords="1773,752,1891,779"/>
+<area shape="rect" id="node26" href="$d1/d64/Messenger_8hpp.html" title="A class to handle messages and output them prettily. " alt="" coords="1744,677,1864,704"/>
+</map>

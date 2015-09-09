@@ -1,0 +1,5 @@
+<map id="include/VandleProcessor.hpp" name="include/VandleProcessor.hpp">
+<area shape="rect" id="node2" href="$d0/d9d/CrosstalkProcessor_8hpp.html" title="A Crosstalk class to be used to build others. " alt="" coords="5,80,225,107"/>
+<area shape="rect" id="node3" href="$d9/d38/VandleAtLeribssProcessor_8hpp.html" title="A class to process data from the LeRIBSS 2012 campaign. " alt="" coords="249,80,512,107"/>
+<area shape="rect" id="node4" href="$db/d6a/WalkVandleBetaProcessor_8hpp.html" title="A class to determine the walk between Vandle and the LeRIBSS betas. " alt="" coords="536,80,801,107"/>
+</map>

@@ -1,0 +1,15 @@
+<map id="include/ScintProcessor.hpp" name="include/ScintProcessor.hpp">
+<area shape="rect" id="node2" href="$d7/d81/EventProcessor_8hpp.html" title="Generic event processor. " alt="" coords="515,80,664,107"/>
+<area shape="rect" id="node29" href="$da/d72/Trace_8hpp.html" title="A simple class to store the traces. " alt="" coords="434,304,521,331"/>
+<area shape="rect" id="node7" href="$d0/d7d/Plots_8hpp.html" title="A container to request a block of plots and plot respective spectra through the plots register..." alt="" coords="616,379,696,405"/>
+<area shape="rect" id="node24" href="$d4/d49/TreeCorrelator_8hpp.html" title="A class to handle complex correlations between various processors. " alt="" coords="1325,155,1467,181"/>
+<area shape="rect" id="node9" href="$d5/d64/Globals_8hpp.html" title="constant parameters used in pixie16 analysis " alt="" coords="1224,453,1320,480"/>
+<area shape="rect" id="node23" href="$d6/d10/PlotsRegister_8hpp.html" title="PlotsRegister.hpp" alt="" coords="569,453,703,480"/>
+<area shape="rect" id="node17" href="$d4/d61/pixie16app__defs_8h_source.html" title="pixie16app_defs.h" alt="" coords="1351,528,1489,555"/>
+<area shape="rect" id="node18" href="$d2/de9/Exceptions_8hpp.html" title="Class to handle errors occurring during the execution of the code. " alt="" coords="1895,603,2014,629"/>
+<area shape="rect" id="node20" href="$d1/d64/Messenger_8hpp.html" title="A class to handle messages and output them prettily. " alt="" coords="1513,528,1633,555"/>
+<area shape="rect" id="node25" href="$db/db7/Places_8hpp.html" title="Defines the various places for the TreeCorrelator. " alt="" coords="1351,304,1441,331"/>
+<area shape="rect" id="node28" href="$d5/d68/PlaceBuilder_8hpp.html" title="Defines the various places for the TreeCorrelator. " alt="" coords="1550,229,1677,256"/>
+<area shape="rect" id="node27" href="$df/d76/EventData_8hpp.html" title="Structure holding event data. " alt="" coords="1192,379,1307,405"/>
+<area shape="rect" id="node31" href="$df/dd7/DammPlotIds_8hpp.html" title="Lists Offsets and Ranges for various Processors. " alt="" coords="145,379,277,405"/>
+</map>

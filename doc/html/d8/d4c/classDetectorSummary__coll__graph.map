@@ -1,0 +1,6 @@
+<map id="DetectorSummary" name="DetectorSummary">
+<area shape="rect" id="node2" href="$dc/d00/classChanEvent.html" title="A channel event. " alt="" coords="1103,545,1195,572"/>
+<area shape="rect" id="node3" href="$d4/d8b/classTrace.html" title="Store the information for a trace. " alt="" coords="860,257,919,284"/>
+<area shape="rect" id="node7" href="$dd/da1/classPlots.html" title="Holds pointers to all Histograms. " alt="" coords="575,319,628,345"/>
+<area shape="rect" id="node9" href="$db/daf/classPlotsRegister.html" title="Holds ranges and offsets of all plots. Singleton class. " alt="" coords="233,453,340,480"/>
+</map>

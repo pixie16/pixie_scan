@@ -1,0 +1,8 @@
+<map id="include/BarDetector.hpp" name="include/BarDetector.hpp">
+<area shape="rect" id="node2" href="$dd/d98/BarBuilder_8hpp.html" title="A class to build bar style detectors. " alt="" coords="91,80,254,107"/>
+<area shape="rect" id="node3" href="$d2/dfa/VandleProcessor_8hpp.html" title="A class to handle VANDLE bars. " alt="" coords="278,80,483,107"/>
+<area shape="rect" id="node7" href="$db/de2/DoubleBetaProcessor_8hpp.html" title="A Template class to be used to build others. " alt="" coords="508,80,741,107"/>
+<area shape="rect" id="node4" href="$d0/d9d/CrosstalkProcessor_8hpp.html" title="A Crosstalk class to be used to build others. " alt="" coords="5,155,225,181"/>
+<area shape="rect" id="node5" href="$d9/d38/VandleAtLeribssProcessor_8hpp.html" title="A class to process data from the LeRIBSS 2012 campaign. " alt="" coords="249,155,512,181"/>
+<area shape="rect" id="node6" href="$db/d6a/WalkVandleBetaProcessor_8hpp.html" title="A class to determine the walk between Vandle and the LeRIBSS betas. " alt="" coords="536,155,801,181"/>
+</map>

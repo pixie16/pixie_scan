@@ -1,0 +1,9 @@
+<map id="include/TraceAnalyzer.hpp" name="include/TraceAnalyzer.hpp">
+<area shape="rect" id="node2" href="$d4/dcd/CfdAnalyzer_8hpp.html" title="Class to use Cfd on traces. " alt="" coords="5,80,180,107"/>
+<area shape="rect" id="node3" href="$d9/dd8/TraceFilterer_8hpp.html" title="Declaration of analysis class which does the filtering of traces. " alt="" coords="205,80,383,107"/>
+<area shape="rect" id="node5" href="$dc/de3/FittingAnalyzer_8hpp.html" title="Class to fit functions to waveforms. " alt="" coords="408,80,599,107"/>
+<area shape="rect" id="node6" href="$d2/dfe/TauAnalyzer_8hpp.html" title="A trace analyzer which determines the decay time constant of traces. " alt="" coords="623,80,799,107"/>
+<area shape="rect" id="node7" href="$d9/d26/TraceExtractor_8hpp.html" title="Header file for the TraceExtractor class. " alt="" coords="824,80,1015,107"/>
+<area shape="rect" id="node8" href="$d5/d8e/WaveformAnalyzer_8hpp.html" title="Class to analyze traces. " alt="" coords="1039,80,1255,107"/>
+<area shape="rect" id="node4" href="$d3/dc3/DoubleTraceAnalyzer_8hpp.html" title="Header file for the TraceAnalyzer class. " alt="" coords="178,155,410,181"/>
+</map>

@@ -1,0 +1,24 @@
+<map id="include/DetectorSummary.hpp" name="include/DetectorSummary.hpp">
+<area shape="rect" id="node2" href="$d7/d4b/RawEvent_8hpp.html" title="Header file for the rawevent. " alt="" coords="1747,80,1908,107"/>
+<area shape="rect" id="node3" href="$d9/def/DetectorLibrary_8hpp.html" title="This is an extension of the vector of the identifiers that was previously used. " alt="" coords="1474,155,1669,181"/>
+<area shape="rect" id="node9" href="$d0/d9d/CrosstalkProcessor_8hpp.html" title="A Crosstalk class to be used to build others. " alt="" coords="1525,528,1745,555"/>
+<area shape="rect" id="node20" href="$df/dd8/Ge4Hen3Processor_8hpp.html" title="include/Ge4Hen3Processor.hpp" alt="" coords="1935,229,2157,256"/>
+<area shape="rect" id="node21" href="$d7/df8/GeProcessor_8hpp.html" title="Processor for germanium detectors. " alt="" coords="2080,155,2260,181"/>
+<area shape="rect" id="node22" href="$d3/d40/GeCalibProcessor_8hpp.html" title="Processor for germanium detectors &#45; calibration. " alt="" coords="2189,229,2399,256"/>
+<area shape="rect" id="node23" href="$db/dd5/PositionProcessor_8hpp.html" title="Handle QDCs for the position sensitive detector. " alt="" coords="1794,155,2005,181"/>
+<area shape="rect" id="node4" href="$d0/dab/ChanEvent_8hpp.html" title="A Class to define what a channel event is. " alt="" coords="1397,229,1564,256"/>
+<area shape="rect" id="node5" href="$d6/d1a/HighResTimingData_8hpp.html" title="Class to hold all of the information for high resolution timing. " alt="" coords="1087,304,1309,331"/>
+<area shape="rect" id="node17" href="$d0/d51/TimingMapBuilder_8hpp.html" title="Class to build timing maps. " alt="" coords="1509,379,1719,405"/>
+<area shape="rect" id="node19" href="$d0/dc0/DetectorDriver_8hpp.html" title="Main Driver for event processing. " alt="" coords="873,304,1062,331"/>
+<area shape="rect" id="node6" href="$de/d9d/BarDetector_8hpp.html" title="A class to handle bar style detectors (VANDLE, Betas, etc.) " alt="" coords="1261,379,1434,405"/>
+<area shape="rect" id="node7" href="$dd/d98/BarBuilder_8hpp.html" title="A class to build bar style detectors. " alt="" coords="1489,453,1651,480"/>
+<area shape="rect" id="node8" href="$d2/dfa/VandleProcessor_8hpp.html" title="A class to handle VANDLE bars. " alt="" coords="1001,453,1206,480"/>
+<area shape="rect" id="node12" href="$db/de2/DoubleBetaProcessor_8hpp.html" title="A Template class to be used to build others. " alt="" coords="1231,453,1464,480"/>
+<area shape="rect" id="node13" href="$d4/dcd/CfdAnalyzer_8hpp.html" title="Class to use Cfd on traces. " alt="" coords="5,379,180,405"/>
+<area shape="rect" id="node14" href="$d1/df1/LiquidProcessor_8hpp.html" title="include/LiquidProcessor.hpp" alt="" coords="204,379,403,405"/>
+<area shape="rect" id="node15" href="$db/d30/PulserProcessor_8hpp.html" title="Class for handling Pulser Signals. " alt="" coords="426,379,626,405"/>
+<area shape="rect" id="node16" href="$d1/d6b/TeenyVandleProcessor_8hpp.html" title="A Template class to be used to build others. " alt="" coords="650,379,895,405"/>
+<area shape="rect" id="node18" href="$d5/d8e/WaveformAnalyzer_8hpp.html" title="Class to analyze traces. " alt="" coords="919,379,1135,405"/>
+<area shape="rect" id="node10" href="$d9/d38/VandleAtLeribssProcessor_8hpp.html" title="A class to process data from the LeRIBSS 2012 campaign. " alt="" coords="828,528,1091,555"/>
+<area shape="rect" id="node11" href="$db/d6a/WalkVandleBetaProcessor_8hpp.html" title="A class to determine the walk between Vandle and the LeRIBSS betas. " alt="" coords="1115,528,1380,555"/>
+</map>

@@ -1,0 +1,18 @@
+<map id="include/DetectorDriver.hpp" name="include/DetectorDriver.hpp">
+<area shape="rect" id="node6" href="$d5/db0/Calibrator_8hpp.html" title="Class to handle energy calibrations for the channels. " alt="" coords="2355,379,2466,405"/>
+<area shape="rect" id="node10" href="$d0/dab/ChanEvent_8hpp.html" title="A Class to define what a channel event is. " alt="" coords="1017,80,1135,107"/>
+<area shape="rect" id="node16" href="$d0/d7d/Plots_8hpp.html" title="A container to request a block of plots and plot respective spectra through the plots register..." alt="" coords="1008,453,1088,480"/>
+<area shape="rect" id="node18" href="$d5/d64/Globals_8hpp.html" title="constant parameters used in pixie16 analysis " alt="" coords="649,528,745,555"/>
+<area shape="rect" id="node26" href="$d1/d64/Messenger_8hpp.html" title="A class to handle messages and output them prettily. " alt="" coords="195,603,315,629"/>
+<area shape="rect" id="node33" href="$d9/d27/WalkCorrector_8hpp.html" title="A Class to handle walk corrections for channels. " alt="" coords="2191,379,2331,405"/>
+<area shape="rect" id="node8" href="$d9/dec/Identifier_8hpp.html" title="Defines identifying information for channels. " alt="" coords="1988,453,2092,480"/>
+<area shape="rect" id="node11" href="$d9/def/DetectorLibrary_8hpp.html" title="This is an extension of the vector of the identifiers that was previously used. " alt="" coords="1827,155,1973,181"/>
+<area shape="rect" id="node23" href="$d4/d61/pixie16app__defs_8h_source.html" title="pixie16app_defs.h" alt="" coords="339,603,477,629"/>
+<area shape="rect" id="node30" href="$da/d72/Trace_8hpp.html" title="A simple class to store the traces. " alt="" coords="1379,379,1466,405"/>
+<area shape="rect" id="node12" href="$d7/d4b/RawEvent_8hpp.html" title="Header file for the rawevent. " alt="" coords="827,229,941,256"/>
+<area shape="rect" id="node14" href="$d8/daa/Correlator_8hpp.html" title="Header file for correlation. " alt="" coords="1069,379,1182,405"/>
+<area shape="rect" id="node32" href="$d9/dee/DetectorSummary_8hpp.html" title="The class that generates the summary of the detectors in the analysis. " alt="" coords="475,304,637,331"/>
+<area shape="rect" id="node29" href="$df/dd7/DammPlotIds_8hpp.html" title="Lists Offsets and Ranges for various Processors. " alt="" coords="1298,453,1430,480"/>
+<area shape="rect" id="node28" href="$d6/d10/PlotsRegister_8hpp.html" title="PlotsRegister.hpp" alt="" coords="1219,528,1352,555"/>
+<area shape="rect" id="node24" href="$d2/de9/Exceptions_8hpp.html" title="Class to handle errors occurring during the execution of the code. " alt="" coords="166,677,285,704"/>
+</map>

@@ -1,0 +1,11 @@
+<map id="include/FittingAnalyzer.hpp" name="include/FittingAnalyzer.hpp">
+<area shape="rect" id="node2" href="$da/d72/Trace_8hpp.html" title="A simple class to store the traces. " alt="" coords="545,155,631,181"/>
+<area shape="rect" id="node26" href="$dc/d8f/TraceAnalyzer_8hpp.html" title="Header file for the TraceAnalyzer class. " alt="" coords="777,80,919,107"/>
+<area shape="rect" id="node7" href="$df/dd7/DammPlotIds_8hpp.html" title="Lists Offsets and Ranges for various Processors. " alt="" coords="626,229,758,256"/>
+<area shape="rect" id="node8" href="$d5/d64/Globals_8hpp.html" title="constant parameters used in pixie16 analysis " alt="" coords="549,304,645,331"/>
+<area shape="rect" id="node22" href="$d0/d7d/Plots_8hpp.html" title="A container to request a block of plots and plot respective spectra through the plots register..." alt="" coords="860,229,940,256"/>
+<area shape="rect" id="node24" href="$d6/d10/PlotsRegister_8hpp.html" title="PlotsRegister.hpp" alt="" coords="155,304,288,331"/>
+<area shape="rect" id="node15" href="$d4/d61/pixie16app__defs_8h_source.html" title="pixie16app_defs.h" alt="" coords="670,379,807,405"/>
+<area shape="rect" id="node16" href="$d2/de9/Exceptions_8hpp.html" title="Class to handle errors occurring during the execution of the code. " alt="" coords="602,453,721,480"/>
+<area shape="rect" id="node18" href="$d1/d64/Messenger_8hpp.html" title="A class to handle messages and output them prettily. " alt="" coords="883,379,1003,405"/>
+</map>

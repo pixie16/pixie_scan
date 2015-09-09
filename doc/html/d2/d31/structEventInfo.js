@@ -1,0 +1,37 @@
+var structEventInfo =
+[
+    [ "EEventTypes", "d2/d31/structEventInfo.html#aa8a8042b70334bab220566ff3ad92346", [
+      [ "IMPLANT_EVENT", "d2/d31/structEventInfo.html#aa8a8042b70334bab220566ff3ad92346a41cadd88553aa3cc18f646c69d716de9", null ],
+      [ "ALPHA_EVENT", "d2/d31/structEventInfo.html#aa8a8042b70334bab220566ff3ad92346a2805ab9ef8d85f3e4131e1d08052715a", null ],
+      [ "BETA_EVENT", "d2/d31/structEventInfo.html#aa8a8042b70334bab220566ff3ad92346afcbfd447eaf2696af0e8ca062a103d2a", null ],
+      [ "FISSION_EVENT", "d2/d31/structEventInfo.html#aa8a8042b70334bab220566ff3ad92346abeb4b388b4cd5fd3f02054396a686ace", null ],
+      [ "PROTON_EVENT", "d2/d31/structEventInfo.html#aa8a8042b70334bab220566ff3ad92346a0b8a37cdb092124156c230154824abc5", null ],
+      [ "DECAY_EVENT", "d2/d31/structEventInfo.html#aa8a8042b70334bab220566ff3ad92346a120d5e187cff7f48ac66fb3b58b890e6", null ],
+      [ "PROJECTILE_EVENT", "d2/d31/structEventInfo.html#aa8a8042b70334bab220566ff3ad92346a89c3967a60c5f2da0e285f891f11da20", null ],
+      [ "GAMMA_EVENT", "d2/d31/structEventInfo.html#aa8a8042b70334bab220566ff3ad92346ac40d0a2b9a977909b0662f647799d909", null ],
+      [ "UNKNOWN_EVENT", "d2/d31/structEventInfo.html#aa8a8042b70334bab220566ff3ad92346aa474e112dbd9f28a267f3fad5a68478e", null ]
+    ] ],
+    [ "EventInfo", "d2/d31/structEventInfo.html#afecb7cc24a3672df223d8b9446211787", null ],
+    [ "EventInfo", "d2/d31/structEventInfo.html#a04596832c5d0f45e0301fe18e534bb9e", null ],
+    [ "beamOn", "d2/d31/structEventInfo.html#a183a48ea20541d8040050b1d973eec6e", null ],
+    [ "boxMax", "d2/d31/structEventInfo.html#a584b8cb3a9d2af804232add7ee1e1165", null ],
+    [ "boxMult", "d2/d31/structEventInfo.html#a156609d291d55b76055c8c0aedd74b93", null ],
+    [ "clockCount", "d2/d31/structEventInfo.html#ad8c8c47a8217f99b14ef24074497422b", null ],
+    [ "dtime", "d2/d31/structEventInfo.html#a9f66b91e377323191ae06f23a6c4f140", null ],
+    [ "energy", "d2/d31/structEventInfo.html#a3111c8334a06d1ecd162ce2b0687626a", null ],
+    [ "energyBox", "d2/d31/structEventInfo.html#ac6efcef0ffe2288d2adb96bdee2d9cd7", null ],
+    [ "flagged", "d2/d31/structEventInfo.html#a4e6c8314cac78b3da48ab9c7bca1347b", null ],
+    [ "foilTime", "d2/d31/structEventInfo.html#ae7fb2296ea24da23612245f763dbfad4", null ],
+    [ "generation", "d2/d31/structEventInfo.html#afec191256eb1d5b4fca4e327774e0867", null ],
+    [ "hasTof", "d2/d31/structEventInfo.html#aa7f3189976487cb1de2d376b7aa513b4", null ],
+    [ "hasVeto", "d2/d31/structEventInfo.html#af865ff7a218e328e3704c6ec25cc376a", null ],
+    [ "impMult", "d2/d31/structEventInfo.html#ac7c8f405bcf4a9790f6ad68ef7d6668b", null ],
+    [ "logicBits", "d2/d31/structEventInfo.html#a85b260c0add81b049c4ed741bd6a4b91", null ],
+    [ "mcpMult", "d2/d31/structEventInfo.html#a1bfacea75ca18d2580c487f4cb973092", null ],
+    [ "offTime", "d2/d31/structEventInfo.html#a5619e9c342c56aac4ade3cd1510edf8e", null ],
+    [ "pileUp", "d2/d31/structEventInfo.html#a155609eba5363b426e56ead662e9ce7e", null ],
+    [ "position", "d2/d31/structEventInfo.html#a8a1234331ae5726ad528dc8f834e7fd1", null ],
+    [ "time", "d2/d31/structEventInfo.html#a38760a148057ae26dbe4d872d77f2e6a", null ],
+    [ "tof", "d2/d31/structEventInfo.html#af7a287da532f474fff2da500bf35719e", null ],
+    [ "type", "d2/d31/structEventInfo.html#a5d62990028c995ac1aec3c558d346b1c", null ]
+];

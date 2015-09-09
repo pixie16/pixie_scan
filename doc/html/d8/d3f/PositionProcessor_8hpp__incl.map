@@ -1,0 +1,21 @@
+<map id="include/PositionProcessor.hpp" name="include/PositionProcessor.hpp">
+<area shape="rect" id="node4" href="$d7/d81/EventProcessor_8hpp.html" title="Generic event processor. " alt="" coords="869,80,1018,107"/>
+<area shape="rect" id="node29" href="$d7/d4b/RawEvent_8hpp.html" title="Header file for the rawevent. " alt="" coords="1668,80,1781,107"/>
+<area shape="rect" id="node8" href="$d0/d7d/Plots_8hpp.html" title="A container to request a block of plots and plot respective spectra through the plots register..." alt="" coords="1717,379,1797,405"/>
+<area shape="rect" id="node24" href="$d4/d49/TreeCorrelator_8hpp.html" title="A class to handle complex correlations between various processors. " alt="" coords="264,155,407,181"/>
+<area shape="rect" id="node10" href="$d5/d64/Globals_8hpp.html" title="constant parameters used in pixie16 analysis " alt="" coords="1362,453,1458,480"/>
+<area shape="rect" id="node23" href="$d6/d10/PlotsRegister_8hpp.html" title="PlotsRegister.hpp" alt="" coords="2023,453,2157,480"/>
+<area shape="rect" id="node17" href="$d4/d61/pixie16app__defs_8h_source.html" title="pixie16app_defs.h" alt="" coords="2636,528,2773,555"/>
+<area shape="rect" id="node18" href="$d2/de9/Exceptions_8hpp.html" title="Class to handle errors occurring during the execution of the code. " alt="" coords="5,603,124,629"/>
+<area shape="rect" id="node20" href="$d1/d64/Messenger_8hpp.html" title="A class to handle messages and output them prettily. " alt="" coords="1342,528,1462,555"/>
+<area shape="rect" id="node25" href="$db/db7/Places_8hpp.html" title="Defines the various places for the TreeCorrelator. " alt="" coords="601,304,691,331"/>
+<area shape="rect" id="node28" href="$d5/d68/PlaceBuilder_8hpp.html" title="Defines the various places for the TreeCorrelator. " alt="" coords="377,229,504,256"/>
+<area shape="rect" id="node27" href="$df/d76/EventData_8hpp.html" title="Structure holding event data. " alt="" coords="589,379,703,405"/>
+<area shape="rect" id="node30" href="$d8/daa/Correlator_8hpp.html" title="Header file for correlation. " alt="" coords="2323,304,2436,331"/>
+<area shape="rect" id="node33" href="$da/d72/Trace_8hpp.html" title="A simple class to store the traces. " alt="" coords="1968,304,2055,331"/>
+<area shape="rect" id="node35" href="$d9/dee/DetectorSummary_8hpp.html" title="The class that generates the summary of the detectors in the analysis. " alt="" coords="1753,155,1915,181"/>
+<area shape="rect" id="node36" href="$d0/dab/ChanEvent_8hpp.html" title="A Class to define what a channel event is. " alt="" coords="1456,229,1575,256"/>
+<area shape="rect" id="node38" href="$d9/dec/Identifier_8hpp.html" title="Defines identifying information for channels. " alt="" coords="1031,379,1135,405"/>
+<area shape="rect" id="node32" href="$df/dd7/DammPlotIds_8hpp.html" title="Lists Offsets and Ranges for various Processors. " alt="" coords="2253,379,2385,405"/>
+<area shape="rect" id="node37" href="$d9/def/DetectorLibrary_8hpp.html" title="This is an extension of the vector of the identifiers that was previously used. " alt="" coords="1183,304,1330,331"/>
+</map>

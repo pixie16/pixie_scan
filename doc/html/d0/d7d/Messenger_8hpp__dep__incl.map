@@ -1,0 +1,51 @@
+<map id="include/Messenger.hpp" name="include/Messenger.hpp">
+<area shape="rect" id="node2" href="$d5/d64/Globals_8hpp.html" title="constant parameters used in pixie16 analysis " alt="" coords="4042,80,4186,107"/>
+<area shape="rect" id="node21" href="$d0/dc0/DetectorDriver_8hpp.html" title="Main Driver for event processing. " alt="" coords="4494,528,4683,555"/>
+<area shape="rect" id="node46" href="$dd/d67/TimingCalibrator_8hpp.html" title="A class to handle the timing calibration parameters. " alt="" coords="5469,155,5669,181"/>
+<area shape="rect" id="node3" href="$d0/d7d/Plots_8hpp.html" title="A container to request a block of plots and plot respective spectra through the plots register..." alt="" coords="4101,155,4229,181"/>
+<area shape="rect" id="node4" href="$d8/daa/Correlator_8hpp.html" title="Header file for correlation. " alt="" coords="2905,229,3067,256"/>
+<area shape="rect" id="node5" href="$d7/d4b/RawEvent_8hpp.html" title="Header file for the rawevent. " alt="" coords="2787,304,2948,331"/>
+<area shape="rect" id="node7" href="$d0/dab/ChanEvent_8hpp.html" title="A Class to define what a channel event is. " alt="" coords="4617,453,4784,480"/>
+<area shape="rect" id="node8" href="$d6/d1a/HighResTimingData_8hpp.html" title="Class to hold all of the information for high resolution timing. " alt="" coords="4757,528,4980,555"/>
+<area shape="rect" id="node20" href="$d9/dee/DetectorSummary_8hpp.html" title="The class that generates the summary of the detectors in the analysis. " alt="" coords="5105,528,5315,555"/>
+<area shape="rect" id="node27" href="$da/d72/Trace_8hpp.html" title="A simple class to store the traces. " alt="" coords="4508,229,4643,256"/>
+<area shape="rect" id="node47" href="$db/db7/Places_8hpp.html" title="Defines the various places for the TreeCorrelator. " alt="" coords="2059,229,2198,256"/>
+<area shape="rect" id="node49" href="$d5/d68/PlaceBuilder_8hpp.html" title="Defines the various places for the TreeCorrelator. " alt="" coords="2041,304,2216,331"/>
+<area shape="rect" id="node50" href="$df/d76/EventData_8hpp.html" title="Structure holding event data. " alt="" coords="2067,155,2230,181"/>
+<area shape="rect" id="node28" href="$dc/d8f/TraceAnalyzer_8hpp.html" title="Header file for the TraceAnalyzer class. " alt="" coords="5177,304,5366,331"/>
+<area shape="rect" id="node34" href="$d7/d81/EventProcessor_8hpp.html" title="Generic event processor. " alt="" coords="2475,453,2673,480"/>
+<area shape="rect" id="node26" href="$d3/de9/ImplantSsdProcessor_8hpp.html" title="Header file for an SSD detector for implantation and correlation. " alt="" coords="3769,528,4000,555"/>
+<area shape="rect" id="node6" href="$d9/def/DetectorLibrary_8hpp.html" title="This is an extension of the vector of the identifiers that was previously used. " alt="" coords="4246,379,4441,405"/>
+<area shape="rect" id="node12" href="$d0/d9d/CrosstalkProcessor_8hpp.html" title="A Crosstalk class to be used to build others. " alt="" coords="767,752,987,779"/>
+<area shape="rect" id="node22" href="$df/dd8/Ge4Hen3Processor_8hpp.html" title="include/Ge4Hen3Processor.hpp" alt="" coords="617,603,840,629"/>
+<area shape="rect" id="node23" href="$d7/df8/GeProcessor_8hpp.html" title="Processor for germanium detectors. " alt="" coords="557,528,737,555"/>
+<area shape="rect" id="node24" href="$d3/d40/GeCalibProcessor_8hpp.html" title="Processor for germanium detectors &#45; calibration. " alt="" coords="383,603,594,629"/>
+<area shape="rect" id="node25" href="$db/dd5/PositionProcessor_8hpp.html" title="Handle QDCs for the position sensitive detector. " alt="" coords="322,528,533,555"/>
+<area shape="rect" id="node18" href="$d0/d51/TimingMapBuilder_8hpp.html" title="Class to build timing maps. " alt="" coords="4763,603,4974,629"/>
+<area shape="rect" id="node9" href="$de/d9d/BarDetector_8hpp.html" title="A class to handle bar style detectors (VANDLE, Betas, etc.) " alt="" coords="5438,603,5611,629"/>
+<area shape="rect" id="node10" href="$dd/d98/BarBuilder_8hpp.html" title="A class to build bar style detectors. " alt="" coords="5505,677,5667,704"/>
+<area shape="rect" id="node11" href="$d2/dfa/VandleProcessor_8hpp.html" title="A class to handle VANDLE bars. " alt="" coords="4623,677,4829,704"/>
+<area shape="rect" id="node13" href="$db/de2/DoubleBetaProcessor_8hpp.html" title="A Template class to be used to build others. " alt="" coords="4365,677,4599,704"/>
+<area shape="rect" id="node14" href="$d4/dcd/CfdAnalyzer_8hpp.html" title="Class to use Cfd on traces. " alt="" coords="4999,603,5173,629"/>
+<area shape="rect" id="node15" href="$d1/df1/LiquidProcessor_8hpp.html" title="include/LiquidProcessor.hpp" alt="" coords="4440,603,4639,629"/>
+<area shape="rect" id="node16" href="$db/d30/PulserProcessor_8hpp.html" title="Class for handling Pulser Signals. " alt="" coords="2898,603,3098,629"/>
+<area shape="rect" id="node17" href="$d1/d6b/TeenyVandleProcessor_8hpp.html" title="A Template class to be used to build others. " alt="" coords="3919,603,4165,629"/>
+<area shape="rect" id="node19" href="$d5/d8e/WaveformAnalyzer_8hpp.html" title="Class to analyze traces. " alt="" coords="5198,603,5414,629"/>
+<area shape="rect" id="node29" href="$d9/dd8/TraceFilterer_8hpp.html" title="Declaration of analysis class which does the filtering of traces. " alt="" coords="5086,379,5265,405"/>
+<area shape="rect" id="node30" href="$d3/dc3/DoubleTraceAnalyzer_8hpp.html" title="Header file for the TraceAnalyzer class. " alt="" coords="4971,453,5203,480"/>
+<area shape="rect" id="node31" href="$dc/de3/FittingAnalyzer_8hpp.html" title="Class to fit functions to waveforms. " alt="" coords="4871,379,5061,405"/>
+<area shape="rect" id="node32" href="$d4/d74/LiquidScintProcessor_8hpp.html" title="include/LiquidScintProcessor.hpp" alt="" coords="4025,528,4254,555"/>
+<area shape="rect" id="node33" href="$d6/d1d/ScintProcessor_8hpp.html" title="include/ScintProcessor.hpp" alt="" coords="4278,528,4470,555"/>
+<area shape="rect" id="node35" href="$d9/dd1/BeamLogicProcessor_8hpp.html" title="include/BeamLogicProcessor.hpp" alt="" coords="915,528,1145,555"/>
+<area shape="rect" id="node36" href="$dd/d65/BetaProcessor_8hpp.html" title="include/BetaProcessor.hpp" alt="" coords="1169,528,1360,555"/>
+<area shape="rect" id="node37" href="$d9/d6e/BetaScintProcessor_8hpp.html" title="include/BetaScintProcessor.hpp" alt="" coords="1385,528,1606,555"/>
+<area shape="rect" id="node38" href="$d6/d4f/DssdProcessor_8hpp.html" title="Header file for DSSD analysis. " alt="" coords="1631,528,1824,555"/>
+<area shape="rect" id="node39" href="$df/de4/E11006Processor_8hpp.html" title="A class specific to the e11006 experiment. " alt="" coords="1849,528,2059,555"/>
+<area shape="rect" id="node40" href="$de/d06/Hen3Processor_8hpp.html" title="include/Hen3Processor.hpp" alt="" coords="2083,528,2278,555"/>
+<area shape="rect" id="node41" href="$df/d11/IonChamberProcessor_8hpp.html" title="Processor for ion chamber. " alt="" coords="2455,528,2693,555"/>
+<area shape="rect" id="node42" href="$d7/dd9/LitePositionProcessor_8hpp.html" title="Handle QDCs for the position sensitive detector, a minimal number of spectra are created. " alt="" coords="2718,528,2953,555"/>
+<area shape="rect" id="node43" href="$d2/d8b/LogicProcessor_8hpp.html" title="Class to handle logic signals derived originally from MTC processor. " alt="" coords="2977,528,3171,555"/>
+<area shape="rect" id="node44" href="$d5/df4/McpProcessor_8hpp.html" title="Class for handling position&#45;sensitive mcp signals. " alt="" coords="3196,528,3384,555"/>
+<area shape="rect" id="node45" href="$d6/d55/MtcProcessor_8hpp.html" title="class to handle mtc signals " alt="" coords="3409,528,3593,555"/>
+<area shape="rect" id="node48" href="$d4/d49/TreeCorrelator_8hpp.html" title="A class to handle complex correlations between various processors. " alt="" coords="5,379,196,405"/>
+</map>

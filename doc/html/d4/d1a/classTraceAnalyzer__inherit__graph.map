@@ -1,0 +1,9 @@
+<map id="TraceAnalyzer" name="TraceAnalyzer">
+<area shape="rect" id="node2" href="$d7/d5d/classCfdAnalyzer.html" title="Class to analyze traces using a digital CFD. " alt="" coords="5,80,104,107"/>
+<area shape="rect" id="node3" href="$db/dde/classFittingAnalyzer.html" title="Analyzer that handles the fitting of traces for High Resolution Timing. " alt="" coords="128,80,243,107"/>
+<area shape="rect" id="node4" href="$d2/d52/classTauAnalyzer.html" title="Class to analyze Tau from a trace. " alt="" coords="267,80,368,107"/>
+<area shape="rect" id="node5" href="$d5/d42/classTraceExtractor.html" title="A class to extract traces from events. " alt="" coords="393,80,509,107"/>
+<area shape="rect" id="node6" href="$d0/d77/classTraceFilterer.html" title="A class to perform trapezoidal filters on the traces. " alt="" coords="533,80,635,107"/>
+<area shape="rect" id="node8" href="$d5/da3/classWaveformAnalyzer.html" title="Class to handle the HRT and waveform analysis. " alt="" coords="660,80,801,107"/>
+<area shape="rect" id="node7" href="$df/dd8/classDoubleTraceAnalyzer.html" title="Analyzer to handle double traces from RMS style experiments. " alt="" coords="505,155,663,181"/>
+</map>

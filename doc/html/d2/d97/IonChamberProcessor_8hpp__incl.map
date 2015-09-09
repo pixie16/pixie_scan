@@ -1,0 +1,13 @@
+<map id="include/IonChamberProcessor.hpp" name="include/IonChamberProcessor.hpp">
+<area shape="rect" id="node3" href="$d7/d81/EventProcessor_8hpp.html" title="Generic event processor. " alt="" coords="235,80,384,107"/>
+<area shape="rect" id="node8" href="$d0/d7d/Plots_8hpp.html" title="A container to request a block of plots and plot respective spectra through the plots register..." alt="" coords="235,229,315,256"/>
+<area shape="rect" id="node25" href="$d4/d49/TreeCorrelator_8hpp.html" title="A class to handle complex correlations between various processors. " alt="" coords="989,155,1131,181"/>
+<area shape="rect" id="node10" href="$d5/d64/Globals_8hpp.html" title="constant parameters used in pixie16 analysis " alt="" coords="901,453,997,480"/>
+<area shape="rect" id="node24" href="$d6/d10/PlotsRegister_8hpp.html" title="PlotsRegister.hpp" alt="" coords="261,453,395,480"/>
+<area shape="rect" id="node18" href="$d4/d61/pixie16app__defs_8h_source.html" title="pixie16app_defs.h" alt="" coords="881,528,1018,555"/>
+<area shape="rect" id="node19" href="$d2/de9/Exceptions_8hpp.html" title="Class to handle errors occurring during the execution of the code. " alt="" coords="1451,603,1570,629"/>
+<area shape="rect" id="node21" href="$d1/d64/Messenger_8hpp.html" title="A class to handle messages and output them prettily. " alt="" coords="541,528,661,555"/>
+<area shape="rect" id="node26" href="$db/db7/Places_8hpp.html" title="Defines the various places for the TreeCorrelator. " alt="" coords="1015,304,1105,331"/>
+<area shape="rect" id="node28" href="$d5/d68/PlaceBuilder_8hpp.html" title="Defines the various places for the TreeCorrelator. " alt="" coords="883,229,1010,256"/>
+<area shape="rect" id="node27" href="$df/d76/EventData_8hpp.html" title="Structure holding event data. " alt="" coords="1024,379,1139,405"/>
+</map>

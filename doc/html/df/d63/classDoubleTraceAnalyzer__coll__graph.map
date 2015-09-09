@@ -1,0 +1,9 @@
+<map id="DoubleTraceAnalyzer" name="DoubleTraceAnalyzer">
+<area shape="rect" id="node2" href="$d0/d77/classTraceFilterer.html" title="A class to perform trapezoidal filters on the traces. " alt="" coords="1196,635,1299,661"/>
+<area shape="rect" id="node3" href="$d9/dc0/classTraceAnalyzer.html" title="Online trace analysis. " alt="" coords="897,556,1011,583"/>
+<area shape="rect" id="node20" href="$d3/daa/classTrapezoidalFilterParameters.html" title="Parameters for your typical trapezoidal filter. " alt="" coords="853,861,1055,888"/>
+<area shape="rect" id="node23" href="$d0/d40/structTraceFilterer_1_1PulseInfo.html" title="Structure to hold information about the pulse. " alt="" coords="871,761,1037,788"/>
+<area shape="rect" id="node12" href="$dd/da1/classPlots.html" title="Holds pointers to all Histograms. " alt="" coords="575,348,628,375"/>
+<area shape="rect" id="node8" href="$d4/d8b/classTrace.html" title="Store the information for a trace. " alt="" coords="925,265,983,292"/>
+<area shape="rect" id="node14" href="$db/daf/classPlotsRegister.html" title="Holds ranges and offsets of all plots. Singleton class. " alt="" coords="233,265,340,292"/>
+</map>

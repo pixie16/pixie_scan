@@ -1,0 +1,4 @@
+<map id="EventProcessor" name="EventProcessor">
+<area shape="rect" id="node8" href="$dd/da1/classPlots.html" title="Holds pointers to all Histograms. " alt="" coords="565,271,619,297"/>
+<area shape="rect" id="node11" href="$db/daf/classPlotsRegister.html" title="Holds ranges and offsets of all plots. Singleton class. " alt="" coords="233,405,340,432"/>
+</map>

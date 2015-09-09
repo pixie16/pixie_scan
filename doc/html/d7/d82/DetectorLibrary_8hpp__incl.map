@@ -1,0 +1,15 @@
+<map id="include/DetectorLibrary.hpp" name="include/DetectorLibrary.hpp">
+<area shape="rect" id="node6" href="$d9/dec/Identifier_8hpp.html" title="Defines identifying information for channels. " alt="" coords="195,304,299,331"/>
+<area shape="rect" id="node8" href="$d7/d4b/RawEvent_8hpp.html" title="Header file for the rawevent. " alt="" coords="1047,80,1161,107"/>
+<area shape="rect" id="node10" href="$d8/daa/Correlator_8hpp.html" title="Header file for correlation. " alt="" coords="1047,304,1161,331"/>
+<area shape="rect" id="node15" href="$d5/d64/Globals_8hpp.html" title="constant parameters used in pixie16 analysis " alt="" coords="1196,453,1292,480"/>
+<area shape="rect" id="node20" href="$d4/d61/pixie16app__defs_8h_source.html" title="pixie16app_defs.h" alt="" coords="1495,528,1633,555"/>
+<area shape="rect" id="node27" href="$da/d72/Trace_8hpp.html" title="A simple class to store the traces. " alt="" coords="770,304,857,331"/>
+<area shape="rect" id="node29" href="$d9/dee/DetectorSummary_8hpp.html" title="The class that generates the summary of the detectors in the analysis. " alt="" coords="1398,155,1559,181"/>
+<area shape="rect" id="node30" href="$d0/dab/ChanEvent_8hpp.html" title="A Class to define what a channel event is. " alt="" coords="1299,229,1418,256"/>
+<area shape="rect" id="node13" href="$d0/d7d/Plots_8hpp.html" title="A container to request a block of plots and plot respective spectra through the plots register..." alt="" coords="549,379,629,405"/>
+<area shape="rect" id="node26" href="$df/dd7/DammPlotIds_8hpp.html" title="Lists Offsets and Ranges for various Processors. " alt="" coords="883,379,1015,405"/>
+<area shape="rect" id="node25" href="$d6/d10/PlotsRegister_8hpp.html" title="PlotsRegister.hpp" alt="" coords="557,453,691,480"/>
+<area shape="rect" id="node21" href="$d2/de9/Exceptions_8hpp.html" title="Class to handle errors occurring during the execution of the code. " alt="" coords="1246,603,1365,629"/>
+<area shape="rect" id="node23" href="$d1/d64/Messenger_8hpp.html" title="A class to handle messages and output them prettily. " alt="" coords="596,528,716,555"/>
+</map>

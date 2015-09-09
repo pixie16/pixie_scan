@@ -1,0 +1,5 @@
+<map id="ChanEvent" name="ChanEvent">
+<area shape="rect" id="node2" href="$d4/d8b/classTrace.html" title="Store the information for a trace. " alt="" coords="860,159,919,185"/>
+<area shape="rect" id="node6" href="$dd/da1/classPlots.html" title="Holds pointers to all Histograms. " alt="" coords="575,268,628,295"/>
+<area shape="rect" id="node8" href="$db/daf/classPlotsRegister.html" title="Holds ranges and offsets of all plots. Singleton class. " alt="" coords="233,424,340,451"/>
+</map>

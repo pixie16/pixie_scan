@@ -1,0 +1,15 @@
+<map id="include/HighResTimingData.hpp" name="include/HighResTimingData.hpp">
+<area shape="rect" id="node2" href="$de/d9d/BarDetector_8hpp.html" title="A class to handle bar style detectors (VANDLE, Betas, etc.) " alt="" coords="273,80,446,107"/>
+<area shape="rect" id="node3" href="$dd/d98/BarBuilder_8hpp.html" title="A class to build bar style detectors. " alt="" coords="91,155,254,181"/>
+<area shape="rect" id="node4" href="$d2/dfa/VandleProcessor_8hpp.html" title="A class to handle VANDLE bars. " alt="" coords="278,155,483,181"/>
+<area shape="rect" id="node8" href="$db/de2/DoubleBetaProcessor_8hpp.html" title="A Template class to be used to build others. " alt="" coords="508,155,741,181"/>
+<area shape="rect" id="node9" href="$d4/dcd/CfdAnalyzer_8hpp.html" title="Class to use Cfd on traces. " alt="" coords="572,80,747,107"/>
+<area shape="rect" id="node10" href="$d1/df1/LiquidProcessor_8hpp.html" title="include/LiquidProcessor.hpp" alt="" coords="771,80,969,107"/>
+<area shape="rect" id="node11" href="$db/d30/PulserProcessor_8hpp.html" title="Class for handling Pulser Signals. " alt="" coords="993,80,1193,107"/>
+<area shape="rect" id="node12" href="$d1/d6b/TeenyVandleProcessor_8hpp.html" title="A Template class to be used to build others. " alt="" coords="1217,80,1462,107"/>
+<area shape="rect" id="node13" href="$d0/d51/TimingMapBuilder_8hpp.html" title="Class to build timing maps. " alt="" coords="1486,80,1697,107"/>
+<area shape="rect" id="node14" href="$d5/d8e/WaveformAnalyzer_8hpp.html" title="Class to analyze traces. " alt="" coords="1721,80,1937,107"/>
+<area shape="rect" id="node5" href="$d0/d9d/CrosstalkProcessor_8hpp.html" title="A Crosstalk class to be used to build others. " alt="" coords="5,229,225,256"/>
+<area shape="rect" id="node6" href="$d9/d38/VandleAtLeribssProcessor_8hpp.html" title="A class to process data from the LeRIBSS 2012 campaign. " alt="" coords="249,229,512,256"/>
+<area shape="rect" id="node7" href="$db/d6a/WalkVandleBetaProcessor_8hpp.html" title="A class to determine the walk between Vandle and the LeRIBSS betas. " alt="" coords="536,229,801,256"/>
+</map>

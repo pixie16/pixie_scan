@@ -1,0 +1,6 @@
+<map id="DetectorDriver" name="DetectorDriver">
+<area shape="rect" id="node3" href="$d4/d29/classCalibrator.html" title="Class to handle energy calibrations. " alt="" coords="631,56,714,83"/>
+<area shape="rect" id="node5" href="$d1/dc2/classWalkCorrector.html" title="Class to correct channels for walk in the onboard filters. " alt="" coords="616,107,729,133"/>
+<area shape="rect" id="node10" href="$dd/da1/classPlots.html" title="Holds pointers to all Histograms. " alt="" coords="646,309,699,336"/>
+<area shape="rect" id="node13" href="$db/daf/classPlotsRegister.html" title="Holds ranges and offsets of all plots. Singleton class. " alt="" coords="265,316,372,343"/>
+</map>

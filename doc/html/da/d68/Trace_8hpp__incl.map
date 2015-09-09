@@ -1,0 +1,9 @@
+<map id="include/Trace.hpp" name="include/Trace.hpp">
+<area shape="rect" id="node6" href="$df/dd7/DammPlotIds_8hpp.html" title="Lists Offsets and Ranges for various Processors. " alt="" coords="1477,80,1609,107"/>
+<area shape="rect" id="node7" href="$d5/d64/Globals_8hpp.html" title="constant parameters used in pixie16 analysis " alt="" coords="839,155,935,181"/>
+<area shape="rect" id="node21" href="$d0/d7d/Plots_8hpp.html" title="A container to request a block of plots and plot respective spectra through the plots register..." alt="" coords="306,80,386,107"/>
+<area shape="rect" id="node23" href="$d6/d10/PlotsRegister_8hpp.html" title="PlotsRegister.hpp" alt="" coords="383,155,517,181"/>
+<area shape="rect" id="node14" href="$d4/d61/pixie16app__defs_8h_source.html" title="pixie16app_defs.h" alt="" coords="712,229,849,256"/>
+<area shape="rect" id="node15" href="$d2/de9/Exceptions_8hpp.html" title="Class to handle errors occurring during the execution of the code. " alt="" coords="740,304,859,331"/>
+<area shape="rect" id="node17" href="$d1/d64/Messenger_8hpp.html" title="A class to handle messages and output them prettily. " alt="" coords="517,229,637,256"/>
+</map>

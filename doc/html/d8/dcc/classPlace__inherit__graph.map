@@ -1,0 +1,9 @@
+<map id="Place" name="Place">
+<area shape="rect" id="node2" href="$d3/d8e/classPlaceAND.html" title="Similar to PlaceOR but uses AND relation. " alt="" coords="5,80,92,107"/>
+<area shape="rect" id="node3" href="$d8/d90/classPlaceCounter.html" title="Counts number of activations coming from directly or from children. " alt="" coords="117,80,223,107"/>
+<area shape="rect" id="node4" href="$d5/dc3/classPlaceDetector.html" title="The basic detector which does not depend on children status. Will use info_ map to store additional i..." alt="" coords="248,80,359,107"/>
+<area shape="rect" id="node5" href="$d1/dc1/classPlaceLazy.html" title="&quot;Lazy&quot; Place does not store multiple activation or deactivation events. Abstract class. " alt="" coords="383,80,469,107"/>
+<area shape="rect" id="node6" href="$d3/d39/classPlaceOR.html" title="An abstract place using OR logic to set the activation of places. " alt="" coords="493,80,572,107"/>
+<area shape="rect" id="node7" href="$d9/df0/classPlaceThreshold.html" title="Each activation must be within the set thresholds. " alt="" coords="596,80,717,107"/>
+<area shape="rect" id="node8" href="$df/d8f/classPlaceThresholdOR.html" title="Each activation must be within the set thresholds. " alt="" coords="585,155,728,181"/>
+</map>

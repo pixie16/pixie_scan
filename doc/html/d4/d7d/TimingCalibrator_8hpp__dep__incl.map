@@ -1,0 +1,9 @@
+<map id="include/TimingCalibrator.hpp" name="include/TimingCalibrator.hpp">
+<area shape="rect" id="node2" href="$de/d9d/BarDetector_8hpp.html" title="A class to handle bar style detectors (VANDLE, Betas, etc.) " alt="" coords="294,80,467,107"/>
+<area shape="rect" id="node3" href="$dd/d98/BarBuilder_8hpp.html" title="A class to build bar style detectors. " alt="" coords="91,155,254,181"/>
+<area shape="rect" id="node4" href="$d2/dfa/VandleProcessor_8hpp.html" title="A class to handle VANDLE bars. " alt="" coords="278,155,483,181"/>
+<area shape="rect" id="node8" href="$db/de2/DoubleBetaProcessor_8hpp.html" title="A Template class to be used to build others. " alt="" coords="508,155,741,181"/>
+<area shape="rect" id="node5" href="$d0/d9d/CrosstalkProcessor_8hpp.html" title="A Crosstalk class to be used to build others. " alt="" coords="5,229,225,256"/>
+<area shape="rect" id="node6" href="$d9/d38/VandleAtLeribssProcessor_8hpp.html" title="A class to process data from the LeRIBSS 2012 campaign. " alt="" coords="249,229,512,256"/>
+<area shape="rect" id="node7" href="$db/d6a/WalkVandleBetaProcessor_8hpp.html" title="A class to determine the walk between Vandle and the LeRIBSS betas. " alt="" coords="536,229,801,256"/>
+</map>

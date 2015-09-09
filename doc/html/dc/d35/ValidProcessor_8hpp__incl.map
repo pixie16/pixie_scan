@@ -1,0 +1,14 @@
+<map id="include/ValidProcessor.hpp" name="include/ValidProcessor.hpp">
+<area shape="rect" id="node3" href="$d7/d81/EventProcessor_8hpp.html" title="Generic event processor. " alt="" coords="263,80,413,107"/>
+<area shape="rect" id="node29" href="$d7/d72/GetArguments_8hpp.html" title="A quick and dirty way to get the arguments pass to scan through the respective Fortran calls..." alt="" coords="1767,80,1906,107"/>
+<area shape="rect" id="node8" href="$d0/d7d/Plots_8hpp.html" title="A container to request a block of plots and plot respective spectra through the plots register..." alt="" coords="221,229,301,256"/>
+<area shape="rect" id="node24" href="$d4/d49/TreeCorrelator_8hpp.html" title="A class to handle complex correlations between various processors. " alt="" coords="908,155,1051,181"/>
+<area shape="rect" id="node10" href="$d5/d64/Globals_8hpp.html" title="constant parameters used in pixie16 analysis " alt="" coords="855,453,951,480"/>
+<area shape="rect" id="node23" href="$d6/d10/PlotsRegister_8hpp.html" title="PlotsRegister.hpp" alt="" coords="325,453,458,480"/>
+<area shape="rect" id="node17" href="$d4/d61/pixie16app__defs_8h_source.html" title="pixie16app_defs.h" alt="" coords="835,528,972,555"/>
+<area shape="rect" id="node18" href="$d2/de9/Exceptions_8hpp.html" title="Class to handle errors occurring during the execution of the code. " alt="" coords="1395,603,1513,629"/>
+<area shape="rect" id="node20" href="$d1/d64/Messenger_8hpp.html" title="A class to handle messages and output them prettily. " alt="" coords="1047,528,1167,555"/>
+<area shape="rect" id="node25" href="$db/db7/Places_8hpp.html" title="Defines the various places for the TreeCorrelator. " alt="" coords="657,304,747,331"/>
+<area shape="rect" id="node28" href="$d5/d68/PlaceBuilder_8hpp.html" title="Defines the various places for the TreeCorrelator. " alt="" coords="916,229,1043,256"/>
+<area shape="rect" id="node27" href="$df/d76/EventData_8hpp.html" title="Structure holding event data. " alt="" coords="827,379,942,405"/>
+</map>

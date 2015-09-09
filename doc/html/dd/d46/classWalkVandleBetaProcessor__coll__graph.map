@@ -1,0 +1,9 @@
+<map id="WalkVandleBetaProcessor" name="WalkVandleBetaProcessor">
+<area shape="rect" id="node2" href="$de/d92/classVandleProcessor.html" title="Class to process VANDLE related events. " alt="" coords="1843,661,1973,688"/>
+<area shape="rect" id="node3" href="$d2/d58/classEventProcessor.html" title="Class to handle event processing. " alt="" coords="1199,725,1322,752"/>
+<area shape="rect" id="node20" href="$dc/d00/classChanEvent.html" title="A channel event. " alt="" coords="1215,277,1307,304"/>
+<area shape="rect" id="node10" href="$dd/da1/classPlots.html" title="Holds pointers to all Histograms. " alt="" coords="575,417,628,444"/>
+<area shape="rect" id="node19" href="$d4/d5c/classDetectorSummary.html" title="Summary of all channels of one detector type. " alt="" coords="1521,661,1656,688"/>
+<area shape="rect" id="node21" href="$d4/d8b/classTrace.html" title="Store the information for a trace. " alt="" coords="905,200,964,227"/>
+<area shape="rect" id="node13" href="$db/daf/classPlotsRegister.html" title="Holds ranges and offsets of all plots. Singleton class. " alt="" coords="233,531,340,557"/>
+</map>

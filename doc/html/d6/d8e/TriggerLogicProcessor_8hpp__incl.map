@@ -1,0 +1,14 @@
+<map id="include/TriggerLogicProcessor.hpp" name="include/TriggerLogicProcessor.hpp">
+<area shape="rect" id="node2" href="$d2/d8b/LogicProcessor_8hpp.html" title="Class to handle logic signals derived originally from MTC processor. " alt="" coords="904,80,1051,107"/>
+<area shape="rect" id="node4" href="$d7/d81/EventProcessor_8hpp.html" title="Generic event processor. " alt="" coords="273,155,423,181"/>
+<area shape="rect" id="node9" href="$d0/d7d/Plots_8hpp.html" title="A container to request a block of plots and plot respective spectra through the plots register..." alt="" coords="277,304,357,331"/>
+<area shape="rect" id="node25" href="$d4/d49/TreeCorrelator_8hpp.html" title="A class to handle complex correlations between various processors. " alt="" coords="749,229,891,256"/>
+<area shape="rect" id="node11" href="$d5/d64/Globals_8hpp.html" title="constant parameters used in pixie16 analysis " alt="" coords="867,528,963,555"/>
+<area shape="rect" id="node24" href="$d6/d10/PlotsRegister_8hpp.html" title="PlotsRegister.hpp" alt="" coords="304,528,437,555"/>
+<area shape="rect" id="node18" href="$d4/d61/pixie16app__defs_8h_source.html" title="pixie16app_defs.h" alt="" coords="779,603,917,629"/>
+<area shape="rect" id="node19" href="$d2/de9/Exceptions_8hpp.html" title="Class to handle errors occurring during the execution of the code. " alt="" coords="1141,677,1259,704"/>
+<area shape="rect" id="node21" href="$d1/d64/Messenger_8hpp.html" title="A class to handle messages and output them prettily. " alt="" coords="507,603,627,629"/>
+<area shape="rect" id="node26" href="$db/db7/Places_8hpp.html" title="Defines the various places for the TreeCorrelator. " alt="" coords="964,379,1055,405"/>
+<area shape="rect" id="node29" href="$d5/d68/PlaceBuilder_8hpp.html" title="Defines the various places for the TreeCorrelator. " alt="" coords="757,304,883,331"/>
+<area shape="rect" id="node28" href="$df/d76/EventData_8hpp.html" title="Structure holding event data. " alt="" coords="857,453,972,480"/>
+</map>

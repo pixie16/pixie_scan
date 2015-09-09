@@ -1,0 +1,10 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="node1" href="$d9/dc0/classTraceAnalyzer.html" title="Online trace analysis. " alt="" coords="5,132,120,159"/>
+<area shape="rect" id="node2" href="$d7/d5d/classCfdAnalyzer.html" title="Class to analyze traces using a digital CFD. " alt="" coords="189,5,288,32"/>
+<area shape="rect" id="node3" href="$db/dde/classFittingAnalyzer.html" title="Analyzer that handles the fitting of traces for High Resolution Timing. " alt="" coords="181,56,296,83"/>
+<area shape="rect" id="node4" href="$d2/d52/classTauAnalyzer.html" title="Class to analyze Tau from a trace. " alt="" coords="188,107,289,133"/>
+<area shape="rect" id="node5" href="$d5/d42/classTraceExtractor.html" title="A class to extract traces from events. " alt="" coords="181,157,297,184"/>
+<area shape="rect" id="node6" href="$d0/d77/classTraceFilterer.html" title="A class to perform trapezoidal filters on the traces. " alt="" coords="187,208,290,235"/>
+<area shape="rect" id="node8" href="$d5/da3/classWaveformAnalyzer.html" title="Class to handle the HRT and waveform analysis. " alt="" coords="168,259,309,285"/>
+<area shape="rect" id="node7" href="$df/dd8/classDoubleTraceAnalyzer.html" title="Analyzer to handle double traces from RMS style experiments. " alt="" coords="357,208,515,235"/>
+</map>

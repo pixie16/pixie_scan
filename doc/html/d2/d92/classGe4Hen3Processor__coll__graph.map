@@ -1,0 +1,6 @@
+<map id="Ge4Hen3Processor" name="Ge4Hen3Processor">
+<area shape="rect" id="node2" href="$d1/d90/classGeProcessor.html" title="Processor to handle Ge (read as clover) events. " alt="" coords="1169,491,1275,517"/>
+<area shape="rect" id="node3" href="$d2/d58/classEventProcessor.html" title="Class to handle event processing. " alt="" coords="862,348,985,375"/>
+<area shape="rect" id="node10" href="$dd/da1/classPlots.html" title="Holds pointers to all Histograms. " alt="" coords="565,451,619,477"/>
+<area shape="rect" id="node13" href="$db/daf/classPlotsRegister.html" title="Holds ranges and offsets of all plots. Singleton class. " alt="" coords="233,585,340,612"/>
+</map>
