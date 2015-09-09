@@ -1,2 +1,0 @@
-//det    det    det   num   poly    low   cal val  cal val  cal val
-//loc   type    sub   cal  order  range     inter    slope     quad
