@@ -7,20 +7,12 @@
 #include <stdexcept>
 
 #include "DetectorDriver.hpp"
+#include "GetArguments.hpp"
 #include "Globals.hpp"
 
-//! DAMM initialization call
-extern "C" void drrmake_();
-//! DAMM declaration wrap-up call
-extern "C" void endrr_();
-
-/*! Defines the main interface with the SCANOR library, the program essentially
- * starts here.
- * \param [in] iexist : unused paramter from SCANOR call
- */
 extern "C" void drrsub_(unsigned int& iexist) {
     try {
-        drrmake_();
+	
 
         /** The DetectorDriver constructor will load processors
          *  from the xml configuration file upon first call.
