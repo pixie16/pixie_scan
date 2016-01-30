@@ -11,17 +11,9 @@
 #include <set>
 #include <string>
 
+#include "hisFile.hpp"
 #include "Globals.hpp"
 #include "PlotsRegister.hpp"
-
-/** Do banana gating using ban files args are the Banana number in the ban file,
- * the x-value to test, and the y-value to test.
- * \return true if the x,y pair is inside the banana gate */
-extern "C" bool bantesti_(const int &, const int &, const int &);
-/** Defines the DAMM function to call for 1D hists */
-extern "C" void count1cc_(const int &, const int &, const int &);
-/** Defines the DAMM function to call for 2D hists */
-extern "C" void set2cc_(const int &, const int &, const int &, const int &);
 
 //! Holds pointers to all Histograms
 class Plots {

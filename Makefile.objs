@@ -10,6 +10,7 @@ SCANORO          = scanor.o
 PUGIXMLO = pugixml.o
 
 #---------- Core ----------
+hisFileO         = hisFile.o
 BARDETECTORO     = BarDetector.o
 BARBUILDERO      = BarBuilder.o
 CALIBRATORO      = Calibrator.o
@@ -81,7 +82,7 @@ WALKCORRECTORO   = WalkCorrector.o
 FORT_OBJS = $(SET2CCO) $(MESSLOGO) $(MILDATIMO) $(SCANORO)
 
 # Important to compile READBUFFDATA first
-CXX_OBJS = $(READBUFFDATAAO) $(READBUFFDATADO) 	$(READBUFFDATAFO)
+CXX_OBJS = $(READBUFFDATAAO) $(READBUFFDATADO) 	$(READBUFFDATAFO) $(hisFileO)
 
 # Core Objects 
 CXX_OBJS += $(PUGIXMLO) $(PIXIEO) $(BARBUILDERO) $(BARDETECTORO) $(CALIBRATORO)\

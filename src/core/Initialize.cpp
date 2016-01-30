@@ -4,15 +4,31 @@
  * \date Aug. 2009
  */
 #include <iostream>
+#include <sstream>
 #include <stdexcept>
 
 #include "DetectorDriver.hpp"
 #include "GetArguments.hpp"
 #include "Globals.hpp"
+#include "hisFile.hpp"
 
+using namespace std;
+
+/*! Defines the main interface with the SCANOR library, the program essentially
+ * starts here.
+ * \param [in] iexist : unused paramter from SCANOR call
+ */
 extern "C" void drrsub_(unsigned int& iexist) {
     try {
-	
+        //Read in the name of the his file
+	char hisFileName[32];
+	GetArgument(1, hisFileName, 32);
+	string temp = hisFileName;
+	temp = temp.substr(0, temp.find_first_of(" "));
+	stringstream name;
+	name << temp;
+
+	output_his = new OutputHisFile(name.str());
 
         /** The DetectorDriver constructor will load processors
          *  from the xml configuration file upon first call.
@@ -26,8 +42,7 @@ extern "C" void drrsub_(unsigned int& iexist) {
          *  calibration and walk correction factors.
          */
         DetectorDriver::get()->DeclarePlots();
-
-        endrr_();
+	output_his->Close();
     } catch (std::exception &e) {
         // Any exceptions will be intercepted here
         std::cout << "Exception caught at Initialize:" << std::endl;
