@@ -32,9 +32,6 @@ PLOTSO           = Plots.o
 PLOTSREGISTERO   = PlotsRegister.o
 RANDOMPOOLO      = RandomPool.o
 RAWEVENTO        = RawEvent.o
-READBUFFDATADO    = ReadBuffData.RevD.o
-READBUFFDATAFO    = ReadBuffData.RevF.o
-READBUFFDATAAO    = ReadBuffData.RevA.o
 STATSDATAO       = StatsData.o
 TIMINGCALO		 = TimingCalibrator.o
 TIMINGMAPBUILDERO = TimingMapBuilder.o
@@ -81,7 +78,7 @@ WALKCORRECTORO   = WalkCorrector.o
 FORT_OBJS = $(SET2CCO) $(MESSLOGO) $(MILDATIMO) $(SCANORO)
 
 # Important to compile READBUFFDATA first
-CXX_OBJS = $(READBUFFDATAAO) $(READBUFFDATADO) 	$(READBUFFDATAFO) $(HISFILEO) $(SCANNERO)
+CXX_OBJS = $(HISFILEO) $(SCANNERO)
 
 # Core Objects 
 CXX_OBJS += $(PUGIXMLO) $(BARBUILDERO) $(BARDETECTORO) $(CALIBRATORO)\

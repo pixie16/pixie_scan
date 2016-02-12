@@ -1,4 +1,7 @@
 #include <iostream>
+#include <algorithm>
+#include <string>
+#include <sstream>
 
 // PixieCore libraries
 #include "Unpacker.hpp"
@@ -7,16 +10,33 @@
 
 // Local files
 #include "Scanner.hpp"
+#include "RawEvent.hpp"
 #include "DetectorDriver.hpp"
+#include "DetectorLibrary.hpp"
+#include "TreeCorrelator.hpp"
+
+// Contains event information, the information is filled in ScanList() and is
+// referenced in DetectorDriver.cpp, particularly in ProcessEvent().
+RawEvent rawev;
 
 // Define a pointer to an OutputHisFile for later use.
 OutputHisFile *output_his = NULL;
 
 /// Process all events in the event list.
 void Scanner::ProcessRawEvent(){
+	//static clock_t clockBegin; // initialization time
+
+    DetectorLibrary* modChan = DetectorLibrary::get();
+    DetectorDriver* driver = DetectorDriver::get();
+
+    // local variable for the detectors used in a given event
+    std::set<std::string> usedDetectors;
+
+	Messenger messenger;
+
 	ChannelEvent *current_event = NULL;
-	
-	// Fill the processor event deques with events
+
+	// Fill the raw event with ChanEvents
 	while(!rawEvent.empty()){
 		current_event = rawEvent.front();
 		rawEvent.pop_front(); // Remove this event from the raw event deque.
@@ -25,8 +45,87 @@ void Scanner::ProcessRawEvent(){
 		if(!current_event){ continue; }
 		
 		// Do something with the current event.
-		delete current_event;
+		ChanEvent *event = new ChanEvent(current_event);
+
+        unsigned int id = event->GetID();
+        if (id == pixie::U_DELIMITER) {
+            std::stringstream ss; ss << "pattern 0 ignore";
+            messenger.warning(ss.str());
+            ss.str("");
+            continue;
+        }
+        if ((*modChan)[id].GetType() == "ignore") {
+            continue;
+        }
+
+		usedDetectors.insert((*modChan)[id].GetType());
+		rawev.AddChan(event);
 	}
+	
+	// Initialize the scan program before the first event
+	if(counter == 0){
+		// Retrieve the current time for use later to determine the total running time of the analysis.
+		messenger.start("Initializing scan");
+
+		/*string revision = Globals::get()->revision();
+		// Initialize function pointer to point to
+		// correct version of ReadBuffData
+		if(revision == "F")
+		ReadBuffData = ReadBuffDataF;
+		if (revision == "D" || revision == "DF")
+		ReadBuffData = ReadBuffDataD;
+		else if (revision == "A")
+		ReadBuffData = ReadBuffDataA;*/
+
+		/*clockBegin = times(&tmsBegin);
+
+		ss << "First buffer at " << clockBegin << " sys time";
+		messenger.detail(ss.str());
+		ss.str("");*/
+
+		// After completion the descriptions of all channels are in the modChan
+		// vector, the DetectorDriver and rawevent have been initialized with the
+		// detectors that will be used in this analysis.
+		modChan->PrintUsedDetectors(rawev);
+		driver->Init(rawev);
+
+		/* Make a last check to see that everything is in order for the driver
+		* before processing data. SanityCheck function throws exception if
+		* something went wrong.
+		*/
+		try{ driver->SanityCheck(); } 
+		catch(GeneralException &e){
+			messenger.fail();
+			std::cout << "Exception caught while checking DetectorDriver" << " sanity in PixieStd" << std::endl;
+			std::cout << "\t" << e.what() << std::endl;
+			exit(EXIT_FAILURE);
+		} 
+		catch(GeneralWarning &w){
+			std::cout << "Warning caught during checking DetectorDriver" << " at PixieStd" << std::endl;
+			std::cout << "\t" << w.what() << std::endl;
+		}
+
+		/*lastVsn=-1; // set last vsn to -1 so we expect vsn 0 first
+
+		ss << "Init at " << times(&tmsBegin) << " sys time.";
+		messenger.detail(ss.str());
+		messenger.done();*/
+	}
+	
+	driver->ProcessEvent(rawev);
+
+	//after processing zero the rawevent variable
+	rawev.Zero(usedDetectors);
+	usedDetectors.clear();
+
+	// Now clear all places in correlator (if resetable type)
+	for (std::map<std::string, Place*>::iterator it = TreeCorrelator::get()->places_.begin(); it != TreeCorrelator::get()->places_.end(); ++it)
+		if ((*it).second->resetable())
+			(*it).second->reset();
+	
+	//rawev.ClearAndDelete();
+	
+	counter++;
 }
 
 Scanner::Scanner(){
@@ -35,7 +134,7 @@ Scanner::Scanner(){
 
 Scanner::~Scanner(){
 	if(init){
-		output_his->Close();
+		// This automatically closes the .his file.
 		delete output_his;
 	}
 
@@ -53,7 +152,8 @@ bool Scanner::Initialize(std::string prefix_){
 		output_his = new OutputHisFile(output_fname);
 		
 		// Set the output his file debug mode, if the user asked for it.
-		if(scan_main->DebugMode()){ output_his->SetDebugMode(true); }
+		//if(scan_main->DebugMode()){ 
+		output_his->SetDebugMode(true); //}
 
 		/** The DetectorDriver constructor will load processors
 		*  from the xml configuration file upon first call.

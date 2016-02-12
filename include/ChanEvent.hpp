@@ -23,58 +23,60 @@
  * Note that this currently stores raw values internally through pixie word types
  *   but returns data values through native C types. This is potentially non-portable.
  */
-class ChanEvent : public ChannelEvent {
+class ChanEvent{
 public:
-    /** Default constructor that zeroes all values */
-    ChanEvent(){ZeroNums();};
+    /** Default constructor */
+    ChanEvent(){ }
+    
+    ChanEvent(ChannelEvent *event_){ 
+    	event = event_; 
+    	trace = Trace(event->trace); // Copy the trace from the ChannelEvent (messy, but needed for the Trace class).
+    }
+    
+    ~ChanEvent(){ 
+    	if(event != NULL){ delete event; } 
+    }
 
     /** Set the raw energy in case we do not want to extract it from the trace
      * ourselves
      * \param [in] a : the energy to set */
-    void SetEnergy(double a) {energy = a;}
+    void SetEnergy(double a) {event->energy = a;}
     /** Set the calibrated energy
      * \param [in] a : the calibrated energy */
-    void SetCalEnergy(double a) {calEnergy = a;}
+    void SetCalEnergy(double a) {event->calEnergy = a;}
     /** Set the time
      * \param [in] a : the time to set */
-    void SetTime(double a) {time = a;}
+    void SetTime(double a) {event->time = a;}
     /** Set the Walk corrected time
      * \param [in] a : the walk corrected time */
-    void SetCorrectedTime(double a) { correctedTime = a;}
-    /** Set the Calibrated time
-     * \param [in] a : the calibrated time */
-    void SetCalTime(double a) {calTime = a;}
+    void SetCorrectedTime(double a) {event->correctedTime = a;}
     /** Set the high resolution time (Filter time + phase )
      * \param [in] a : the high resolution time */
-    void SetHighResTime(double a) {hires_time =a;}
+    void SetHighResTime(double a) {event->hires_time =a;}
 
     bool GetCfdSourceBit() const {
-	return(cfdTrigSource);
+		return(event->cfdTrigSource);
     }
     bool CfdForceTrig() const {
-	return(cfdForceTrig);
+		return(event->cfdForceTrig);
     }
-
     double GetEnergy() const      {
-        return energy;   /**< \return the raw energy */
+        return event->energy;   /**< \return the raw energy */
     }
     double GetCalEnergy() const   {
-        return calEnergy;   /**< \return the calibrated energy */
-    }
-    double GetCorrectedTime() const {
-        return correctedTime;   /**< \return the corrected time */
+        return event->calEnergy;   /**< \return the calibrated energy */
     }
     double GetTime() const        {
-        return time;   /**< \return the raw time */
+        return event->time;   /**< \return the raw time */
     }
-    double GetCalTime() const     {
-        return calTime;   /**< \return the calibrated time */
+    double GetCorrectedTime() const {
+		return event->correctedTime;
     }
     double GetHighResTime() const {
-        return hires_time;   /**< \return the high-resolution time */
+        return event->hires_time;   /**< \return the high-resolution time */
     }
     double GetEventTime() const   {
-        return eventTime;   /**< \return the event time */
+        return event->eventTime;   /**< \return the event time */
     }
     const Trace& GetTrace() const {
         return trace;   /**< \return a reference to the trace */
@@ -83,29 +85,23 @@ public:
         return trace;   /** \return a reference which can alter the trace */
     }
     unsigned long GetTrigTime() const {
-        return trigTime;   /**< \return the channel trigger time */
+        return event->trigTime;   /**< \return the channel trigger time */
     }
     unsigned long GetEventTimeLo() const {
-        return eventTimeLo;   /**< \return the lower 32 bits of event time */
+        return event->eventTimeLo;   /**< \return the lower 32 bits of event time */
     }
     unsigned long GetEventTimeHi() const {
-        return eventTimeHi;   /**< \return the upper 32 bits of event time */
-    }
-    unsigned long GetRunTime0() const {
-        return runTime0;   /**< \return the lower bits of run time */
-    }
-    unsigned long GetRunTime1() const {
-        return runTime1;   /**< \return the middle bits of run time */
-    }
-    unsigned long GetRunTime2() const {
-        return runTime2;   /**< \return the higher bits of run time */
+        return event->eventTimeHi;   /**< \return the upper 32 bits of event time */
     }
     bool IsPileup() const {
-        return pileupBit;   //!< \return true if channel is pileup
+        return event->pileupBit;   //!< \return true if channel is pileup
     }
     bool IsSaturated() const { /**< \return whether the trace is saturated */
-        return saturatedBit;
+        return event->saturatedBit;
     }
+
+	/// Save the pointer to the channel event associated with this ChanEvent.
+	void SetChannelEvent(ChannelEvent *event_){ event = event_; }
 
     //! \return The identifier in the map for the channel event
     const Identifier& GetChanID() const;
@@ -122,17 +118,9 @@ public:
      * identifier is zeroed using its identifier::zeroid method. */
     void ZeroVar();
 private:
-    double calEnergy;          /**< Calibrated channel energy,
-                  calibration performed in ThreshAndCal
-                  function in the detector_driver.cpp */
-    double calTime;            /**< Calibrated time, currently unused */
-    double correctedTime;      /**< Energy-walk corrected time */
-    Trace trace;               /**< Channel trace if present */
-    pixie::word_t runTime0;    /**< Lower bits of run time */
-    pixie::word_t runTime1;    /**< Upper bits of run time */
-    pixie::word_t runTime2;    /**< Higher bits of run time */
+	ChannelEvent *event; /// The raw channel event.
 
-    double eventTime;          /**< The event time recorded by Pixie */
+    Trace trace; /**< Channel trace if present */
 
     void ZeroNums(void); /**< Zero members which do not have constructors associated with them */
 

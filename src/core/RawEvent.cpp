@@ -7,6 +7,13 @@
 
 using namespace std;
 
+void RawEvent::ClearAndDelete(void){
+    for(std::vector<ChanEvent*>::iterator it = eventList.begin(); it != eventList.end(); it++){
+        delete (*it);
+    }
+    eventList.clear();
+}
+
 void RawEvent::Init(const std::set<std::string> &usedTypes)
 {
     /*! initialize the map of used detectors. This will associate the name of a
@@ -30,7 +37,8 @@ void RawEvent::Zero(const std::set<std::string> &usedev) {
         (*it).second.Zero();
     }
 
-    eventList.clear();
+    //eventList.clear();
+    ClearAndDelete();
 }
 
 DetectorSummary *RawEvent::GetSummary(const std::string& s, bool construct) {

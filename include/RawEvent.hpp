@@ -54,6 +54,9 @@ public:
     /** Clear the list of individual channel events (Memory is managed elsewhere) */
     void Clear(void) {eventList.clear();};
 
+	/** Clear the list of individual channel events and free up their associated memory */
+	void ClearAndDelete(void);
+
     /** \return the number of channels in the current event */
     size_t Size(void) const {return(eventList.size());};
 

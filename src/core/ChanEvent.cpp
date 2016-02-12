@@ -13,43 +13,19 @@ bool CompareTime(const ChanEvent *a, const ChanEvent *b){
 }
 
 void ChanEvent::ZeroNums() {
-    energy        = -1;
-    calEnergy     = -1;
-    time          = -1;
-    calTime       = -1;
-    correctedTime = -1;
-    hires_time   = -1;
-
-    virtualChannel = false;
-    pileupBit = false;
-    saturatedBit = false;
-    cfdForceTrig = false;
-    cfdTrigSource = false;
-    
-    trigTime    = pixie::U_DELIMITER;
-    eventTimeLo = pixie::U_DELIMITER;
-    eventTimeHi = pixie::U_DELIMITER;
-    runTime0    = pixie::U_DELIMITER;
-    runTime1    = pixie::U_DELIMITER;
-    runTime2    = pixie::U_DELIMITER;
-    chanNum     = -1;
-    modNum      = -1;
-    for (int i=0; i < numQdcs; i++)
-        qdcValue[i] = pixie::U_DELIMITER;
+	event->Clear();
 }
 
 unsigned long ChanEvent::GetQdcValue(int i) const {
-    if (i < 0 || i >= numQdcs)
-        return pixie::U_DELIMITER;
-    return qdcValue[i];
+    return event->GetQdcValue(i);
 }
 
 const Identifier& ChanEvent::GetChanID() const {
-    return DetectorLibrary::get()->at(modNum, chanNum);
+    return DetectorLibrary::get()->at(event->modNum, event->chanNum);
 }
 
 int ChanEvent::GetID() const {
-    return DetectorLibrary::get()->GetIndex(modNum, chanNum);
+    return DetectorLibrary::get()->GetIndex(event->modNum, event->chanNum);
 }
 
 //! [Zero Channel]

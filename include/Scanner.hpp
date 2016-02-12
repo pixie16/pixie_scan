@@ -23,6 +23,8 @@ public:
 private:
 	std::string output_fname; /// The output histogram filename prefix.
 
+	unsigned int counter; /// The number of times ProcessRawEvent is called.
+
     /// Process all events in the event list.
     void ProcessRawEvent();	
 };//class Scanner 
