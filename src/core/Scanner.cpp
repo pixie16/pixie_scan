@@ -3,14 +3,18 @@
 // PixieCore libraries
 #include "Unpacker.hpp"
 #include "ScanMain.hpp"
+#include "ChannelEvent.hpp"
 
 // Local files
 #include "Scanner.hpp"
+#include "DetectorDriver.hpp"
+
+// Define a pointer to an OutputHisFile for later use.
+OutputHisFile *output_his = NULL;
 
 /// Process all events in the event list.
 void Scanner::ProcessRawEvent(){
 	ChannelEvent *current_event = NULL;
-	ChannelEventPair *current_pair = NULL;
 	
 	// Fill the processor event deques with events
 	while(!rawEvent.empty()){
@@ -19,59 +23,9 @@ void Scanner::ProcessRawEvent(){
 		
 		// Check that this channel event exists.
 		if(!current_event){ continue; }
-
-		// Fill the output histograms.
-		chanCounts->Fill(current_event->chanNum, current_event->modNum);
-		chanEnergy->Fill(current_event->energy, current_event->modNum*16+current_event->chanNum);
-
-		if(!raw_event_mode){ // Standard operation. Individual processors will handle output
-			// Link the channel event to its corresponding map entry.
-			current_pair = new ChannelEventPair(current_event, mapfile->GetMapEntry(current_event));
 		
-			// Pass this event to the correct processor
-			if(current_pair->entry->type == "ignore" || !handler->AddEvent(current_pair)){ // Invalid detector type. Delete it
-				delete current_pair;
-			}
-		
-			// This channel is a start signal. Due to the way ScanList
-			// packs the raw event, there may be more than one start signal
-			// per raw event.
-			if(current_pair->entry->tag == "start"){ 
-				handler->AddStart(current_pair);
-			}
-		}
-		else{ // Raw event mode operation. Dump raw event information to root file.
-			structure.Append(current_event->modNum, current_event->chanNum, current_event->time, current_event->energy);
-			waveform.Append(current_event->trace);
-			delete current_pair;
-		}
-	}
-	
-	if(!raw_event_mode){
-		// Call each processor to do the processing. Each
-		// processor will remove the channel events when finished.
-		if(handler->Process()){
-			// This event had at least one valid signal
-			root_tree->Fill();
-		}
-		
-		// Zero all of the processors.
-		handler->ZeroAll();
-	}
-	else{
-		root_tree->Fill();
-		structure.Zero();
-		waveform.Zero();
-	}
-	
-	// Check for the need to update the online canvas.
-	if(online_mode){
-		if(events_since_last_update >= events_between_updates){
-			online->Refresh();
-			events_since_last_update = 0;
-			std::cout << "refresh!\n";
-		}
-		else{ events_since_last_update++; }
+		// Do something with the current event.
+		delete current_event;
 	}
 }
 
@@ -86,11 +40,7 @@ Scanner::Scanner(){
 
 Scanner::~Scanner(){
 	if(init){
-		std::cout << "Scanner: Found " << chanCounts->GetHist()->GetEntries() << " total events.\n";
-		if(!raw_event_mode){
-			std::cout << "Scanner: Found " << handler->GetTotalEvents() << " start events.\n";
-			std::cout << "Scanner: Total data time is " << handler->GetDeltaEventTime() << " s.\n";
-		}
+		// Do some cleanup stuff.
 	}
 
 	Close(); // Close the Unpacker object.
@@ -100,9 +50,40 @@ Scanner::~Scanner(){
 bool Scanner::Initialize(std::string prefix_){
 	if(init)
 	    return(false);
+	    
+	// Code taken from drrsub_ in Initialize.cpp
+	try{
+		// Read in the name of the his file
+		char hisFileName[32];
+		//GetArgument(1, hisFileName, 32); // FIX THIS! NO GETARGUMENT IN C++!!!
+		std::string temp = "dummy";//hisFileName;
+		temp = temp.substr(0, temp.find_first_of(" "));
+		std::stringstream name;
+		name << temp;
 
-	// CALL DRR SUB HERE (in Initialize.cpp)
-	drrsub_();
+		output_his = new OutputHisFile(name.str());
+		output_his->SetDebugMode(true);
+
+		/** The DetectorDriver constructor will load processors
+		*  from the xml configuration file upon first call.
+		*  The DeclarePlots function will instantiate the DetectorLibrary
+		*  class which will read in the "map" of channels.
+		*  Subsequently the raw histograms, the diagnostic histograms
+		*  and the processors and analyzers plots are declared.
+		*
+		*  Note that in the PixieStd the Init function of DetectorDriver
+		*  is called upon first buffer. This include reading in the
+		*  calibration and walk correction factors.
+		*/
+		DetectorDriver::get()->DeclarePlots();
+		output_his->Finalize();
+	} 
+	catch(std::exception &e){
+		// Any exceptions will be intercepted here
+		std::cout << "Exception caught at Initialize:" << std::endl;
+		std::cout << "\t" << e.what() << std::endl;
+		exit(EXIT_FAILURE);
+	}
 	
 	if(online_mode){
 	    //ADD SOME STUFFHERE
@@ -112,8 +93,7 @@ bool Scanner::Initialize(std::string prefix_){
 
 /// Return the syntax string for this program.
 void Scanner::SyntaxStr(const char *name_, std::string prefix_){ 
-	std::cout << prefix_ << "SYNTAX: " << std::string(name_) 
-		  << " <options> <input>\n"; 
+	std::cout << prefix_ << "SYNTAX: " << std::string(name_) << " <options> <input>\n"; 
 }       
 
 /**
@@ -125,8 +105,8 @@ bool Scanner::SetArgs(std::deque<std::string> &args_, std::string &filename){
 	while(!args_.empty()){
 		current_arg = args_.front();
 		args_.pop_front();
-		else if(current_arg == "-shm"){
-			std::cout << "Scanner: Using online mode.\n";
+		if(current_arg == "-shm"){
+			std::cout << "pixie_ldf_c: Using online mode.\n";
 			online_mode = true;
 		}
 		else{ filename = current_arg; }
@@ -138,7 +118,7 @@ bool Scanner::SetArgs(std::deque<std::string> &args_, std::string &filename){
 int main(int argc, char *argv[]){
 	ScanMain scan_main((Unpacker*)(new Scanner()));
 	
-	scan_main.SetMessageHeader("Scanner: ");
+	scan_main.SetMessageHeader("pixie_ldf_c: ");
 
 	return scan_main.Execute(argc, argv);
 }

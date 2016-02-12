@@ -3,8 +3,6 @@
 
 #include <string>
 
-#include "Structures.h"
-
 class Scanner : public Unpacker{
 public:
     Scanner();

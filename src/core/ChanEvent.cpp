@@ -18,7 +18,7 @@ void ChanEvent::ZeroNums() {
     time          = -1;
     calTime       = -1;
     correctedTime = -1;
-    highResTime   = -1;
+    hires_time   = -1;
 
     virtualChannel = false;
     pileupBit = false;
