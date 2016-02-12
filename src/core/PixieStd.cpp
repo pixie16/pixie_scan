@@ -79,14 +79,12 @@ void ScanList(vector<ChanEvent*> &eventList, RawEvent& rawev);
 void RemoveList(vector<ChanEvent*> &eventList);
 void HistoStats(unsigned int, double, double, HistoPoints);
 
-#ifdef newreadout
 /** \brief Extract channel information from the raw parameter array ibuf
  * \param [in] ibuf : the buffer to send to the his subroutines
  * \param [in] nhw : */
 void hissub_sec(unsigned int *ibuf[],unsigned int *nhw);
 bool MakeModuleData(const word_t *data, unsigned long nWords,
                     unsigned int maxWords);
-#endif
 
 /**
  * ReadBuffData versions for different pixie revisions
@@ -135,7 +133,6 @@ extern "C" void cleanup_()
  * \param [in] ibuf : the array with the data
  * \param [in] nhw : the number of half words contained in the data buffer
 */
-#ifdef newreadout
 extern "C" void hissub_(unsigned short *sbuf[],unsigned short *nhw) {
     const unsigned int maxChunks = 200;
 
@@ -355,8 +352,6 @@ bool MakeModuleData(const word_t *data, unsigned long nWords,
 
     return true;
 }
-#endif
-
 
 /**
  * If the new Pixie16 readout is used (default), this routine processes the
@@ -369,12 +364,7 @@ bool MakeModuleData(const word_t *data, unsigned long nWords,
  * If the old pixie readout is used then this function is
  * redefined as hissub_.
  */
-#ifdef newreadout
-void hissub_sec(word_t *ibuf[],unsigned int *nhw)
-#else
-extern "C" void hissub_(unsigned short *ibuf[],unsigned short *nhw)
-#endif
-{
+void hissub_sec(word_t *ibuf[],unsigned int *nhw) {
     static float hz = sysconf(_SC_CLK_TCK); // get the number of clock ticks per second
     static clock_t clockBegin; // initialization time
     static struct tms tmsBegin;
@@ -417,11 +407,8 @@ extern "C" void hissub_(unsigned short *ibuf[],unsigned short *nhw)
       This results in two different assignment statements depending on
       the readout.
     */
-#ifdef newreadout
+
     lbuf=(word_t *)ibuf[0];
-#else
-    lbuf=(word_t *)ibuf; //old readout
-#endif
 
     /* Initialize the scan program before the first event */
     if (counter==0) {

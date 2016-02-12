@@ -20,6 +20,7 @@ using namespace std;
  */
 extern "C" void drrsub_(unsigned int& iexist) {
     try {
+
         //Read in the name of the his file
 	char hisFileName[32];
 	GetArgument(1, hisFileName, 32);
@@ -28,7 +29,7 @@ extern "C" void drrsub_(unsigned int& iexist) {
 	stringstream name;
 	name << temp;
 
-	OutputHisFile *output_his = new OutputHisFile(name.str());
+	output_his = new OutputHisFile(name.str());
 	output_his->SetDebugMode(true);
 
         /** The DetectorDriver constructor will load processors
