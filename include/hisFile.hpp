@@ -265,10 +265,10 @@ class HisFile{
 	HisData *GetData(){ return &data; }
 
 	/// Get a pointer to a root TH1I
-	//TH1I *GetTH1(int hist_=-1);
+    //TH1I *GetTH1(int hist_=-1);
 	
-	/// Get a pointer to a root TH2I
-	//TH2I *GetTH2(int hist_=-1);
+    /// Get a pointer to a root TH2I
+    //TH2I *GetTH2(int hist_=-1);
 
 	/// Get a drr entry from the vector
 	void GetEntry(size_t id_);

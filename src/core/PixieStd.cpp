@@ -353,16 +353,13 @@ bool MakeModuleData(const word_t *data, unsigned long nWords,
     return true;
 }
 
-/**
+/**de
  * If the new Pixie16 readout is used (default), this routine processes the
  * reconstructed buffer.  Specifically, it retrieves channel information
  * and places the channel information into a list of channels that triggered in
  * this spill.  The list of channels is sorted according to the event time
  * assigned to each channel by Pixie16 and the sorted list is passed to
  * ScanList() for raw event creation.
- *
- * If the old pixie readout is used then this function is
- * redefined as hissub_.
  */
 void hissub_sec(word_t *ibuf[],unsigned int *nhw) {
     static float hz = sysconf(_SC_CLK_TCK); // get the number of clock ticks per second
