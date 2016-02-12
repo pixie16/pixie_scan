@@ -16,9 +16,18 @@ public:
     
     /// Return the syntax string for this program.
     void SyntaxStr(const char *name_, std::string prefix_="");
-    
-    /// Scan input arguments and set class variables.
-    bool SetArgs(std::deque<std::string> &args_, std::string &filename_);
+
+	/// Print an in-terminal help dialogue for recognized commands.
+	void CmdHelp(std::string prefix_="");
+	
+	/// Scan input arguments and set class variables.
+	bool SetArgs(std::deque<std::string> &args_, std::string &filename_);
+	
+	/** Search for an input command and perform the desired action.
+	  * 
+	  * \return True if the command is valid and false otherwise.
+	  */
+	bool CommandControl(std::string cmd_, const std::vector<std::string> &args_);
     
 private:
 	std::string output_fname; /// The output histogram filename prefix.

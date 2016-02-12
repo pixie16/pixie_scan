@@ -184,6 +184,14 @@ void Scanner::SyntaxStr(const char *name_, std::string prefix_){
 	std::cout << prefix_ << "SYNTAX: " << std::string(name_) << " [input-fname] <options> <output-prefix>\n"; 
 }       
 
+/** 
+ *	\param[in] prefix_ 
+ */
+void Scanner::CmdHelp(std::string prefix_){
+	std::cout << prefix_ << "flush - Flush histogram entries to file.\n";
+	std::cout << prefix_ << "zero  - Zero the output histogram (SLOW! Be patient...).\n";
+}
+
 /**
  * \param[in] args_
  * \param[out] filename
@@ -199,6 +207,31 @@ bool Scanner::SetArgs(std::deque<std::string> &args_, std::string &filename){
 		count++;
 	}
 	
+	return true;
+}
+
+/** Search for an input command and perform the desired action.
+  * 
+  * \return True if the command is valid and false otherwise.
+  */
+bool Scanner::CommandControl(std::string cmd_, const std::vector<std::string> &args_){
+	if(cmd_ == "flush"){
+		std::cout << message_head << "Flushing histogram entries to file.\n";
+		output_his->Flush();
+	}
+	else if(cmd_ == "zero"){
+		if(args_.size() >= 1){
+			int his_id = atoi(args_.at(0).c_str());
+			if(output_his->Zero(his_id)){ std::cout << message_head << "Zeroed histo id " << his_id << "...\n"; }
+			else{ std::cout << message_head << "Failed to zero histo with id " << his_id << "!\n"; }
+		}
+		else{ // Zero all histos.
+			std::cout << message_head << "Zeroing output .his file. This may take some time...\n";
+			output_his->Zero();
+		}
+	}
+	else{ return false; }
+
 	return true;
 }
 

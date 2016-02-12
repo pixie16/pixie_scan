@@ -709,7 +709,7 @@ drr_entry *OutputHisFile::find_drr_in_list(unsigned int hisID_){
 	return NULL;
 }
 
-void OutputHisFile::flush(){
+void OutputHisFile::Flush(){
 	if(debug_mode){ std::cout << "debug: Flushing histogram entries to file.\n"; }
 
 	if(writable){ // Do the filling
@@ -754,7 +754,7 @@ void OutputHisFile::flush(){
 	}
 	fills_waiting.clear();
 	
-	flush_count = 0;
+	Flush_count = 0;
 }
 
 OutputHisFile::OutputHisFile(){
@@ -762,8 +762,8 @@ OutputHisFile::OutputHisFile(){
 	writable = false;
 	finalized = false;
 	existing_file = false;
-	flush_wait = 100000;
-	flush_count = 0;
+	Flush_wait = 100000;
+	Flush_count = 0;
 	total_his_size = 0;
 	
 	initialize();
@@ -774,8 +774,8 @@ OutputHisFile::OutputHisFile(std::string fname_prefix){
 	writable = false;
 	finalized = false;
 	existing_file = false;
-	flush_wait = 100000;
-	flush_count = 0;
+	Flush_wait = 100000;
+	Flush_count = 0;
 	total_his_size = 0;
 	
 	initialize();
@@ -920,7 +920,7 @@ bool OutputHisFile::Fill(unsigned int hisID_, unsigned int x_, unsigned int y_, 
 		fill_queue *fill = new fill_queue(temp_drr, bin, weight_);
 		fills_waiting.push_back(fill);
 
-		if(++flush_count >= flush_wait){ flush(); }
+		if(++Flush_count >= Flush_wait){ Flush(); }
 	}
 	
 	return false;
@@ -939,7 +939,7 @@ bool OutputHisFile::FillBin(unsigned int hisID_, unsigned int x_, unsigned int y
 		fill_queue *fill = new fill_queue(temp_drr, bin, weight_);
 		fills_waiting.push_back(fill);
 
-		if(++flush_count >= flush_wait){ flush(); }
+		if(++Flush_count >= Flush_wait){ Flush(); }
 		return true;
 	}
 	
@@ -963,6 +963,21 @@ bool OutputHisFile::Zero(unsigned int hisID_){
 	
 	return false;
 }
+
+bool OutputHisFile::Zero(){
+	if(!writable){ return false; }
+
+	for(std::vector<drr_entry*>::iterator iter = drr_entries.begin(); iter != drr_entries.end(); iter++){
+		ofile.seekp((*iter)->offset*2, std::ios::beg);
+		
+		char *block = new char[(*iter)->total_size];	
+		memset(block, 0x0, (*iter)->total_size);
+		ofile.write(block, (*iter)->total_size);
+		delete[] block;
+	}
+	
+	return true;
+}
 	
 bool OutputHisFile::Open(std::string fname_prefix){
 	if(writable){ 
@@ -979,7 +994,7 @@ bool OutputHisFile::Open(std::string fname_prefix){
 }
 
 void OutputHisFile::Close(){
-	flush();
+	Flush();
 
 	if(!finalized){ Finalize(); }
 

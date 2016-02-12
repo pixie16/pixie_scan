@@ -297,17 +297,14 @@ class OutputHisFile : public HisFile{
 	bool writable; /// True if the output .his file is open and writable
 	bool finalized; /// True if the .his and .drr files are locked
 	bool existing_file; /// True if the .his file was a previously existing file
-	unsigned int flush_wait; /// Number of fills to wait between flushes
-	unsigned int flush_count; /// Number of fills since last flush
+	unsigned int Flush_wait; /// Number of fills to wait between Flushes
+	unsigned int Flush_count; /// Number of fills since last Flush
 	std::vector<fill_queue*> fills_waiting; /// Vector containing list of histograms to be filled
 	std::vector<unsigned int> failed_fills; /// Vector containing list of histogram fills into an invalid his id
 	std::streampos total_his_size; /// Total size of .his file
 
 	/// Find the specified .drr entry in the drr list using its histogram id
 	drr_entry *find_drr_in_list(unsigned int hisID_);
-
-	/// Flush histogram fills to file
-	void flush();
 
   public:
 	OutputHisFile();
@@ -322,8 +319,8 @@ class OutputHisFile : public HisFile{
 	/// Return a pointer to the output file
 	std::fstream *GetOutputFile(){ return &ofile; }
 	
-	/// Set the number of fills to wait between file flushes
-	void SetFlushWait(unsigned int wait_){ flush_wait = wait_; }
+	/// Set the number of fills to wait between file Flushes
+	void SetFlushWait(unsigned int wait_){ Flush_wait = wait_; }
 	
 	/* Push back with another histogram entry. This command will also
 	 * extend the length of the .his file (if possible). DO NOT delete
@@ -347,8 +344,14 @@ class OutputHisFile : public HisFile{
 	/// Zero the specified histogram 
 	bool Zero(unsigned int hisID_);
 	
+	/// Zero all histograms
+	bool Zero();
+	
 	/// Open a new .his file
 	bool Open(std::string fname_prefix);
+
+	/// Flush histogram fills to file
+	void Flush();
 	
 	/// Close the histogram file and write the drr file
 	void Close();
