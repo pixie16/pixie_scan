@@ -1,7 +1,6 @@
 #include <iostream>
 
 // PixieCore libraries
-#include "Unpacker.hpp"
 #include "ScanMain.hpp"
 
 // Local files
@@ -9,70 +8,6 @@
 
 /// Process all events in the event list.
 void Scanner::ProcessRawEvent(){
-	ChannelEvent *current_event = NULL;
-	ChannelEventPair *current_pair = NULL;
-	
-	// Fill the processor event deques with events
-	while(!rawEvent.empty()){
-		current_event = rawEvent.front();
-		rawEvent.pop_front(); // Remove this event from the raw event deque.
-		
-		// Check that this channel event exists.
-		if(!current_event){ continue; }
-
-		// Fill the output histograms.
-		chanCounts->Fill(current_event->chanNum, current_event->modNum);
-		chanEnergy->Fill(current_event->energy, current_event->modNum*16+current_event->chanNum);
-
-		if(!raw_event_mode){ // Standard operation. Individual processors will handle output
-			// Link the channel event to its corresponding map entry.
-			current_pair = new ChannelEventPair(current_event, mapfile->GetMapEntry(current_event));
-		
-			// Pass this event to the correct processor
-			if(current_pair->entry->type == "ignore" || !handler->AddEvent(current_pair)){ // Invalid detector type. Delete it
-				delete current_pair;
-			}
-		
-			// This channel is a start signal. Due to the way ScanList
-			// packs the raw event, there may be more than one start signal
-			// per raw event.
-			if(current_pair->entry->tag == "start"){ 
-				handler->AddStart(current_pair);
-			}
-		}
-		else{ // Raw event mode operation. Dump raw event information to root file.
-			structure.Append(current_event->modNum, current_event->chanNum, current_event->time, current_event->energy);
-			waveform.Append(current_event->trace);
-			delete current_pair;
-		}
-	}
-	
-	if(!raw_event_mode){
-		// Call each processor to do the processing. Each
-		// processor will remove the channel events when finished.
-		if(handler->Process()){
-			// This event had at least one valid signal
-			root_tree->Fill();
-		}
-		
-		// Zero all of the processors.
-		handler->ZeroAll();
-	}
-	else{
-		root_tree->Fill();
-		structure.Zero();
-		waveform.Zero();
-	}
-	
-	// Check for the need to update the online canvas.
-	if(online_mode){
-		if(events_since_last_update >= events_between_updates){
-			online->Refresh();
-			events_since_last_update = 0;
-			std::cout << "refresh!\n";
-		}
-		else{ events_since_last_update++; }
-	}
 }
 
 Scanner::Scanner(){
