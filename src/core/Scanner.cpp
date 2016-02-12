@@ -30,17 +30,13 @@ void Scanner::ProcessRawEvent(){
 }
 
 Scanner::Scanner(){
-	force_overwrite = false;
-	raw_event_mode = false;
-	online_mode = false;
-	output_filename = "out.root";
-	events_since_last_update = 0;
-	events_between_updates = 5000;
+	output_fname = "output";
 }
 
 Scanner::~Scanner(){
 	if(init){
-		// Do some cleanup stuff.
+		output_his->Close();
+		delete output_his;
 	}
 
 	Close(); // Close the Unpacker object.
@@ -53,16 +49,11 @@ bool Scanner::Initialize(std::string prefix_){
 	    
 	// Code taken from drrsub_ in Initialize.cpp
 	try{
-		// Read in the name of the his file
-		char hisFileName[32];
-		//GetArgument(1, hisFileName, 32); // FIX THIS! NO GETARGUMENT IN C++!!!
-		std::string temp = "dummy";//hisFileName;
-		temp = temp.substr(0, temp.find_first_of(" "));
-		std::stringstream name;
-		name << temp;
-
-		output_his = new OutputHisFile(name.str());
-		output_his->SetDebugMode(true);
+		// Read in the name of the his file.
+		output_his = new OutputHisFile(output_fname);
+		
+		// Set the output his file debug mode, if the user asked for it.
+		if(scan_main->DebugMode()){ output_his->SetDebugMode(true); }
 
 		/** The DetectorDriver constructor will load processors
 		*  from the xml configuration file upon first call.
@@ -80,20 +71,17 @@ bool Scanner::Initialize(std::string prefix_){
 	} 
 	catch(std::exception &e){
 		// Any exceptions will be intercepted here
-		std::cout << "Exception caught at Initialize:" << std::endl;
-		std::cout << "\t" << e.what() << std::endl;
+		std::cout << prefix_ << "Exception caught at Initialize:" << std::endl;
+		std::cout << prefix_ << e.what() << std::endl;
 		exit(EXIT_FAILURE);
 	}
 	
-	if(online_mode){
-	    //ADD SOME STUFFHERE
-	}
 	return(init = true);
 }
 
 /// Return the syntax string for this program.
 void Scanner::SyntaxStr(const char *name_, std::string prefix_){ 
-	std::cout << prefix_ << "SYNTAX: " << std::string(name_) << " <options> <input>\n"; 
+	std::cout << prefix_ << "SYNTAX: " << std::string(name_) << " [input-fname] <options> <output-prefix>\n"; 
 }       
 
 /**
@@ -102,23 +90,32 @@ void Scanner::SyntaxStr(const char *name_, std::string prefix_){
  */
 bool Scanner::SetArgs(std::deque<std::string> &args_, std::string &filename){
 	std::string current_arg;
+	int count = 0;
 	while(!args_.empty()){
 		current_arg = args_.front();
 		args_.pop_front();
-		if(current_arg == "-shm"){
-			std::cout << "pixie_ldf_c: Using online mode.\n";
-			online_mode = true;
-		}
-		else{ filename = current_arg; }
+		if(count == 0){ filename = current_arg; } // Set the input filename.
+		else if(count == 1){ output_fname = current_arg; } // Set the output filename prefix.
+		count++;
 	}
 	
 	return true;
 }
 
 int main(int argc, char *argv[]){
-	ScanMain scan_main((Unpacker*)(new Scanner()));
+	// Define a new unpacker object.
+	Unpacker *scanner = (Unpacker*)(new Scanner());
 	
+	// Setup the ScanMain object and link it to the unpacker object.
+	ScanMain scan_main(scanner);
+	
+	// Link the unpacker object back to the ScanMain object so we may
+	// access its command line arguments and options.
+	scanner->SetScanMain(&scan_main);
+	
+	// Set the output message prefix.
 	scan_main.SetMessageHeader("pixie_ldf_c: ");
 
+	// Run the main loop.
 	return scan_main.Execute(argc, argv);
 }

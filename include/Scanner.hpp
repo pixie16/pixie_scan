@@ -3,6 +3,8 @@
 
 #include <string>
 
+class ScanMain;
+
 class Scanner : public Unpacker{
 public:
     Scanner();
@@ -19,15 +21,8 @@ public:
     bool SetArgs(std::deque<std::string> &args_, std::string &filename_);
     
 private:
-    int events_since_last_update; /// The number of processed events since the last online histogram update.
-    int events_between_updates; /// The number of events to process before updating online histograms.
-    
-    bool force_overwrite;	
-    bool raw_event_mode;
-    bool online_mode;
-    
-    std::string output_filename;
-    
+	std::string output_fname; /// The output histogram filename prefix.
+
     /// Process all events in the event list.
     void ProcessRawEvent();	
 };//class Scanner 
