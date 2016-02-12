@@ -5,6 +5,9 @@
 #define __CHANEVENT_HPP
 
 #include <vector>
+
+#include "ChannelEvent.hpp"
+
 #include "DetectorLibrary.hpp"
 #include "pixie16app_defs.h"
 #include "Identifier.hpp"
@@ -20,7 +23,7 @@
  * Note that this currently stores raw values internally through pixie word types
  *   but returns data values through native C types. This is potentially non-portable.
  */
-class ChanEvent {
+class ChanEvent : public ChannelEvent {
 public:
     /** Default constructor that zeroes all values */
     ChanEvent(){ZeroNums();};
@@ -43,7 +46,7 @@ public:
     void SetCalTime(double a) {calTime = a;}
     /** Set the high resolution time (Filter time + phase )
      * \param [in] a : the high resolution time */
-    void SetHighResTime(double a) {highResTime =a;}
+    void SetHighResTime(double a) {hires_time =a;}
 
     bool GetCfdSourceBit() const {
 	return(cfdTrigSource);
@@ -68,7 +71,7 @@ public:
         return calTime;   /**< \return the calibrated time */
     }
     double GetHighResTime() const {
-        return highResTime;   /**< \return the high-resolution time */
+        return hires_time;   /**< \return the high-resolution time */
     }
     double GetEventTime() const   {
         return eventTime;   /**< \return the event time */
@@ -119,37 +122,24 @@ public:
      * identifier is zeroed using its identifier::zeroid method. */
     void ZeroVar();
 private:
-    double energy;             /**< Raw channel energy */
     double calEnergy;          /**< Calibrated channel energy,
                   calibration performed in ThreshAndCal
                   function in the detector_driver.cpp */
     double calTime;            /**< Calibrated time, currently unused */
     double correctedTime;      /**< Energy-walk corrected time */
-    double highResTime;        /**< timing resolution less than 1 adc size */
     Trace trace;               /**< Channel trace if present */
-    pixie::word_t trigTime;    /**< The channel trigger time, trigger time and the lower 32 bits
-                  of the event time are not necessarily the same but could be
-                  separated by a constant value.*/
-    pixie::word_t cfdTime;     /**< CFD trigger time in units of 1/256 pixie clock ticks */
-    pixie::word_t eventTimeLo; /**< Lower 32 bits of pixie16 event time */
-    pixie::word_t eventTimeHi; /**< Upper 32 bits of pixie16 event time */
     pixie::word_t runTime0;    /**< Lower bits of run time */
     pixie::word_t runTime1;    /**< Upper bits of run time */
     pixie::word_t runTime2;    /**< Higher bits of run time */
-    static const int numQdcs = 8;     /**< Number of QDCs onboard */
-    pixie::word_t qdcValue[numQdcs];  /**< QDCs from onboard */
 
-    double time;               /**< Raw channel time, 64 bit from pixie16 channel event time */
     double eventTime;          /**< The event time recorded by Pixie */
-    int modNum;             /**< Module number */
-    int chanNum;            /**< Channel number */
 
     bool virtualChannel; /**< Flagged if generated virtually in Pixie DSP */
     bool pileupBit;      /**< Pile-up flag from Pixie */
     bool saturatedBit;   /**< Saturation flag from Pixie */
     bool cfdForceTrig;   //!< CFD was forced to trigger
     bool cfdTrigSource;  //!< The ADC that the CFD/FPGA synched with
-
+    
     void ZeroNums(void); /**< Zero members which do not have constructors associated with them */
 
     /** Make the front end responsible for reading the data able to set the
@@ -168,9 +158,11 @@ private:
  * \param [in] b : the right hand side for comparison
  * \return True if LHS is less the RHS */
 bool CompareCorrectedTime(const ChanEvent *a, const ChanEvent *b);
+
 /** Sort by increasing raw time
  * \param [in] a : the left hand side for comparison
  * \param [in] b : the right hand side for comparison
  * \return True if LHS is less the RHS*/
 bool CompareTime(const ChanEvent *a, const ChanEvent *b);
+
 #endif

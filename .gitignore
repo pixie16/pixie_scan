@@ -1,3 +1,6 @@
+#ScanMain cmd history file
+.ScanMain.cmd
+
 #Build files
 *.o
 pixie_ldf_*

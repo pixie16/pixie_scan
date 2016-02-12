@@ -1,12 +1,21 @@
+/** \file hisFile.hpp
+ * \brief A class to output histograms in a format which HHIRF damm is able to read.
+ *
+ * This is a special hacked version of the .his file handler which has all of
+ * the root dependencies removed. This version is not supported directly. In
+ * order to get the most recent version of this file, clone the git repo via
+ *  git clone https://github.com/cthornsb/his2root.git
+ * CRT
+ *
+ * \author C. R. Thornsberry
+ * \date Feb. 12th, 2016
+ */
 #ifndef HISFILE_H
 #define HISFILE_H
 
 #include <iostream>
 #include <fstream>
 #include <vector>
-
-// class TH1I;
-// class TH2I;
 
 /// Create a DAMM 1D histogram
 void hd1d_(int dammId, int nHalfWords, int rawlen, int histlen, int min, int max, const char *title, unsigned int length);

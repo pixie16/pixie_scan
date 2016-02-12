@@ -1,18 +1,26 @@
+/** \file hisFile.cpp
+ * \brief A class to output histograms in a format which HHIRF damm is able to read.
+ *
+ * This is a special hacked version of the .his file handler which has all of
+ * the root dependencies removed. This version is not supported directly. In
+ * order to get the most recent version of this file, clone the git repo via
+ *  git clone https://github.com/cthornsb/his2root.git
+ * CRT
+ *
+ * \author C. R. Thornsberry
+ * \date Feb. 12th, 2016
+ */
 #include <iostream>
 #include <iomanip>
 #include <fstream>
 #include <sstream>
 #include <vector>
 
-#include <cmath>
-#include <cstring>
-#include <ctime>
+#include <string.h>
+#include <time.h>
+#include <math.h>
 
 #include "hisFile.hpp"
-
-using namespace std;
-
-OutputHisFile *output_his; /// to actually define the pointer.
 
 ///////////////////////////////////////////////////////////////////////////////
 // Support Functions
@@ -20,12 +28,9 @@ OutputHisFile *output_his; /// to actually define the pointer.
 
 /// Create a DAMM 1D histogram (implemented for backwards compatibility)
 void hd1d_(int dammId, int nHalfWords, int rawlen, int histlen, int min, int max, const char *title, unsigned int length){
-    if(!output_his) {
-	cout << "The output_his is bad" << endl;
-	return;
-    }
-    drr_entry *entry = new drr_entry(dammId, (short)nHalfWords, (short)rawlen, (short)histlen, (short)min, (short)max, title);
-    output_his->push_back(entry);
+	if(!output_his){ return; }
+	drr_entry *entry = new drr_entry(dammId, (short)nHalfWords, (short)rawlen, (short)histlen, (short)min, (short)max, title);
+	output_his->push_back(entry);
 }
 
 /// Create a DAMM 2D histogram (implemented for backwards compatibility)
@@ -49,9 +54,8 @@ void count1cc_(const int &dammID, const int &x, const int &y){
 
 /// Unknown (implemented for backwards compatibility)
 void set2cc_(const int &dammID, const int &x, const int &y, const int &z){
-    if(!output_his)
-	return;
-    output_his->Fill(dammID, x, y, z);
+	if(!output_his){ return; }
+	output_his->Fill(dammID, x, y, z);
 }
 
 /// Strip trailing whitespace from a c-string
@@ -461,6 +465,30 @@ bool HisFile::Get2dRange(short &xmin, short &xmax, short &ymin, short &ymax){
 	ymax = current_entry->maxc[1];
 	return true;
 }
+
+/*/// Get the range of a 3d histogram
+bool HisFile::Get3dRange(short &xmin, short &xmax, short &ymin, short &ymax, short &zmin, short &zmax){
+	if(!current_entry){ return false; }
+	xmin = current_entry->minc[0];
+	xmax = current_entry->maxc[0];
+	ymin = current_entry->minc[1];
+	ymax = current_entry->maxc[1];
+	zmin = current_entry->minc[2];
+	zmax = current_entry->maxc[2];
+}
+
+/// Get the range of a 4d histogram
+bool HisFile::Get4dRange(short &xmin, short &xmax, short &ymin, short &ymax, short &zmin, short &zmax, short &amin, short &amax){
+	if(!current_entry){ return false; }
+	xmin = current_entry->minc[0];
+	xmax = current_entry->maxc[0];
+	ymin = current_entry->minc[1];
+	ymax = current_entry->maxc[1];
+	zmin = current_entry->minc[2];
+	zmax = current_entry->maxc[2];
+	amin = current_entry->minc[3];
+	amax = current_entry->maxc[3];
+}*/
 
 /// Get the size of the .his file
 std::streampos HisFile::GetHisFilesize(){

@@ -10,7 +10,8 @@ SCANORO          = scanor.o
 PUGIXMLO = pugixml.o
 
 #---------- Core ----------
-hisFileO         = hisFile.o
+HISFILEO         = hisFile.o
+SCANNERO         = Scanner.o
 BARDETECTORO     = BarDetector.o
 BARBUILDERO      = BarBuilder.o
 CALIBRATORO      = Calibrator.o
@@ -23,14 +24,12 @@ EVENTPROCESSORO  = EventProcessor.o
 GLOBALSO         = Globals.o
 HIGHRESTIMINGDATAO = HighResTimingData.o
 IDENTIFIERO        = Identifier.o
-INITIALIZEO      = Initialize.o
 MESSENGERO       = Messenger.o
 NOTEBOOKO		 = Notebook.o
 PLACEBUILDERO    = PlaceBuilder.o
 PLACESO          = Places.o
 PLOTSO           = Plots.o
 PLOTSREGISTERO   = PlotsRegister.o
-PIXIEO           = PixieStd.o
 RANDOMPOOLO      = RandomPool.o
 RAWEVENTO        = RawEvent.o
 READBUFFDATADO    = ReadBuffData.RevD.o
@@ -82,13 +81,13 @@ WALKCORRECTORO   = WalkCorrector.o
 FORT_OBJS = $(SET2CCO) $(MESSLOGO) $(MILDATIMO) $(SCANORO)
 
 # Important to compile READBUFFDATA first
-CXX_OBJS = $(READBUFFDATAAO) $(READBUFFDATADO) 	$(READBUFFDATAFO) $(hisFileO)
+CXX_OBJS = $(READBUFFDATAAO) $(READBUFFDATADO) 	$(READBUFFDATAFO) $(HISFILEO) $(SCANNERO)
 
 # Core Objects 
-CXX_OBJS += $(PUGIXMLO) $(PIXIEO) $(BARBUILDERO) $(BARDETECTORO) $(CALIBRATORO)\
+CXX_OBJS += $(PUGIXMLO) $(BARBUILDERO) $(BARDETECTORO) $(CALIBRATORO)\
 	$(CORRELATORO) $(CHANEVENTO) $(DETECTORDRIVERO) $(DETECTORLIBRARYO)\
 	$(DETECTORSUMMARYO) $(EVENTPROCESSORO) $(GLOBALSO) $(IDENTIFIERO) \
-	$(INITIALIZEO) $(MESSENGERO) $(NOTEBOOKO) $(RANDOMPOOLO) $(RAWEVENTO)\
+	$(MESSENGERO) $(NOTEBOOKO) $(RANDOMPOOLO) $(RAWEVENTO)\
 	$(STATSDATAO) $(TIMINGCALO) $(TIMINGMAPBUILDERO) $(WALKCORRECTORO)
 
 #Correlation Objects
