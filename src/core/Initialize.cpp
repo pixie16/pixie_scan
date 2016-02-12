@@ -28,7 +28,8 @@ extern "C" void drrsub_(unsigned int& iexist) {
 	stringstream name;
 	name << temp;
 
-	output_his = new OutputHisFile(name.str());
+	OutputHisFile *output_his = new OutputHisFile(name.str());
+	output_his->SetDebugMode(true);
 
         /** The DetectorDriver constructor will load processors
          *  from the xml configuration file upon first call.
@@ -42,7 +43,7 @@ extern "C" void drrsub_(unsigned int& iexist) {
          *  calibration and walk correction factors.
          */
         DetectorDriver::get()->DeclarePlots();
-	output_his->Close();
+	output_his->Finalize();
     } catch (std::exception &e) {
         // Any exceptions will be intercepted here
         std::cout << "Exception caught at Initialize:" << std::endl;

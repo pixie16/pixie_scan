@@ -59,6 +59,8 @@
 #include "Messenger.hpp"
 #include "Exceptions.hpp"
 
+#include "hisFile.hpp"
+
 using namespace std;
 using namespace dammIds::raw;
 using pixie::word_t;
@@ -106,6 +108,7 @@ int (*ReadBuffData)(word_t *lbuf, unsigned long *BufLen,
 extern "C" void cleanup_()
 {
     std::cout << "\nCleaning up..\n";
+    output_his->Close();
     DetectorDriver* driver = DetectorDriver::get();
     delete driver;
 }
