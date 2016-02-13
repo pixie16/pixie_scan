@@ -2,7 +2,7 @@
 # GNUmakefile using implicit rules and standard definitions
 SHELL=/bin/sh
 
-PIXIE_SUITE_DIR = $(HOME)/Research/PixieSuite
+PIXIE_SUITE_DIR = /opt/PixieSuite
 
 # Uncomment the following line for root functionality
 # USEROOT = 1
@@ -25,8 +25,8 @@ vpath %.icc include/
 vpath %.cpp src/analyzers:src/core:src/experiment:src/processors
 vpath %.o obj/
 
-SCAN_LIB_DIR = $(PIXIE_SUITE_DIR)/exec/lib
-SCAN_INC_DIR = $(PIXIE_SUITE_DIR)/exec/include
+SCAN_LIB_DIR = $(PIXIE_SUITE_DIR)/lib
+SCAN_INC_DIR = $(PIXIE_SUITE_DIR)/include
 
 OutPutOpt     = -o # keep whitespace after "-o"
 
