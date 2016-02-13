@@ -33,55 +33,69 @@ class ChanEvent{
     }
     
     ChanEvent(PixieEvent *event_){ 
-    	event = event_; // We will take ownership of the PixieEvent.
+    	event = event_; // We will take ownership of the PixieEvent. No need to copy the variables.
     	trace = new Trace(event->adcTrace); // Copy the trace from the PixieEvent (messy, but needed for the Trace class).
     }
     
     ~ChanEvent(){ 
-    	if(trace){ delete trace; } 
+    	delete trace;
     	delete event;
     }
+
+	/////////////////////////////////////////////////////////////////
+	// Gets/Sets for implementation specific channel variables.
+	/////////////////////////////////////////////////////////////////
+
+    /** Set the calibrated energy
+     * \param [in] a : the calibrated energy */
+    void SetCalEnergy(double a) {calEnergy = a;}
+
+    /** Set the Walk corrected time
+     * \param [in] a : the walk corrected time */
+    void SetCorrectedTime(double a) {correctedTime = a;}
+
+    /** Set the high resolution time (Filter time + phase )
+     * \param [in] a : the high resolution time */
+    void SetHighResTime(double a) {hires_time =a;}
+
+	double GetCalEnergy() const { return calEnergy; } /**< \return the calibrated energy */
+
+    double GetCorrectedTime() const { return correctedTime; } /**< \return the corrected time */
+    
+    double GetHighResTime() const { return hires_time; } /**< \return the high-resolution time */
+
+    const Trace& GetTrace() const { return *trace; } /**< \return a reference to the trace */
+    
+    Trace& GetTrace() { return *trace; } /** \return a reference which can alter the trace */
+
+    //! \return The identifier in the map for the channel event
+    const Identifier& GetChanID() const;
+    
+    /** \return the channel id defined as pixie module # * 16 + channel number */
+    int GetID() const;
+
+	/////////////////////////////////////////////////////////////////
+	// Gets/Sets for raw channel variables from PixieEvent class.
+	/////////////////////////////////////////////////////////////////
 
     /** Set the raw energy in case we do not want to extract it from the trace
      * ourselves
      * \param [in] a : the energy to set */
     void SetEnergy(double a) {event->energy = a;}
     
-    /** Set the calibrated energy
-     * \param [in] a : the calibrated energy */
-    void SetCalEnergy(double a) {event->calEnergy = a;}
-    
     /** Set the time
      * \param [in] a : the time to set */
     void SetTime(double a) {event->time = a;}
     
-    /** Set the Walk corrected time
-     * \param [in] a : the walk corrected time */
-    void SetCorrectedTime(double a) {event->correctedTime = a;}
-
-    /** Set the high resolution time (Filter time + phase )
-     * \param [in] a : the high resolution time */
-    void SetHighResTime(double a) {event->hires_time = a;}
-
     bool GetCfdSourceBit() const { return(event->cfdTrigSource); } /**< \return the cfdTrigSource flag */
     
     bool CfdForceTrig() const { return(event->cfdForceTrig); } /**< \return the cfdForceTrig flag */
     
     double GetEnergy() const { return event->energy; } /**< \return the raw energy */
     
-    double GetCalEnergy() const { return event->calEnergy; } /**< \return the calibrated energy */
-    
     double GetTime() const { return event->time; } /**< \return the raw time */
     
-    double GetCorrectedTime() const { return event->correctedTime; } /**< \return the corrected time */
-    
-    double GetHighResTime() const { return event->hires_time; } /**< \return the high-resolution time */
-    
     double GetEventTime() const { return event->eventTime; } /**< \return the event time */
-    
-    const Trace& GetTrace() const { return *trace; } /**< \return a reference to the trace */
-    
-    Trace& GetTrace() { return *trace; } /** \return a reference which can alter the trace */
     
     unsigned long GetTrigTime() const { return event->trigTime; } /**< \return the channel trigger time */
     
@@ -93,12 +107,6 @@ class ChanEvent{
     
     bool IsSaturated() const { return event->saturatedBit; } /**< \return whether the trace is saturated */
 
-    //! \return The identifier in the map for the channel event
-    const Identifier& GetChanID() const;
-    
-    /** \return the channel id defined as pixie module # * 16 + channel number */
-    int GetID() const;
-    
     /** \return The Onboard QDC value at i
      * \param [in] i : the QDC number to obtain, possible values [0,7] */
     unsigned long GetQdcValue(int i) const;
@@ -111,6 +119,10 @@ class ChanEvent{
     void ZeroVar();
 private:
 	PixieEvent *event;
+
+    double calEnergy; /**< Calibrated channel energy. */
+    double correctedTime; /**< Energy-walk corrected time. */
+	double hires_time; /**< timing resolution less than 1 adc size */
 
     Trace *trace; /**< Channel trace if present */
 

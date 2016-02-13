@@ -139,7 +139,6 @@ void HistoStats(unsigned int id, double diff, double clock, HistoPoints event) {
     // Exclude event type 0/1 since it will also appear as an
     // event type 11
     if ( event != BUFFER_START && event != BUFFER_END ){
-	cout << remainNumSecs << " " << id << " " << runTimeSecs << endl;
         driver->plot(DD_RUNTIME_SEC, remainNumSecs, rowNumSecs);
         driver->plot(DD_RUNTIME_MSEC, remainNumMsecs, rowNumMsecs);
         //fill scalar spectrum (per second)
@@ -162,7 +161,7 @@ void Scanner::ProcessRawEvent(){
     // local variables for the times of the current event, previous
     // event and time difference between the two
     double diffTime = 0;
-    deque<PixieEvent*>::iterator iEvent;
+    deque<PixieEvent*>::iterator iEvent = rawEvent.begin();
 
         // Initialize the scan program before the first event
     if(counter == 0){

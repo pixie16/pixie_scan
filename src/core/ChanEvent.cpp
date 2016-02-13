@@ -13,6 +13,9 @@ bool CompareTime(const ChanEvent *a, const ChanEvent *b){
 }
 
 void ChanEvent::ZeroNums() {
+	calEnergy = -1;
+	correctedTime = -1;
+	hires_time = -1;
 	event->clear();
 }
 
