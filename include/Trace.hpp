@@ -43,6 +43,8 @@ public:
     Trace(const std::vector<int> &x) : std::vector<int>(x) {
         baselineLow = baselineHigh = pixie::U_DELIMITER;
     }
+    
+    virtual ~Trace(){ }
 
     /** calculation of the trapezoidal filter
     * \param [in] filter : the filter for the trace

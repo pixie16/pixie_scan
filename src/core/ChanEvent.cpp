@@ -13,11 +13,7 @@ bool CompareTime(const ChanEvent *a, const ChanEvent *b){
 }
 
 void ChanEvent::ZeroNums() {
-	event->Clear();
-}
-
-unsigned long ChanEvent::GetQdcValue(int i) const {
-    return event->GetQdcValue(i);
+	event->clear();
 }
 
 const Identifier& ChanEvent::GetChanID() const {
@@ -28,9 +24,15 @@ int ChanEvent::GetID() const {
     return DetectorLibrary::get()->GetIndex(event->modNum, event->chanNum);
 }
 
+/** \return The Onboard QDC value at i
+ * \param [in] i : the QDC number to obtain, possible values [0,7] */
+unsigned long ChanEvent::GetQdcValue(int i) const {
+	return event->getQdcValue(i);
+}
+
 //! [Zero Channel]
 void ChanEvent::ZeroVar() {
     ZeroNums();
-    trace.clear();
+    trace->clear();
 }
 //! [Zero Channel]

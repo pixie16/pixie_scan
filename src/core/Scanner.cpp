@@ -6,7 +6,7 @@
 // PixieCore libraries
 #include "Unpacker.hpp" 
 #include "ScanMain.hpp"
-#include "ChannelEvent.hpp"
+#include "PixieEvent.hpp"
 
 // Local files
 #include "Scanner.hpp"
@@ -34,7 +34,7 @@ void Scanner::ProcessRawEvent(){
 
 	Messenger messenger;
 
-	ChannelEvent *current_event = NULL;
+	PixieEvent *current_event = NULL;
 
 	// Fill the raw event with ChanEvents
 	while(!rawEvent.empty()){
