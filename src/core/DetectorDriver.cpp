@@ -65,7 +65,7 @@ DetectorDriver* DetectorDriver::instance = NULL;
 DetectorDriver* DetectorDriver::get() {
     if (!instance)
         instance = new DetectorDriver();
-    return instance;
+    return(instance);
 }
 
 DetectorDriver::DetectorDriver() : histo(OFFSET, RANGE, "DetectorDriver") {
@@ -383,6 +383,7 @@ void DetectorDriver::LoadProcessors(Messenger& m) {
             }
         }
     }
+    m.done();
 }
 
 int DetectorDriver::Init(RawEvent& rawev) {
@@ -458,7 +459,7 @@ int DetectorDriver::ProcessEvent(RawEvent& rawev) {
             if ( (*iProc)->HasEvent() ) {
                 (*iProc)->Process(rawev);
             }
-        }
+	}
     } catch (GeneralException &e) {
         /// Any exception in activation of basic places, PreProcess and Process
         /// will be intercepted here
@@ -612,7 +613,6 @@ int DetectorDriver::ThreshAndCal(ChanEvent *chan, RawEvent& rawev) {
                                   chan->GetTrigTime() *
                                   Globals::get()->filterClockInSeconds());
         }
-
     } else {
         /// otherwise, use the Pixie on-board calculated energy
         /// add a random number to convert an integer value to a

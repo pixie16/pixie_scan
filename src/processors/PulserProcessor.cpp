@@ -61,6 +61,8 @@ bool PulserProcessor::Process(RawEvent &event) {
     if (!EventProcessor::Process(event))
         return false;
 
+    cout << "GOT HERE" << endl;
+
     plot(D_PROBLEMSTUFF, 30);
 
     if(!RetrieveData(event)) {
@@ -100,7 +102,7 @@ void PulserProcessor::AnalyzeData(void) {
         (*pulserMap_.find(make_pair(0,"start"))).second;
     HighResTimingData stop  =
         (*pulserMap_.find(make_pair(0,"stop"))).second;
-	
+
     // static int counter = 0;
     // for(Trace::const_iterator it = start.GetTrace()->begin();
     // 	it!= start.GetTrace()->end(); it++)

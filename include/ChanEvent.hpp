@@ -6,6 +6,7 @@
 
 #include <vector>
 
+///Included from PixieSuite2 
 #include "PixieEvent.hpp"
 
 #include "DetectorLibrary.hpp"
@@ -60,7 +61,7 @@ class ChanEvent{
 
     /** Set the high resolution time (Filter time + phase )
      * \param [in] a : the high resolution time */
-    void SetHighResTime(double a) {event->hires_time =a;}
+    void SetHighResTime(double a) {event->hires_time = a;}
 
     bool GetCfdSourceBit() const { return(event->cfdTrigSource); } /**< \return the cfdTrigSource flag */
     

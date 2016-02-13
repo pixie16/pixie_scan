@@ -75,7 +75,7 @@ WALKCORRECTORO   = WalkCorrector.o
 
 #----- list of objects
 # Fortran objects
-FORT_OBJS = $(SET2CCO) $(MESSLOGO) $(MILDATIMO) $(SCANORO)
+#FORT_OBJS = $(SET2CCO) $(MESSLOGO) $(MILDATIMO) $(SCANORO)
 
 # Important to compile READBUFFDATA first
 CXX_OBJS = $(HISFILEO) $(SCANNERO)

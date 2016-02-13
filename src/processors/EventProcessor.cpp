@@ -45,6 +45,7 @@ EventProcessor::~EventProcessor() {
 bool EventProcessor::HasEvent(void) const {
     for (map<string, const DetectorSummary*>::const_iterator it = sumMap.begin();
 	 it != sumMap.end(); it++) {
+	cout << "GOT HERE BOSSS " << sumMap.size() << endl;
         if (it->second->GetMult() > 0) {
             return true;
         }

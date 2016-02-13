@@ -6,6 +6,8 @@
 #ifndef __HIGHRESTIMINGDATA_HPP__
 #define __HIGHRESTIMINGDATA_HPP__
 
+#include <iostream>
+
 #include "ChanEvent.hpp"
 #include "Globals.hpp"
 #include "Trace.hpp"
@@ -19,7 +21,7 @@ public:
     virtual ~HighResTimingData() {};
 
     /** Constructor using the channel event
-    * \param [in] chan : the channel event for grabbing values from */
+    * \param [in] chan : the channel event */
     HighResTimingData(ChanEvent *chan) {
         trace_ = &chan->GetTrace();
         highResTime_ = chan->GetHighResTime()*1e9;
