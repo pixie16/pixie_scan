@@ -41,7 +41,6 @@ enum HistoPoints {BUFFER_START, BUFFER_END, EVENT_START = 10, EVENT_CONTINUE};
 // Define a pointer to an OutputHisFile for later use.
 OutputHisFile *output_his = NULL;
 
-
 /**
  * At various points in the processing of data in ScanList(), HistoStats() is
  * called to increment some low level pixie16 informational and diagnostic
@@ -152,37 +151,24 @@ void Scanner::ProcessRawEvent(){
     DetectorDriver* driver = DetectorDriver::get();
     DetectorLibrary* modChan = DetectorLibrary::get();
     PixieEvent *current_event = NULL;
+
+    static float hz = sysconf(_SC_CLK_TCK); // get the number of clock ticks per second
+    static clock_t clockBegin; // initialization time
+    static struct tms tmsBegin;
     
     // local variable for the detectors used in a given event
     set<string> usedDetectors;
     Messenger m;
     stringstream ss;
-
-    // local variables for the times of the current event, previous
-    // event and time difference between the two
-    double diffTime = 0;
-    deque<PixieEvent*>::iterator iEvent = rawEvent.begin();
-
-        // Initialize the scan program before the first event
+    
+    // Initialize the scan program before the first event
     if(counter == 0){
 	// Retrieve the current time for use later to determine the total running time of the analysis.
 	m.start("Initializing scan");
-	
-	/*string revision = Globals::get()->revision();
-	// Initialize function pointer to point to
-	// correct version of ReadBuffData
-	if(revision == "F")
-	ReadBuffData = ReadBuffDataF;
-	if (revision == "D" || revision == "DF")
-	ReadBuffData = ReadBuffDataD;
-	else if (revision == "A")
-	ReadBuffData = ReadBuffDataA;*/
-	
-	/*clockBegin = times(&tmsBegin);
-	  
-	  ss << "First buffer at " << clockBegin << " sys time";
-	  m.detail(ss.str());
-	  ss.str("");*/
+	clockBegin = times(&tmsBegin);
+	ss << "First buffer at " << clockBegin << " sys time";
+	m.detail(ss.str());
+	ss.str("");
 	
 	// After completion the descriptions of all channels are in the modChan
 	// vector, the DetectorDriver and rawevent have been initialized with the
@@ -206,69 +192,123 @@ void Scanner::ProcessRawEvent(){
 	    std::cout << "\t" << w.what() << std::endl;
 	}
 	
-	//lastVsn=-1; // set last vsn to -1 so we expect vsn 0 first
-	  
-	// ss << "Init at " << times(&tmsBegin) << " sys time.";
-    // 	m.detail(ss.str());
-    // 	m.done();
+	ss << "Init at " << times(&tmsBegin) << " sys time.";
+	m.detail(ss.str());
+	m.done();
     } //if(counter == 0)
-    
-    bool IsFirstEvt = true;
-    double lastTime, currTime;
-    unsigned int id;
-    static double firstTime;
-    // Fill the raw event with ChanEvents
-    while(!rawEvent.empty()){
-	if(IsFirstEvt) {
-	    lastTime = (*iEvent)->eventTime;
-	    currTime = lastTime;
-	    id = (*iEvent)->getID();
 
+    //BEGIN SCANLIST PART
+    unsigned long chanTime, eventTime;
+    
+    /** Rejection regions defined here*/
+    
+    ///The initial event
+    deque<PixieEvent*>::iterator iEvent = rawEvent.begin();
+
+    // local variables for the times of the current event, previous
+    // event and time difference between the two
+    double diffTime = 0;
+    //set last_t to the time of the first event
+    double lastTime = (*iEvent)->time;
+    double currTime = lastTime;
+    unsigned int id = (*iEvent)->getID();
+
+    /* KM
+     * Save time of the beginning of the file,
+     * this is needed for the rejection regions */
+    static double firstTime = lastTime;
+    bool IsFirstEvt = true;
+    bool IsLastEvt = false;
+    HistoStats(id, diffTime, lastTime, BUFFER_START);
+
+    //loop over the list of channels that fired in this buffer
+    while(!rawEvent.empty()) {
+	///Check if this is the last event in the deque.
+	if(rawEvent.size() == 1) 
+	    IsLastEvt = true;
+	
+	current_event = rawEvent.front();
+	rawEvent.pop_front(); // Remove this event from the raw event deque.
+
+	// Check that this channel event exists.
+	if(!current_event)
+	    continue;
+
+	///Completely ignore any channel that is set to be ignored
+	if (id == pixie::U_DELIMITER) {
+            ss << "pattern 0 ignore";
+            m.warning(ss.str());
+            ss.str("");
+            continue;
+        }
+	if ((*modChan)[id].GetType() == "ignore")
+            continue;
+	
+	// Do something with the current event.
+	ChanEvent *event = new ChanEvent(current_event);
+	
+	//calculate some of the parameters of interest
+	id = event->GetID();
+        chanTime  = event->GetTime();
+        eventTime = event->GetEventTimeLo();
+        /* retrieve the current event time and determine the time difference
+        between the current and previous events.
+        */
+        currTime = event->GetTime();
+        diffTime = currTime - lastTime;
+
+	//Add the ChanEvent pointer to the rawev and used detectors.
+	usedDetectors.insert((*modChan)[id].GetType());
+	rawev.AddChan(event);
+
+	if(IsFirstEvt) {
 	    /* KM
 	     * Save time of the beginning of the file,
 	     * this is needed for the rejection regions */
 	    firstTime = lastTime;
 	    HistoStats(id, diffTime, lastTime, BUFFER_START);
 	    IsFirstEvt = false;
-	}
-	
-	current_event = rawEvent.front();
-	rawEvent.pop_front(); // Remove this event from the raw event deque.
-	// Check that this channel event exists.
-	if(!current_event)
-	    continue;
-	
-	// Do something with the current event.
-	ChanEvent *event = new ChanEvent(current_event);
-	
-        unsigned int id = event->GetID();
-        if (id == pixie::U_DELIMITER) {
-            std::stringstream ss; 
-	    ss << "pattern 0 ignore";
-            m.warning(ss.str());
-            ss.str("");
-            continue;
-        }
-        if ((*modChan)[id].GetType() == "ignore")
-            continue;
+	}else if(IsLastEvt) {
+	    string mode;
+	    HistoStats(id, diffTime, currTime, BUFFER_END);
+	    
+	    driver->ProcessEvent(rawev);
+	    rawev.Zero(usedDetectors);
+	}else
+	    HistoStats(id, diffTime, lastTime, EVENT_CONTINUE);        
+        
+	//REJECTION REGIONS WOULD GO HERE
 
-	usedDetectors.insert((*modChan)[id].GetType());
-	rawev.AddChan(event);
-	HistoStats(id, diffTime, lastTime, EVENT_CONTINUE);
-    }
-    
-    driver->ProcessEvent(rawev);
-    
-    //after processing zero the rawevent variable
-    rawev.Zero(usedDetectors);
-    usedDetectors.clear();
-    
-    // Now clear all places in correlator (if resetable type)
-    for (std::map<std::string, Place*>::iterator it = TreeCorrelator::get()->places_.begin(); it != TreeCorrelator::get()->places_.end(); ++it)
-	if ((*it).second->resetable())
-	    (*it).second->reset();
-    
-    //rawev.ClearAndDelete();
+        /* if the time difference between the current and previous event is
+        larger than the event width, finalize the current event, otherwise
+        treat this as part of the current event
+        */
+        if ( diffTime > Globals::get()->eventWidth() ) {
+            if(rawev.Size() > 0) {
+            /* detector driver accesses rawevent externally in order to
+            have access to proper detector_summaries
+            */
+                driver->ProcessEvent(rawev);
+            }
+
+            //after processing zero the rawevent variable
+            rawev.Zero(usedDetectors);
+            usedDetectors.clear();
+
+            // Now clear all places in correlator (if resetable type)
+            for (map<string, Place*>::iterator it =
+                    TreeCorrelator::get()->places_.begin();
+                it != TreeCorrelator::get()->places_.end(); ++it)
+                if ((*it).second->resetable())
+                    (*it).second->reset();
+            HistoStats(id, diffTime, currTime, EVENT_START);
+        } else HistoStats(id, diffTime, currTime, EVENT_CONTINUE);
+
+	//DTIME STUFF GOES HERE
+
+        // update the time of the last event
+        lastTime = currTime;
+    }//while(!rawEvent.empty())
     counter++;
 }
 

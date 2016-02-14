@@ -428,7 +428,7 @@ int DetectorDriver::ProcessEvent(RawEvent& rawev) {
             PlotRaw((*it));
             ThreshAndCal((*it), rawev);
             PlotCal((*it));
-
+	    
             string place = (*it)->GetChanID().GetPlaceName();
             if (place == "__-1")
                 continue;
