@@ -45,7 +45,7 @@ EventProcessor::~EventProcessor() {
 bool EventProcessor::HasEvent(void) const {
     for (map<string, const DetectorSummary*>::const_iterator it = sumMap.begin();
 	 it != sumMap.end(); it++) {
-	cout << "GOT HERE BOSSS " << sumMap.size() << endl;
+
         if (it->second->GetMult() > 0) {
             return true;
         }
@@ -56,7 +56,6 @@ bool EventProcessor::HasEvent(void) const {
 bool EventProcessor::Init(RawEvent& rawev) {
     vector<string> intersect;
     const set<string> &usedDets = DetectorLibrary::get()->GetUsedDetectors();
-    cout << "EventProcessor::Init used Dets size = " << usedDets.size() << endl;
 
     set_intersection(associatedTypes.begin(), associatedTypes.end(),
                      usedDets.begin(), usedDets.end(),

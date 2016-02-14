@@ -61,8 +61,6 @@ bool PulserProcessor::Process(RawEvent &event) {
     if (!EventProcessor::Process(event))
         return false;
 
-    cout << "GOT HERE" << endl;
-
     plot(D_PROBLEMSTUFF, 30);
 
     if(!RetrieveData(event)) {
