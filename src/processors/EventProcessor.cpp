@@ -56,6 +56,7 @@ bool EventProcessor::HasEvent(void) const {
 bool EventProcessor::Init(RawEvent& rawev) {
     vector<string> intersect;
     const set<string> &usedDets = DetectorLibrary::get()->GetUsedDetectors();
+    cout << "EventProcessor::Init used Dets size = " << usedDets.size() << endl;
 
     set_intersection(associatedTypes.begin(), associatedTypes.end(),
                      usedDets.begin(), usedDets.end(),

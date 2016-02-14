@@ -175,6 +175,7 @@ void Scanner::ProcessRawEvent(){
 	// detectors that will be used in this analysis.
 	modChan->PrintUsedDetectors(rawev);
 	driver->Init(rawev);
+	rawev.Init(usedDetectors);
 	
 	/* Make a last check to see that everything is in order for the driver
 	 * before processing data. SanityCheck function throws exception if
