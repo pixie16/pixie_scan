@@ -41,10 +41,13 @@ private:
     TFile *rootfile_;
     TTree *roottree_;
     TH2D *qdctof_;
-    TH1D *vsize_;
+    TH1D *vsizehist_;
     static double tof_;
     static double qdc_;
+    static double ben_;
+    static unsigned int vid_;
+    static unsigned int vsize_;
+    static unsigned int evtnum_;
 #endif
-    std::ofstream *outstream;
 };
 #endif

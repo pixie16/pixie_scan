@@ -22,8 +22,14 @@
 #include "TimingMapBuilder.hpp"
 #include "VandleProcessor.hpp"
 
-double IS600Processor::tof_;
-double IS600Processor::qdc_;
+#ifdef useroot
+double IS600Processor::tof_ = 0.;
+double IS600Processor::qdc_ = 0.;
+double IS600Processor::ben_ = 0.;
+unsigned int IS600Processor::vid_ = 9999;
+unsigned int IS600Processor::evtnum_ = 0;
+unsigned int IS600Processor::vsize_ = 0;
+#endif
 
 namespace dammIds {
     namespace experiment {
@@ -58,7 +64,8 @@ void IS600Processor::DeclarePlots(void) {
     DeclareHistogram1D(DD_DEBUGGING3, S7, "Vandle Multiplicity");
     DeclareHistogram2D(DD_DEBUGGING5, SC, SC, "Mult2 Sym Plot Tof ");
     DeclareHistogram1D(DD_DEBUGGING6, SE, "LaBr3 RAW");
-    DeclareHistogram2D(DD_PROTONBETA2TDIFF_VS_BETA2EN, SD, SA, "BetaProton Tdiff vs. Beta Energy");
+    DeclareHistogram2D(DD_PROTONBETA2TDIFF_VS_BETA2EN, SD, SA,
+                       "BetaProton Tdiff vs. Beta Energy");
 
     const int energyBins1  = SD;
     DeclareHistogram1D(D_ENERGY, energyBins1,
@@ -79,24 +86,23 @@ IS600Processor::IS600Processor() : EventProcessor(OFFSET, RANGE, "IS600PRocessor
     GetArgument(1, hisFileName, 32);
     string temp = hisFileName;
     temp = temp.substr(0, temp.find_first_of(" "));
-    stringstream name;
-    name << temp << ".dat";
-    outstream = new ofstream(name.str().c_str());
 #ifdef useroot
     stringstream rootname;
     rootname << temp << ".root";
-    rootfile_ = new TFile(rootname.str().c_str(),"RECREATE");
+    rootfile_ = new TFile(rootname.str().c_str(),"Update");
     roottree_ = new TTree("vandle","");
     roottree_->Branch("tof",&tof_,"tof/D");
     roottree_->Branch("qdc",&qdc_,"qdc/D");
+    roottree_->Branch("ben",&ben_,"ben/D");
+    roottree_->Branch("vid",&vid_,"vid/I");
+    roottree_->Branch("evtnum",&evtnum_,"evtnum/I");
+    roottree_->Branch("vsize",&vsize_,"vsize/I");
     qdctof_ = new TH2D("qdctof","",1000,-100,900,16000,0,16000);
-    vsize_ = new TH1D("vsize","",40,0,40);
+    vsizehist_ = new TH1D("vsize","",40,0,40);
 #endif
 }
 
 IS600Processor::~IS600Processor() {
-    outstream->close();
-    delete(outstream);
 #ifdef useroot
     rootfile_->Write();
     rootfile_->Close();
@@ -141,7 +147,8 @@ bool IS600Processor::Process(RawEvent &event) {
 	event.GetSummary("labr3:mrbig")->GetList();
 
 #ifdef useroot
-    vsize_->Fill(vbars.size());
+    vsizehist_->Fill(vbars.size());
+    vsize_ = vbars.size();
 #endif
 
     //Obtain some useful logic statuses
@@ -185,17 +192,18 @@ bool IS600Processor::Process(RawEvent &event) {
 
 	    bool notPrompt = corTof > 45.;
 	    bool inPeel = histo.BananaTest(bananaNum,
-            corTof*plotMult_+plotOffset_,
-            bar.GetQdc());
+					   corTof*plotMult_+plotOffset_,
+					   bar.GetQdc());
 	    bool isLowStart = start.GetQdc() < 300;
 
-	    *outstream << tof << " " << bar.GetQdc() << endl;
 #ifdef useroot
         qdctof_->Fill(tof,bar.GetQdc());
         qdc_ = bar.GetQdc();
         tof_ = tof;
+	vid_ = barLoc;
+	ben_ = start.GetQdc();
         roottree_->Fill();
-        qdc_ = tof_ = -9999;
+        qdc_ = tof_ = vid_ = ben_ = -9999;
 #endif
 
 	    plot(DD_DEBUGGING1, tof*plotMult_+plotOffset_, bar.GetQdc());
@@ -296,6 +304,9 @@ bool IS600Processor::Process(RawEvent &event) {
 	     (gTime - lastProtonTime) / plotResolution) ;
     }
 
+#ifdef useroot
+    evtnum_++;
+#endif
     EndProcess();
     return(true);
 }
