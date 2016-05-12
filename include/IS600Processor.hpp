@@ -40,13 +40,16 @@ private:
 #ifdef useroot
     TFile *rootfile_;
     TTree *roottree_;
-    TH2D *qdctof_;
-    TH1D *vsizehist_;
     static double tof_;
     static double qdc_;
     static double ben_;
+    static double snrl_;
+    static double snrr_;
+    static double pos_;
+    static double tdiff_;
     static unsigned int vid_;
     static unsigned int vsize_;
+    static unsigned int gsize_;
     static unsigned int evtnum_;
 #endif
 };
