@@ -23,18 +23,36 @@
 #include "VandleProcessor.hpp"
 
 #ifdef useroot
-double IS600Processor::tof_ = 0.;
-double IS600Processor::qdc_ = 0.;
-double IS600Processor::ben_ = 0.;
-double IS600Processor::snrl_ = 0.;
-double IS600Processor::snrr_ = 0.;
-double IS600Processor::pos_ = 0.;
-double IS600Processor::tdiff_ = 0.;
-unsigned int IS600Processor::vid_ = 9999;
-unsigned int IS600Processor::evtnum_ = 0;
-unsigned int IS600Processor::vsize_ = 0;
-unsigned int IS600Processor::gsize_ = 0;
-#endif
+TFile *rootfile_;
+TTree *roottree_;
+
+struct VandleRoot{
+    double tof;
+    double qdc;
+    double ben;
+    double snrl;
+    double snrr;
+    double pos;
+    double tdiff;
+    unsigned int vid;
+};
+
+struct CloverRoot{
+    double gen0;
+    double gen1;
+};
+
+struct TapeInfo{
+    unsigned int move;
+    unsigned int beam;
+};
+
+static VandleRoot vandleroot;
+static CloverRoot cloverroot;
+static TapeInfo tapeinfo;
+static unsigned int vsize_ = 0;
+static unsigned int evtnum_ = 0;
+#endif //#ifdef useroot
 
 namespace dammIds {
     namespace experiment {
@@ -93,19 +111,13 @@ IS600Processor::IS600Processor() : EventProcessor(OFFSET, RANGE, "IS600PRocessor
 #ifdef useroot
     stringstream rootname;
     rootname << temp << ".root";
-    rootfile_ = new TFile(rootname.str().c_str(),"UPDATE");
-    roottree_ = new TTree("vandle","");
-    roottree_->Branch("tof",&tof_,"tof/D");
-    roottree_->Branch("qdc",&qdc_,"qdc/D");
-    roottree_->Branch("ben",&ben_,"ben/D");
-    roottree_->Branch("vid",&vid_,"vid/I");
+    rootfile_ = new TFile(rootname.str().c_str(),"RECREATE");
+    roottree_ = new TTree("data","");
+    roottree_->Branch("vandle", &vandleroot, "tof/D:qdc:ben:snrl:snrr:pos:tdiff:vid/I");
+    roottree_->Branch("clover", &cloverroot, "en0/D:en1");
+    roottree_->Branch("tape", &tapeinfo,"move/b:beam");
     roottree_->Branch("evtnum",&evtnum_,"evtnum/I");
     roottree_->Branch("vsize",&vsize_,"vsize/I");
-    roottree_->Branch("gsize",&gsize_,"gsize/I");
-    roottree_->Branch("snrl", &snrl_,"snrl/D");
-    roottree_->Branch("snrr", &snrr_,"snrr/D");
-    roottree_->Branch("pos", &pos_,"pos/D");
-    roottree_->Branch("tdiff", &tdiff_,"tdiff/D");
 #endif
 }
 
@@ -149,24 +161,36 @@ bool IS600Processor::Process(RawEvent &event) {
             GetProcessor("GeProcessor"))->GetGeEvents();
         geAddback = ((GeProcessor*)DetectorDriver::get()->
             GetProcessor("GeProcessor"))->GetAddbackEvents();
-        cout << geAddback.size() << endl;
     }
     static const vector<ChanEvent*> &labr3Evts =
 	event.GetSummary("labr3:mrbig")->GetList();
 
 #ifdef useroot
     vsize_ = vbars.size();
-    gsize_ = geEvts.size();
+    if(geAddback.size() != 0) {
+        if(geAddback.at(0).size() != 0)
+            cloverroot.gen0 = geAddback.at(0).at(0).energy;
+        else
+            cloverroot.gen0 = 0;
+        if(geAddback.at(1).size() != 0)
+            cloverroot.gen1 = geAddback.at(1).at(0).energy;
+        else
+            cloverroot.gen1 = 0;
+    } else
+        cloverroot.gen0 = cloverroot.gen1 = 0;
 #endif
 
     //Obtain some useful logic statuses
     double lastProtonTime =
         TreeCorrelator::get()->place("logic_t1_0")->last().time;
-    bool isTapeMoving = TreeCorrelator::get()->place("TapeMove")->status();
-
-    int bananaNum = 2;
-    bool hasMultOne = vbars.size() == 1;
-    bool hasMultTwo = vbars.size() == 2;
+    if(TreeCorrelator::get()->place("TapeMove")->status())
+        tapeinfo.move = 1;
+    else
+        tapeinfo.move = 0;
+    if(TreeCorrelator::get()->place("Beam")->status())
+        tapeinfo.beam = 1;
+    else
+        tapeinfo.beam = 0;
 
     //Begin processing for VANDLE bars
     for (BarMap::iterator it = vbars.begin(); it !=  vbars.end(); it++) {
@@ -195,32 +219,21 @@ bool IS600Processor::Process(RawEvent &event) {
                 GetProcessor("VandleProcessor"))->
                 CorrectTOF(tof, bar.GetFlightPath(), cal.GetZ0());
 
-            bool notPrompt = corTof > 45.;
-            bool inPeel = histo.BananaTest(bananaNum,
-					   corTof*plotMult_+plotOffset_,
-					   bar.GetQdc());
-            bool isLowStart = start.GetQdc() < 300;
-
-#ifdef useroot
-        qdc_ = bar.GetQdc();
-        pos_ = bar.GetQdcPosition();
-        tdiff_ = bar.GetTimeDifference();
-        tof_ = tof;
-        vid_ = barLoc;
-        snrr_ = bar.GetRightSide().GetSignalToNoiseRatio();
-        snrl_ = bar.GetLeftSide().GetSignalToNoiseRatio();
-        ben_ = start.GetQdc();
-        roottree_->Fill();
-        qdc_ = tof_ = vid_ = ben_ = -9999;
-#endif
+            #ifdef useroot
+            vandleroot.qdc   = bar.GetQdc();
+            vandleroot.pos   = bar.GetQdcPosition();
+            vandleroot.tdiff = bar.GetTimeDifference();
+            vandleroot.tof   = corTof;
+            vandleroot.vid   = barLoc;
+            vandleroot.snrr  = bar.GetRightSide().GetSignalToNoiseRatio();
+            vandleroot.snrl  = bar.GetLeftSide().GetSignalToNoiseRatio();
+            vandleroot.ben   = start.GetQdc();
+            roottree_->Fill();
+            #endif
 
             plot(DD_DEBUGGING1, tof*plotMult_+plotOffset_, bar.GetQdc());
-            if(!isTapeMoving && !isLowStart)
-                plot(DD_DEBUGGING0, corTof*plotMult_+plotOffset_,bar.GetQdc());
-            if(hasMultOne)
-                plot(DD_DEBUGGING4, corTof*plotMult_+plotOffset_, bar.GetQdc());
 
-            if (geEvts.size() != 0 && notPrompt && hasMultOne) {
+            if (geEvts.size() != 0) {
                 for (vector<ChanEvent *>::const_iterator itGe = geEvts.begin();
                 itGe != geEvts.end(); itGe++) {
                     plot(DD_DEBUGGING2, (*itGe)->GetCalEnergy(),
@@ -245,7 +258,6 @@ bool IS600Processor::Process(RawEvent &event) {
         plot(DD_PROTONBETA2TDIFF_VS_BETA2EN, it->second.second,
             (it->second.first - lastProtonTime) /
             (10e-3/Globals::get()->clockInSeconds()) );
-
 
     //----------------- GE Processing -------------------
     bool hasBeta = TreeCorrelator::get()->place("Beta")->status();

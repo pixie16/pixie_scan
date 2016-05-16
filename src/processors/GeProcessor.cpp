@@ -390,15 +390,15 @@ bool GeProcessor::PreProcess(RawEvent &event) {
 
     static const vector<ChanEvent*> &highEvents =
         event.GetSummary("ge:clover_high", true)->GetList();
-    static const vector<ChanEvent*> &lowEvents  =
-        event.GetSummary("ge:clover_low", true)->GetList();
+    //static const vector<ChanEvent*> &lowEvents  =
+    //    event.GetSummary("ge:clover_low", true)->GetList();
 
     /** Only the high gain events are going to be used. The events where
      * low/high gain mismatches, saturation or pileup is marked are rejected
      */
     for (vector<ChanEvent*>::const_iterator itHigh = highEvents.begin();
 	 itHigh != highEvents.end(); itHigh++) {
-        int location = (*itHigh)->GetChanID().GetLocation();
+        //int location = (*itHigh)->GetChanID().GetLocation();
         if ( (*itHigh)->IsSaturated() || (*itHigh)->IsPileup() )
             continue;
         /*

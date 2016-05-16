@@ -23,11 +23,12 @@ ValgrindOut.xml
 *.tgz
 *.tar.gz
 
-#DAMM files
+#Histogram files
 *.drr
 *.his
 *.list
 *.log
+*.root
 
 # Data directories
 HIS

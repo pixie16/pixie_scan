@@ -37,20 +37,5 @@ public:
     * \return Returns true if the processing was successful */
     virtual bool Process(RawEvent &event);
 private:
-#ifdef useroot
-    TFile *rootfile_;
-    TTree *roottree_;
-    static double tof_;
-    static double qdc_;
-    static double ben_;
-    static double snrl_;
-    static double snrr_;
-    static double pos_;
-    static double tdiff_;
-    static unsigned int vid_;
-    static unsigned int vsize_;
-    static unsigned int gsize_;
-    static unsigned int evtnum_;
-#endif
 };
-#endif
+#endif //#ifndef __IS600PROCESSOR_HPP__
