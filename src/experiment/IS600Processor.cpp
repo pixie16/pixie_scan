@@ -23,8 +23,8 @@
 #include "VandleProcessor.hpp"
 
 #ifdef useroot
-TFile *rootfile_;
-TTree *roottree_;
+TFile *rootfile_, *walkfile_;
+TTree *roottree_, *walktree_;
 
 struct VandleRoot{
     double tof;
@@ -49,6 +49,8 @@ struct TapeInfo{
 
 static VandleRoot vandleroot;
 static CloverRoot cloverroot;
+static HrtRoot leftside;
+static HrtRoot rightside;
 static TapeInfo tapeinfo;
 static unsigned int vsize_ = 0;
 static unsigned int evtnum_ = 0;
@@ -118,6 +120,11 @@ IS600Processor::IS600Processor() : EventProcessor(OFFSET, RANGE, "IS600PRocessor
     roottree_->Branch("tape", &tapeinfo,"move/b:beam");
     roottree_->Branch("evtnum",&evtnum_,"evtnum/I");
     roottree_->Branch("vsize",&vsize_,"vsize/I");
+
+    walkfile_ = new TFile("walk.root","RECREATE");
+    walktree_ = new TTree("walk","");
+    walktree_->Branch("left",&leftside,"qdc/D:time:snr:wtime:phase:abase:sbase");
+    walktree_->Branch("right",&rightside,"qdc/D:time:snr:wtime:phase:abase:sbase");
 #endif
 }
 
@@ -125,6 +132,8 @@ IS600Processor::~IS600Processor() {
 #ifdef useroot
     rootfile_->Write();
     rootfile_->Close();
+    walkfile_->Write();
+    walkfile_->Close();
     delete(rootfile_);
 #endif
 }
@@ -178,11 +187,7 @@ bool IS600Processor::Process(RawEvent &event) {
             cloverroot.gen1 = 0;
     } else
         cloverroot.gen0 = cloverroot.gen1 = 0;
-#endif
 
-    //Obtain some useful logic statuses
-    double lastProtonTime =
-        TreeCorrelator::get()->place("logic_t1_0")->last().time;
     if(TreeCorrelator::get()->place("TapeMove")->status())
         tapeinfo.move = 1;
     else
@@ -191,6 +196,18 @@ bool IS600Processor::Process(RawEvent &event) {
         tapeinfo.beam = 1;
     else
         tapeinfo.beam = 0;
+#endif
+
+    for(BarMap::iterator itStart = betas.begin();
+	    itStart != betas.end(); itStart++) {
+        (*itStart).second.GetRightSide().FillRootStructure(rightside);
+        (*itStart).second.GetLeftSide().FillRootStructure(leftside);
+        walktree_->Fill();
+    }
+
+    //Obtain some useful logic statuses
+    double lastProtonTime =
+        TreeCorrelator::get()->place("logic_t1_0")->last().time;
 
     //Begin processing for VANDLE bars
     for (BarMap::iterator it = vbars.begin(); it !=  vbars.end(); it++) {

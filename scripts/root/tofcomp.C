@@ -18,6 +18,8 @@
     Double_t octNorm = projOct->GetEntries();
     projOct->Scale(1./octNorm);
 
+    cout << augNorm << " " << octNorm << endl;
+
 
     projAug->SetXTitle("ToF (ns)");
     projAug->SetYTitle("Counts / (0.5 ns)");
