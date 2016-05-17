@@ -35,7 +35,6 @@ public:
 
     /** \return the true if there was an event in the bar */
     bool GetHasEvent() const {
-
         if(GetType() == "small") {
             double lengthSmallTime = Globals::get()->smallLengthTime();
             return(fabs(GetTimeDifference()) < lengthSmallTime+20 &&
