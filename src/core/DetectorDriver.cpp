@@ -464,7 +464,6 @@ void DetectorDriver::DeclarePlots() {
         DeclareHistogram2D(DD_RUNTIME_MSEC, SE, S7, "run time - ms");
 
         if(Globals::get()->hasRaw()) {
-            cout << "HAVING THE RAWWWWW" << endl;
             DetectorLibrary* modChan = DetectorLibrary::get();
             DeclareHistogram1D(D_NUMBER_OF_EVENTS, S4, "event counter");
             DeclareHistogram1D(D_HAS_TRACE, S8, "channels with traces");
