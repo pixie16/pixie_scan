@@ -19,6 +19,7 @@ struct HrtRoot {
     double phase;
     double abase;
     double sbase;
+    unsigned int id;
 };
 #endif
 
@@ -114,6 +115,7 @@ public:
         s.phase = GetPhase();
         s.snr = GetSignalToNoiseRatio();
         s.qdc = GetTraceQdc();
+        s.id = chan_->GetID();
     }
 #endif
 private:

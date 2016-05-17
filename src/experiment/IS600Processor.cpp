@@ -123,8 +123,8 @@ IS600Processor::IS600Processor() : EventProcessor(OFFSET, RANGE, "IS600PRocessor
 
     walkfile_ = new TFile("walk.root","RECREATE");
     walktree_ = new TTree("walk","");
-    walktree_->Branch("left",&leftside,"qdc/D:time:snr:wtime:phase:abase:sbase");
-    walktree_->Branch("right",&rightside,"qdc/D:time:snr:wtime:phase:abase:sbase");
+    walktree_->Branch("left",&leftside,"qdc/D:time:snr:wtime:phase:abase:sbase:id/b");
+    walktree_->Branch("right",&rightside,"qdc/D:time:snr:wtime:phase:abase:sbase:id/b");
 #endif
 }
 
@@ -198,13 +198,13 @@ bool IS600Processor::Process(RawEvent &event) {
         tapeinfo.beam = 0;
 #endif
 
-    for(BarMap::iterator itStart = betas.begin();
-	    itStart != betas.end(); itStart++) {
-        (*itStart).second.GetRightSide().FillRootStructure(rightside);
-        (*itStart).second.GetLeftSide().FillRootStructure(leftside);
-        walktree_->Fill();
-    }
-
+//    for(BarMap::iterator itStart = betas.begin();
+//	    itStart != betas.end(); itStart++) {
+//        (*itStart).second.GetRightSide().FillRootStructure(rightside);
+//        (*itStart).second.GetLeftSide().FillRootStructure(leftside);
+//        walktree_->Fill();
+//    }
+//
     //Obtain some useful logic statuses
     double lastProtonTime =
         TreeCorrelator::get()->place("logic_t1_0")->last().time;
@@ -213,6 +213,12 @@ bool IS600Processor::Process(RawEvent &event) {
     for (BarMap::iterator it = vbars.begin(); it !=  vbars.end(); it++) {
         TimingDefs::TimingIdentifier barId = (*it).first;
         BarDetector bar = (*it).second;
+
+        bar.GetRightSide().FillRootStructure(rightside);
+        bar.GetLeftSide().FillRootStructure(leftside);
+        walktree_->Fill();
+        rightside.qdc = leftside.qdc = rightside.time = leftside.time =
+            rightside.id = leftside.id = 0;
 
         if(!bar.GetHasEvent() || bar.GetType() == "small")
             continue;
