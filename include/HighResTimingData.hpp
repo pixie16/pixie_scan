@@ -11,16 +11,7 @@
 
 #ifdef useroot
 //! Structure for ROOT
-struct HrtRoot {
-    double qdc;
-    double time;
-    double snr;
-    double wtime;
-    double phase;
-    double abase;
-    double sbase;
-    unsigned int id;
-};
+
 #endif
 
 //! Class for holding information for high resolution timing. All times more
@@ -107,6 +98,17 @@ public:
     }
 
 #ifdef useroot
+    struct HrtRoot {
+        double qdc;
+        double time;
+        double snr;
+        double wtime;
+        double phase;
+        double abase;
+        double sbase;
+        unsigned int id;
+    };
+
     void FillRootStructure(HrtRoot &s) const {
         s.time = GetHighResTime();
         s.abase = GetAveBaseline();
@@ -115,7 +117,7 @@ public:
         s.phase = GetPhase();
         s.snr = GetSignalToNoiseRatio();
         s.qdc = GetTraceQdc();
-        s.id = chan_->GetID();
+        s.id = chan_->GetChanID().GetLocation();
     }
 #endif
 private:

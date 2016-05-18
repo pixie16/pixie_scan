@@ -19,16 +19,14 @@ using std::endl;
 
 /** Open a file for tree output */
 RootProcessor::RootProcessor(const char *fileName, const char *treeName)
-    : EventProcessor()
-{
+    : EventProcessor() {
     name = "RootProcessor";
     file = new TFile(fileName, "recreate"); //! overwrite tree for now
     tree = new TTree(treeName, treeName);
 }
 
 /** Add branches to the tree from the event processors in the driver */
-bool RootProcessor::Init(RawEvent& rawev)
-{
+bool RootProcessor::Init(RawEvent& rawev) {
     DetectorDriver* driver = DetectorDriver::get();
     if (file == NULL || tree == NULL) {
         cout << "Failed to create ROOT objects for "
@@ -51,8 +49,7 @@ bool RootProcessor::Init(RawEvent& rawev)
 }
 
 /** Fill the tree for each event, saving to file occasionally */
-bool RootProcessor::Process(RawEvent &event)
-{
+bool RootProcessor::Process(RawEvent &event) {
     if (!EventProcessor::Process(event))
 	return false;
 
@@ -71,8 +68,7 @@ bool RootProcessor::Process(RawEvent &event)
 }
 
 /** Finish flushing the file to disk, and clean up memory */
-RootProcessor::~RootProcessor()
-{
+RootProcessor::~RootProcessor() {
   if (tree != NULL) {
     cout << "  saving " << tree->GetEntries() << " tree entries" << endl;
     tree->AutoSave();

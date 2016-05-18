@@ -7,6 +7,7 @@
  */
 #include <fstream>
 #include <iostream>
+#include <string>
 
 #include <cmath>
 
@@ -49,8 +50,8 @@ struct TapeInfo{
 
 static VandleRoot vandleroot;
 static CloverRoot cloverroot;
-static HrtRoot leftside;
-static HrtRoot rightside;
+static HighResTimingData::HrtRoot leftside;
+static HighResTimingData::HrtRoot rightside;
 static TapeInfo tapeinfo;
 static unsigned int vsize_ = 0;
 static unsigned int evtnum_ = 0;
@@ -118,7 +119,7 @@ IS600Processor::IS600Processor() : EventProcessor(OFFSET, RANGE, "IS600PRocessor
     roottree_->Branch("vandle", &vandleroot, "tof/D:qdc:ben:snrl:snrr:pos:tdiff:vid/I");
     roottree_->Branch("clover", &cloverroot, "en0/D:en1");
     roottree_->Branch("tape", &tapeinfo,"move/b:beam");
-    roottree_->Branch("evtnum",&evtnum_,"evtnum/I");
+    roottree_->Branch("eCleanup and vtnum",&evtnum_,"evtnum/I");
     roottree_->Branch("vsize",&vsize_,"vsize/I");
 
     walkfile_ = new TFile("walk.root","RECREATE");
@@ -217,6 +218,7 @@ bool IS600Processor::Process(RawEvent &event) {
         bar.GetRightSide().FillRootStructure(rightside);
         bar.GetLeftSide().FillRootStructure(leftside);
         walktree_->Fill();
+
         rightside.qdc = leftside.qdc = rightside.time = leftside.time =
             rightside.id = leftside.id = 0;
 
