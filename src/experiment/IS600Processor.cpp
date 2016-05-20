@@ -218,9 +218,8 @@ bool IS600Processor::Process(RawEvent &event) {
         bar.GetRightSide().FillRootStructure(rightside);
         bar.GetLeftSide().FillRootStructure(leftside);
         walktree_->Fill();
-
-        rightside.qdc = leftside.qdc = rightside.time = leftside.time =
-            rightside.id = leftside.id = 0;
+        bar.GetRightSide().ZeroRootStructure(rightside);
+        bar.GetLeftSide().ZeroRootStructure(leftside);
 
         if(!bar.GetHasEvent() || bar.GetType() == "small")
             continue;

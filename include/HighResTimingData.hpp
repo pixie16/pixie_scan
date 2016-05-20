@@ -9,11 +9,6 @@
 #include "ChanEvent.hpp"
 #include "Globals.hpp"
 
-#ifdef useroot
-//! Structure for ROOT
-
-#endif
-
 //! Class for holding information for high resolution timing. All times more
 //! precise than the filter time will be in nanoseconds (phase, highResTime).
 class HighResTimingData {
@@ -118,6 +113,17 @@ public:
         s.snr = GetSignalToNoiseRatio();
         s.qdc = GetTraceQdc();
         s.id = chan_->GetChanID().GetLocation();
+    }
+
+    void ZeroRootStructure(HrtRoot &s) const {
+        s.time = -9999.;
+        s.abase = -9999.;
+        s.sbase = -9999.;
+        s.wtime = -9999.;
+        s.phase = -9999.;
+        s.snr = -9999.;
+        s.qdc = -9999.;
+        s.id = 9999;
     }
 #endif
 private:

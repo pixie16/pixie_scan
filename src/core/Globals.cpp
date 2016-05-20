@@ -162,9 +162,6 @@ Globals::Globals() {
                 WarnOfUnknownParameter(m, it);
         }
 
-
-
-
         for(pugi::xml_node_iterator it = timing.child("Trace").begin();
             it != timing.child("Trace").end(); ++it) {
             if(std::string(it->name()).compare("DiscriminationStart") == 0)
@@ -181,8 +178,8 @@ Globals::Globals() {
             for(pugi::xml_node_iterator waveit = it->begin();
                 waveit != it->end(); ++waveit) {
                 waveformRanges_.insert(std::make_pair(waveit->attribute("name").as_string(),
-                                  std::make_pair(waveit->child("Low").attribute("value").as_int(5),
-                                         waveit->child("High").attribute("value").as_int(10))));
+                    std::make_pair(waveit->child("Low").attribute("value").as_int(5),
+                    waveit->child("High").attribute("value").as_int(10))));
             }
 	    } else
             WarnOfUnknownParameter(m, it);
