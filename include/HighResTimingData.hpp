@@ -72,8 +72,8 @@ public:
     double GetFilterTime() const { return(chan_->GetTime()); }
     /** \return The current value of snr_ */
     double GetSignalToNoiseRatio() const {
-	return(20*log10(chan_->GetTrace().GetValue("maxval") /
-			chan_->GetTrace().GetValue("sigmaBaseline")));
+        return(20*log10(chan_->GetTrace().GetValue("maxval") /
+                chan_->GetTrace().GetValue("sigmaBaseline")));
     }
     /** \return The current value of stdDevBaseline_  */
     double GetStdDevBaseline() const {

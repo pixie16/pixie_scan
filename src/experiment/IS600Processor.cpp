@@ -119,7 +119,7 @@ IS600Processor::IS600Processor() : EventProcessor(OFFSET, RANGE, "IS600PRocessor
     roottree_->Branch("vandle", &vandleroot, "tof/D:qdc:ben:snrl:snrr:pos:tdiff:vid/I");
     roottree_->Branch("clover", &cloverroot, "en0/D:en1");
     roottree_->Branch("tape", &tapeinfo,"move/b:beam");
-    roottree_->Branch("eCleanup and vtnum",&evtnum_,"evtnum/I");
+    roottree_->Branch("evtnum",&evtnum_,"evtnum/I");
     roottree_->Branch("vsize",&vsize_,"vsize/I");
 
     walkfile_ = new TFile("walk.root","RECREATE");
@@ -215,11 +215,13 @@ bool IS600Processor::Process(RawEvent &event) {
         TimingDefs::TimingIdentifier barId = (*it).first;
         BarDetector bar = (*it).second;
 
-        bar.GetRightSide().FillRootStructure(rightside);
-        bar.GetLeftSide().FillRootStructure(leftside);
-        walktree_->Fill();
-        bar.GetRightSide().ZeroRootStructure(rightside);
-        bar.GetLeftSide().ZeroRootStructure(leftside);
+        if(bar.GetType() != "small") {
+            bar.GetRightSide().FillRootStructure(rightside);
+            bar.GetLeftSide().FillRootStructure(leftside);
+            walktree_->Fill();
+            bar.GetRightSide().ZeroRootStructure(rightside);
+            bar.GetLeftSide().ZeroRootStructure(leftside);
+        }
 
         if(!bar.GetHasEvent() || bar.GetType() == "small")
             continue;
