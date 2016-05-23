@@ -114,7 +114,7 @@ IS600Processor::IS600Processor() : EventProcessor(OFFSET, RANGE, "IS600PRocessor
 #ifdef useroot
     stringstream rootname;
     rootname << temp << ".root";
-    rootfile_ = new TFile(rootname.str().c_str(),"RECREATE");
+    rootfile_ = new TFile(rootname.str().c_str(),"update");
     roottree_ = new TTree("data","");
     roottree_->Branch("vandle", &vandleroot, "tof/D:qdc:ben:snrl:snrr:pos:tdiff:vid/I");
     roottree_->Branch("clover", &cloverroot, "en0/D:en1");
@@ -122,7 +122,9 @@ IS600Processor::IS600Processor() : EventProcessor(OFFSET, RANGE, "IS600PRocessor
     roottree_->Branch("evtnum",&evtnum_,"evtnum/I");
     roottree_->Branch("vsize",&vsize_,"vsize/I");
 
-    walkfile_ = new TFile("walk.root","RECREATE");
+    rootname.str("");
+    rootname << temp << "-walk.root";
+    walkfile_ = new TFile(rootname.str().c_str(),"RECREATE");
     walktree_ = new TTree("walk","");
     walktree_->Branch("left",&leftside,"qdc/D:time:snr:wtime:phase:abase:sbase:id/b");
     walktree_->Branch("right",&rightside,"qdc/D:time:snr:wtime:phase:abase:sbase:id/b");

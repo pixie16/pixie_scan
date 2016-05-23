@@ -3,11 +3,11 @@
   <Author>
     <Name>S. V. Paulauskas</Name>
     <Email>stanpaulauskas AT gmail DOT com</Email>
-    <Date>April 18, 2016</Date>
+    <Date>May 23, 2016</Date>
   </Author>
 
   <Description>
-    Configuration for IS599Oct_A052_HRS_08.ldf
+    Master configuration for IS599/600 October run
   </Description>
 
   <Global>
@@ -16,7 +16,7 @@
     <EnergyContraction value="1.0"/>
     <Path>config/</Path>
     <NumOfTraces value="50"/>
-    <HasRaw value="false"/>
+    <HasRaw value="true"/>
   </Global>
 
   <DetectorDriver>
@@ -24,7 +24,17 @@
     <Analyzer name="FittingAnalyzer"/>
 
     <Processor name="LogicProcessor"/>
-    <Processor name="GeProcessor"/>
+    <Processor name="GeProcessor"
+               gamma_threshold="10.0"
+               low_ratio="1.5"
+               high_ratio="3.0"
+               sub_event="1e-6"
+               gamma_beta_limit="1e-6"
+               gamma_gamma_limit="2e-6"
+               cycle_gate1_min="1.0"
+               cycle_gate1_max="1.5"
+               cycle_gate2_min="1.5"
+               cycle_gate2_max="2.0" />
     <Processor name="DoubleBetaProcessor"/>
     <Processor name="VandleProcessor"
         types="medium" res="2" offset="1000" NumStarts="1"/>
@@ -176,7 +186,22 @@
 	<WalkCorrection model="VM"> </WalkCorrection></Channel>
     </Module>
     <Module number="6">
-      <Channel number="15" type="ignore" subtype="ignore"></Channel>
+      <Channel number="0" type="ge" subtype="clover_low"></Channel>
+      <Channel number="1" type="ge" subtype="clover_low" ></Channel>
+      <Channel number="2" type="ge" subtype="clover_low" ></Channel>
+      <Channel number="3" type="ge" subtype="clover_low" ></Channel>
+      <Channel number="4" type="ge" subtype="clover_low" ></Channel>
+      <Channel number="5" type="ge" subtype="clover_low" ></Channel>
+      <Channel number="6" type="ge" subtype="clover_low" ></Channel>
+      <Channel number="7" type="ge" subtype="clover_low" ></Channel>
+      <Channel number="8" type="ge" subtype="clover_low"></Channel>
+      <Channel number="9" type="ge" subtype="clover_low" ></Channel>
+      <Channel number="10" type="ge" subtype="clover_low" ></Channel>
+      <Channel number="11" type="ge" subtype="clover_low" ></Channel>
+      <Channel number="12" type="ge" subtype="clover_low" ></Channel>
+      <Channel number="13" type="ge" subtype="clover_low" ></Channel>
+      <Channel number="14" type="ge" subtype="clover_low" ></Channel>
+      <Channel number="15" type="ge" subtype="clover_low" ></Channel>
     </Module>
   </Map>
 
@@ -215,87 +240,6 @@
 
   <TimeCalibration verbose_timing="False">
     <Vandle>
-    <medium>
-    <Bar number="0" lroffset="0" z0="100.5" xoffset="0" zoffset="0">
-        <TofOffset location="0" offset="0"/>
-    </Bar>
-    <Bar number="1" lroffset="0" z0="100" xoffset="0" zoffset="0">
-        <TofOffset location="0" offset="0"/>
-    </Bar>
-    <Bar number="2" lroffset="-1.73300" z0="100" xoffset="0" zoffset="0">
-        <TofOffset location="0" offset="86.98124"/>
-    </Bar>
-    <Bar number="3" lroffset="-.68246" z0="100.7" xoffset="0" zoffset="0">
-        <TofOffset location="0" offset="87.63391"/>
-    </Bar>
-    <Bar number="4" lroffset="5.83425" z0="100.4" xoffset="0" zoffset="0">
-        <TofOffset location="0" offset="83.72493"/>
-    </Bar>
-    <Bar number="5" lroffset="10.84317" z0="100.4" xoffset="0" zoffset="0">
-        <TofOffset location="0" offset="85.11106"/>
-    </Bar>
-    <Bar number="6" lroffset="4.43611" z0="100.8" xoffset="0" zoffset="0">
-        <TofOffset location="0" offset="84.21111"/>
-    </Bar>
-    <Bar number="7" lroffset="7.95674" z0="101.1" xoffset="0" zoffset="0">
-        <TofOffset location="0" offset="83.85788"/>
-    </Bar>
-    <Bar number="8" lroffset="-2.18549" z0="101.2" xoffset="0" zoffset="0">
-        <TofOffset location="0" offset="114.33375"/>
-    </Bar>
-    <Bar number="9" lroffset="7.03138" z0="101.4" xoffset="0" zoffset="0">
-        <TofOffset location="0" offset="118.36517"/>
-    </Bar>
-    <Bar number="10" lroffset="7.39354" z0="101.9" xoffset="0" zoffset="0">
-        <TofOffset location="0" offset="111.56401"/>
-    </Bar>
-    <Bar number="11" lroffset="3.63534" z0="101.7" xoffset="0" zoffset="0">
-        <TofOffset location="0" offset="117.43130"/>
-    </Bar>
-    <Bar number="12" lroffset="-1.26939" z0="101.9" xoffset="0" zoffset="0">
-        <TofOffset location="0" offset="117.35709"/>
-    </Bar>
-    <Bar number="13" lroffset="-.14388" z0="101.7" xoffset="0" zoffset="0">
-        <TofOffset location="0" offset="117.69789"/>
-    </Bar>
-    <Bar number="14" lroffset="-1.50256" z0="101.6" xoffset="0" zoffset="0">
-        <TofOffset location="0" offset="115.95947"/>
-    </Bar>
-    <Bar number="15" lroffset="9.68153" z0="102" xoffset="0" zoffset="0">
-        <TofOffset location="0" offset="125.15729"/>
-    </Bar>
-    <Bar number="16" lroffset="-.83046" z0="101.5" xoffset="0" zoffset="0">
-        <TofOffset location="0" offset="84.69952"/>
-    </Bar>
-    <Bar number="17" lroffset="4.57612" z0="101.1" xoffset="0" zoffset="0">
-        <TofOffset location="0" offset="88.29630"/>
-    </Bar>
-    <Bar number="18" lroffset="-1.77463" z0="100.7" xoffset="0" zoffset="0">
-        <TofOffset location="0" offset="84.82753"/>
-    </Bar>
-    <Bar number="19" lroffset=".93577" z0="101.1" xoffset="0" zoffset="0">
-        <TofOffset location="0" offset="84.66785"/>
-    </Bar>
-    <Bar number="20" lroffset="-.56446" z0="100.8" xoffset="0" zoffset="0">
-        <TofOffset location="0" offset="84.95243"/>
-    </Bar>
-    <Bar number="21" lroffset="7.27974" z0="101.1" xoffset="0" zoffset="0">
-        <TofOffset location="0" offset="93.55008"/>
-    </Bar>
-    <Bar number="22" lroffset="-3.80855" z0="100.3" xoffset="0" zoffset="0">
-        <TofOffset location="0" offset="82.71080"/>
-    </Bar>
-    <Bar number="23" lroffset="8.13257" z0="100.7" xoffset="0" zoffset="0">
-        <TofOffset location="0" offset="93.61036"/>
-    </Bar>
-    <Bar number="24" lroffset="4.42853" z0="100.8" xoffset="0" zoffset="0">
-        <TofOffset location="0" offset="110.31805"/>
-    </Bar>
-    <Bar number="25" lroffset=".97305" z0="100.2" xoffset="0" zoffset="0">
-        <TofOffset location="0" offset="119.54142"/>
-    </Bar>
-</medium>
-
     </Vandle>
   </TimeCalibration>
 
@@ -320,22 +264,21 @@
     </Trace>
 
     <Fitting>
-      <SigmaBaselineThresh value="3.0"/>
-      <SiPmtSigmaBaselineThresh value = "25.0"/>
-      <Parameters>
-	<Pars name="vandle:small">
-	  <Beta value="0.32969"/>
-          <Gamma value="0.212945"/>
-	</Pars>
-	<Pars name="vandle:medium">
-	  <Beta value="0.254373"/>
-          <Gamma value="0.208072"/>
-	</Pars>
-	<Pars name="beta:double">
-	  <Beta value="0.21332816"/>
-          <Gamma value="0.2454749398"/>
-	</Pars>
-      </Parameters>
+        <SigmaBaselineThresh value="3.0"/>
+        <Parameters>
+            <Pars name="vandle:small">
+                <Beta value="0.32969"/>
+                <Gamma value="0.212945"/>
+            </Pars>
+            <Pars name="vandle:medium">
+                <Beta value="0.254373"/>
+                <Gamma value="0.208072"/>
+            </Pars>
+            <Pars name="beta:double">
+                <Beta value="0.21332816"/>
+                <Gamma value="0.2454749398"/>
+            </Pars>
+        </Parameters>
     </Fitting>
   </Timing>
 

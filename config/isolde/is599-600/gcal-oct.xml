@@ -3,7 +3,7 @@
   <Author>
     <Name>S. V. Paulauskas</Name>
     <Email>stanpaulauskas AT gmail DOT com</Email>
-    <Date>April 18, 2016</Date>
+    <Date>May 23, 2016</Date>
   </Author>
 
   <Description>
@@ -21,7 +21,9 @@
 
   <DetectorDriver>
     <Processor name="GeCalibProcessor"
-               gamma_threshold="20.0"/>
+               gamma_threshold="20.0"
+               low_ratio="1.0"
+               high_ratio="1.0"/>
     <Processor name="LogicProcessor" />
     <Processor name="DoubleBetaProcessor"/>
   </DetectorDriver>
@@ -48,6 +50,24 @@
       <Channel number="5" type="ge" subtype="clover_high" ></Channel>
       <Channel number="6" type="ge" subtype="clover_high" ></Channel>
       <Channel number="7" type="ge" subtype="clover_high" ></Channel>
+      <Channel number="8" type="ge" subtype="clover_high"></Channel>
+      <Channel number="9" type="ge" subtype="clover_high" ></Channel>
+      <Channel number="10" type="ge" subtype="clover_high" ></Channel>
+      <Channel number="11" type="ge" subtype="clover_high" ></Channel>
+      <Channel number="12" type="ge" subtype="clover_high" ></Channel>
+      <Channel number="13" type="ge" subtype="clover_high" ></Channel>
+      <Channel number="14" type="ge" subtype="clover_high" ></Channel>
+      <Channel number="15" type="ge" subtype="clover_high" ></Channel>
+    </Module>
+    <Module number="6">
+      <Channel number="0" type="ge" subtype="clover_low"></Channel>
+      <Channel number="1" type="ge" subtype="clover_low" ></Channel>
+      <Channel number="2" type="ge" subtype="clover_low" ></Channel>
+      <Channel number="3" type="ge" subtype="clover_low" ></Channel>
+      <Channel number="4" type="ge" subtype="clover_low" ></Channel>
+      <Channel number="5" type="ge" subtype="clover_low" ></Channel>
+      <Channel number="6" type="ge" subtype="clover_low" ></Channel>
+      <Channel number="7" type="ge" subtype="clover_low" ></Channel>
       <Channel number="8" type="ge" subtype="clover_low"></Channel>
       <Channel number="9" type="ge" subtype="clover_low" ></Channel>
       <Channel number="10" type="ge" subtype="clover_low" ></Channel>
@@ -57,12 +77,9 @@
       <Channel number="14" type="ge" subtype="clover_low" ></Channel>
       <Channel number="15" type="ge" subtype="clover_low" ></Channel>
     </Module>
-    <Module number="6">
-      <Channel number="15" type="ignore" subtype="ignore"></Channel>
-    </Module>
   </Map>
 
-  <TreeCorrelator name="root" verbose="False">
+    <TreeCorrelator name="root" verbose="False">
     <Place type="PlaceOR" name="Beta" fifo="4">
       <Place type="PlaceThreshold" name="DoubleBeta1"
 	     low_limit="50.0" high_limit="16382" replace="false"/>
@@ -75,6 +92,14 @@
       </Place>
       <Place type="PlaceOR" name="Clover1">
         <Place type="PlaceThreshold" name="ge_clover_high_4-7"
+               low_limit="20.0" high_limit="99999" replace="true"/>
+      </Place>
+      <Place type="PlaceOR" name="Clover2">
+        <Place type="PlaceThreshold" name="ge_clover_high_8-11"
+               low_limit="20.0" high_limit="99999" replace="true"/>
+      </Place>
+      <Place type="PlaceOR" name="Clover3">
+        <Place type="PlaceThreshold" name="ge_clover_high_12-15"
                low_limit="20.0" high_limit="99999" replace="true"/>
       </Place>
     </Place>

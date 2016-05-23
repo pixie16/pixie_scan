@@ -24,20 +24,10 @@
     <Analyzer name="FittingAnalyzer"/>
 
     <Processor name="LogicProcessor"/>
-    <Processor name="GeProcessor"
-               gamma_threshold="10.0"
-               low_ratio="1.5"
-               high_ratio="3.0"
-               sub_event="1e-6"
-               gamma_beta_limit="1e-6"
-               gamma_gamma_limit="2e-6"
-               cycle_gate1_min="1.0"
-               cycle_gate1_max="1.5"
-               cycle_gate2_min="1.5"
-               cycle_gate2_max="2.0" />
+    <Processor name="GeProcessor"/>
     <Processor name="DoubleBetaProcessor"/>
     <Processor name="VandleProcessor"
-               types="small,medium" res="2" offset="1000" NumStarts="1"/>
+        types="medium" res="2" offset="1000" NumStarts="1"/>
     <Processor name="IS600Processor"/>
   </DetectorDriver>
 
@@ -53,7 +43,6 @@
       <Channel number="11" type="logic" subtype="beam_start" ></Channel>
       <Channel number="12" type="logic" subtype="beam_stop"></Channel>
       <Channel number="13" type="logic" subtype="supercycle"></Channel>
-      <Channel number="14" type="labr3" subtype="mrbig"></Channel>
       <Channel number="15" type="generic" subtype="generic"></Channel>
     </Module>
     <Module number="1">
@@ -65,14 +54,14 @@
       <Channel number="5" type="ge" subtype="clover_high" ></Channel>
       <Channel number="6" type="ge" subtype="clover_high" ></Channel>
       <Channel number="7" type="ge" subtype="clover_high" ></Channel>
-      <Channel number="8" type="ge" subtype="clover_low"></Channel>
-      <Channel number="9" type="ge" subtype="clover_low" ></Channel>
-      <Channel number="10" type="ge" subtype="clover_low" ></Channel>
-      <Channel number="11" type="ge" subtype="clover_low" ></Channel>
-      <Channel number="12" type="ge" subtype="clover_low" ></Channel>
-      <Channel number="13" type="ge" subtype="clover_low" ></Channel>
-      <Channel number="14" type="ge" subtype="clover_low" ></Channel>
-      <Channel number="15" type="ge" subtype="clover_low" ></Channel>
+      <Channel number="8" type="ge" subtype="clover_high"></Channel>
+      <Channel number="9" type="ge" subtype="clover_high" ></Channel>
+      <Channel number="10" type="ge" subtype="clover_high" ></Channel>
+      <Channel number="11" type="ge" subtype="clover_high" ></Channel>
+      <Channel number="12" type="ge" subtype="clover_high" ></Channel>
+      <Channel number="13" type="ge" subtype="clover_high" ></Channel>
+      <Channel number="14" type="ge" subtype="clover_high" ></Channel>
+      <Channel number="15" type="ge" subtype="clover_high" ></Channel>
     </Module>
     <Module number="2">
       <Channel number="0" type="vandle" subtype="medium" tags="left">
@@ -206,6 +195,14 @@
         <Place type="PlaceThreshold" name="ge_clover_high_4-7"
                low_limit="20.0" high_limit="99999" replace="true"/>
       </Place>
+      <Place type="PlaceOR" name="Clover2">
+        <Place type="PlaceThreshold" name="ge_clover_high_8-11"
+               low_limit="20.0" high_limit="99999" replace="true"/>
+      </Place>
+      <Place type="PlaceOR" name="Clover3">
+        <Place type="PlaceThreshold" name="ge_clover_high_12-15"
+               low_limit="20.0" high_limit="99999" replace="true"/>
+      </Place>
     </Place>
 
     <Place type="PlaceDetector" name="Vandle" reset="false"/>
@@ -323,7 +320,6 @@
 
     <Fitting>
       <SigmaBaselineThresh value="3.0"/>
-      <SiPmtSigmaBaselineThresh value = "25.0"/>
       <Parameters>
 	<Pars name="vandle:small">
 	  <Beta value="0.32969"/>

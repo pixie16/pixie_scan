@@ -1,5 +1,5 @@
 zero
 ban bananas/test.ban
-file /scratch2/cern/isoldeData/aug/is599/052k/is599_52k_00.ldf
+file /scratch2/cern/isoldeData/oct/is599/052k/IS599Oct_A052_03.ldf
 go
 end

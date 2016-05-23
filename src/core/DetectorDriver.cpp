@@ -179,11 +179,11 @@ void DetectorDriver::LoadProcessors(Messenger& m) {
                 cycle_gate2_max));
         } else if (name == "GeCalibProcessor") {
             double gamma_threshold =
-                processor.attribute("gamma_threshold").as_double(1);
+                processor.attribute("gamma_threshold").as_double(1.0);
             double low_ratio =
-                processor.attribute("low_ratio").as_double(1);
+                processor.attribute("low_ratio").as_double(1.0);
             double high_ratio =
-                processor.attribute("high_ratio").as_double(3);
+                processor.attribute("high_ratio").as_double(3.0);
             vecProcess.push_back(new GeCalibProcessor(gamma_threshold,
                 low_ratio, high_ratio));
         } else if (name == "Hen3Processor") {
@@ -481,7 +481,7 @@ int DetectorDriver::ThreshAndCal(ChanEvent *chan, RawEvent& rawev) {
 
         for (vector<TraceAnalyzer *>::iterator it = vecAnalyzer.begin();
             it != vecAnalyzer.end(); it++) {
-            (*it)->Analyze(trace, type, subtype,tags);
+            (*it)->Analyze(trace, type, subtype, tags);
         }
 
         if (trace.HasValue("filterEnergy") ) {

@@ -20,6 +20,7 @@
     <EnergyContraction value="1.0"/>
     <Path>config/</Path>
     <NumOfTraces value="50"/>
+    <HasRaw value="true"/>
   </Global>
 
   <DetectorDriver>

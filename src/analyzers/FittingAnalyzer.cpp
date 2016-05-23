@@ -108,20 +108,20 @@ void FittingAnalyzer::Analyze(Trace &trace, const std::string &detType,
     trace.plot(D_SIGMA, sigmaBaseline*100);
 
     if(!isDblBetaT) {
-	if(sigmaBaseline > globals->sigmaBaselineThresh()) {
-	    EndAnalyze();
-	    return;
-	}
+        if(sigmaBaseline > globals->sigmaBaselineThresh()) {
+            EndAnalyze();
+            return;
+        }
     } else {
-	if(sigmaBaseline > globals->siPmtSigmaBaselineThresh()) {
-	    EndAnalyze();
-	    return;
-	}
+        if(sigmaBaseline > globals->siPmtSigmaBaselineThresh()) {
+            EndAnalyze();
+            return;
+        }
     }
 
     pair<double,double> pars =  globals->fitPars(detType+":"+detSubtype);
     if(isDblBetaT)
-	pars = globals->fitPars(detType+":"+detSubtype+":timing");
+        pars = globals->fitPars(detType+":"+detSubtype+":timing");
 
     const gsl_multifit_fdfsolver_type *T = gsl_multifit_fdfsolver_lmsder;
     gsl_multifit_fdfsolver *s;

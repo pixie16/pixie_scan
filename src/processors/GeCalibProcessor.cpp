@@ -67,32 +67,32 @@ void GeCalibProcessor::DeclarePlots(void) {
     const int energyBins2 = SC;
     const int energyBins3 = S9;
     const int timeBins = S7;
-    
+
     using namespace dammIds::ge;
-    
+
     DetectorLibrary* modChan = DetectorLibrary::get();
-    
+
     const set<int> &cloverLocations = modChan->GetLocations("ge", "clover_high");
     // could set it now but we'll iterate through the locations to set this
     unsigned int cloverChans = 0;
-    
+
     for ( set<int>::const_iterator it = cloverLocations.begin();
 	  it != cloverLocations.end(); it++) {
         leafToClover[*it] = int(cloverChans / 4);
         cloverChans++;
     }
-    
+
     if (cloverChans % chansPerClover != 0) {
         cout << " There does not appear to be the proper number of"
 	     << " channels per clover.\n Program terminating." << endl;
         exit(EXIT_FAILURE);
     }
-    
+
     if (cloverChans != 0) {
         numClovers = cloverChans / chansPerClover;
         Messenger m;
         m.start("Building clovers");
-	
+
         stringstream ss;
         ss << "A total of " << cloverChans
            << " clover channels were detected: ";
@@ -110,7 +110,7 @@ void GeCalibProcessor::DeclarePlots(void) {
             ss << setw(2) << it->first;
         }
         m.detail(ss.str());
-	
+
         if (numClovers > dammIds::ge::MAX_CLOVERS) {
             m.fail();
             stringstream ss;
@@ -121,8 +121,8 @@ void GeCalibProcessor::DeclarePlots(void) {
         }
         m.done();
     }
-    
-    
+
+
     DeclareHistogram1D(calib::D_E_SUM, energyBins, "Gamma energy");
     for (unsigned i = 0; i < cloverChans; ++i) {
         stringstream ss;
@@ -134,14 +134,14 @@ void GeCalibProcessor::DeclarePlots(void) {
                        "Gamma E vs. crystal number ");
     DeclareHistogram2D(calib::DD_E_DETX_BETA_GATED, energyBins, S5,
                        "Gamma E vs. crystal number beta gated");
-    
+
     DeclareHistogram2D(calib::DD_EGAMMA__EBETA_ALL,
                        energyBins2, energyBins2,
                        "Gamma E, Beta E (all crystals)");
     DeclareHistogram2D(calib::DD_TDIFF__EGAMMA_ALL,
                        timeBins, energyBins,
                        "dt gamma-beta, gamma E (all)");
-    
+
     DeclareHistogram2D(calib::DD_EGAMMA__EBETA_B0,
 		       energyBins2, energyBins2, "Gamma E, beta E; beta 0");
     DeclareHistogram2D(calib::DD_EGAMMA__EBETA_B1,
@@ -150,7 +150,7 @@ void GeCalibProcessor::DeclarePlots(void) {
                        timeBins, energyBins, "dt gamma-beta, gamma E; beta 0");
     DeclareHistogram2D(calib::DD_TDIFF__EGAMMA_B1,
                        timeBins, energyBins, "dt gamma-beta, gamma E; beta 0");
-    
+
     for (unsigned b = 0; b < 2; ++b) {
         stringstream ss;
         for (unsigned i = 0; i < cloverChans; ++i) {
@@ -159,7 +159,7 @@ void GeCalibProcessor::DeclarePlots(void) {
                << " beta " << b << " (energy/2)";
             DeclareHistogram2D(calib::DD_EGAMMA__EBETA + i * 2 + b,
                                energyBins2, energyBins3, ss.str().c_str());
-	    
+
             ss.str("");
             ss << "dt gamma-beta, gamma E; crystal "
                << i << " beta " << b;
@@ -167,7 +167,7 @@ void GeCalibProcessor::DeclarePlots(void) {
                                timeBins, energyBins, ss.str().c_str());
         }
     }
-    
+
     DeclareHistogram1D(calib::D_ENERGY_HIGHGAIN, energyBins,
                        "Gamma singles, high gain");
     DeclareHistogram1D(calib::D_ENERGY_LOWGAIN, energyBins,
@@ -181,15 +181,15 @@ void GeCalibProcessor::DeclarePlots(void) {
 bool GeCalibProcessor::PreProcess(RawEvent &event) {
     if (!EventProcessor::PreProcess(event))
         return false;
-    
+
     using namespace dammIds::ge;
-    
+
     // Clear all events stored in vectors from previous event
     geEvents_.clear();
-    
+
     static const vector<ChanEvent*> &highEvents = event.GetSummary("ge:clover_high", true)->GetList();
     static const vector<ChanEvent*> &lowEvents  = event.GetSummary("ge:clover_low", true)->GetList();
-    
+
     /** Only the high gain events are going to be used. The events where
      * low/high gain mismatches, saturation or pileup is marked are rejected
      */
@@ -197,77 +197,77 @@ bool GeCalibProcessor::PreProcess(RawEvent &event) {
 	 itLow != lowEvents.end(); ++itLow) {
         plot(calib::D_ENERGY_LOWGAIN, (*itLow)->GetCalEnergy());
     }
-    
+
     for (vector<ChanEvent*>::const_iterator itHigh = highEvents.begin();
 	 itHigh != highEvents.end(); itHigh++) {
         int location = (*itHigh)->GetChanID().GetLocation();
         plot(calib::D_ENERGY_HIGHGAIN, (*itHigh)->GetCalEnergy());
-	
+
         if ( (*itHigh)->IsSaturated() || (*itHigh)->IsPileup() )
             continue;
-	
+
         // find the matching low gain event
-        vector <ChanEvent*>::const_iterator itLow = lowEvents.begin();
-        for (; itLow != lowEvents.end(); itLow++) {
-            if ( (*itLow)->GetChanID().GetLocation() == location ) {
-                break;
-            }
-        }
-        if ( itLow != lowEvents.end() ) {
-            double ratio = (*itHigh)->GetEnergy() / (*itLow)->GetEnergy();
-            plot(calib::DD_CLOVER_ENERGY_RATIO, location, ratio * 10.);
-            if ( (ratio < lowRatio_ ||
-                  ratio > highRatio_) )
-                continue;
-        }
+//        vector <ChanEvent*>::const_iterator itLow = lowEvents.begin();
+//        for (; itLow != lowEvents.end(); itLow++) {
+//            if ( (*itLow)->GetChanID().GetLocation() == location ) {
+//                break;
+//            }
+//        }
+//        if ( itLow != lowEvents.end() ) {
+//            double ratio = (*itHigh)->GetEnergy() / (*itLow)->GetEnergy();
+//            plot(calib::DD_CLOVER_ENERGY_RATIO, location, ratio * 10.);
+//            if ( (ratio < lowRatio_ ||
+//                  ratio > highRatio_) )
+//                continue;
+//        }
         geEvents_.push_back(*itHigh);
     }
-    
+
     // now we sort the germanium events according to their corrected time
     sort(geEvents_.begin(), geEvents_.end(), CompareCorrectedTime);
-    
+
     return true;
 }
 
 
 bool GeCalibProcessor::Process(RawEvent &event) {
     using namespace dammIds::ge;
-    
+
     if (!EventProcessor::Process(event))
         return false;
-    
+
     bool hasBeta = TreeCorrelator::get()->place("Beta")->status();
-    
+
     plot(D_MULT, geEvents_.size());
-    
+
     for (vector<ChanEvent*>::iterator it = geEvents_.begin();
          it != geEvents_.end(); ++it) {
         ChanEvent* chan = *it;
         double gEnergy = chan->GetCalEnergy();
-	
+
         if (gEnergy < gammaThreshold_)
             continue;
-	
+
         double gTime = chan->GetCorrectedTime();
         int det = chan->GetChanID().GetLocation();
-	
+
         plot(calib::D_E_CRYSTALX + det, gEnergy);
         plot(calib::D_E_SUM, gEnergy);
         plot(calib::DD_E_DETX, gEnergy, det);
-	
+
         if (hasBeta) {
             plot(calib::DD_E_DETX_BETA_GATED, gEnergy, det);
-	    
+
             EventData beta = TreeCorrelator::get()->place("Beta")->last();
             double gb_dtime = (gTime - beta.time);
             double betaEnergy = beta.energy;
             int betaLocation = beta.location;
             int timeShift = 20;
-	    
+
             plot(calib::DD_TDIFF__EGAMMA_ALL,
 		 (gb_dtime + timeShift), gEnergy);
             plot(calib::DD_EGAMMA__EBETA_ALL, gEnergy, betaEnergy);
-	    
+
             if (betaLocation == 0) {
                 plot(calib::DD_EGAMMA__EBETA_B0,
 		     gEnergy, betaEnergy);
@@ -279,15 +279,15 @@ bool GeCalibProcessor::Process(RawEvent &event) {
                 plot(calib::DD_TDIFF__EGAMMA_B1,
 		     (gb_dtime + timeShift), gEnergy);
             }
-	    
+
             plot(calib::DD_TDIFF__EGAMMA + 2 * det + betaLocation,
                  (gb_dtime + timeShift), gEnergy);
-	    
+
             plot(calib::DD_EGAMMA__EBETA + 2 * det + betaLocation,
                  gEnergy, betaEnergy / 2.0);
         }
     }
-    
+
     EndProcess();
     return true;
 }
