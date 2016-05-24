@@ -46,22 +46,70 @@
       <Channel number="15" type="generic" subtype="generic"></Channel>
     </Module>
     <Module number="1">
-      <Channel number="0" type="ge" subtype="clover_high"></Channel>
-      <Channel number="1" type="ge" subtype="clover_high" ></Channel>
-      <Channel number="2" type="ge" subtype="clover_high" ></Channel>
-      <Channel number="3" type="ge" subtype="clover_high" ></Channel>
-      <Channel number="4" type="ge" subtype="clover_high" ></Channel>
-      <Channel number="5" type="ge" subtype="clover_high" ></Channel>
-      <Channel number="6" type="ge" subtype="clover_high" ></Channel>
-      <Channel number="7" type="ge" subtype="clover_high" ></Channel>
-      <Channel number="8" type="ge" subtype="clover_high"></Channel>
-      <Channel number="9" type="ge" subtype="clover_high" ></Channel>
-      <Channel number="10" type="ge" subtype="clover_high" ></Channel>
-      <Channel number="11" type="ge" subtype="clover_high" ></Channel>
-      <Channel number="12" type="ge" subtype="clover_high" ></Channel>
-      <Channel number="13" type="ge" subtype="clover_high" ></Channel>
-      <Channel number="14" type="ge" subtype="clover_high" ></Channel>
-      <Channel number="15" type="ge" subtype="clover_high" ></Channel>
+      <Channel number="0" type="ge" subtype="clover_high">
+        <Calibration model="linear" max="16000">
+            0.012  0.28955
+        </Calibration> </Channel>
+      <Channel number="1" type="ge" subtype="clover_high" >
+        <Calibration model="linear" max="16000">
+            -0.049 0.292716
+        </Calibration> </Channel>
+      <Channel number="2" type="ge" subtype="clover_high" >
+        <Calibration model="linear" max="16000">
+            -0.116  0.291058
+        </Calibration> </Channel>
+      <Channel number="3" type="ge" subtype="clover_high" >
+        <Calibration model="linear" max="16000">
+            -0.402 0.288821
+        </Calibration> </Channel>
+      <Channel number="4" type="ge" subtype="clover_high" >
+        <Calibration model="linear" max="16000">
+            -0.022 0.311118
+        </Calibration> </Channel>
+      <Channel number="5" type="ge" subtype="clover_high" >
+        <Calibration model="linear" max="16000">
+            1.432 0.306107
+        </Calibration> </Channel>
+      <Channel number="6" type="ge" subtype="clover_high" >
+        <Calibration model="linear" max="16000">
+            0.024 0.290475
+        </Calibration> </Channel>
+      <Channel number="7" type="ge" subtype="clover_high" >
+        <Calibration model="linear" max="16000">
+            -0.388 0.286519
+        </Calibration> </Channel>
+      <Channel number="8" type="ge" subtype="clover_high">
+        <Calibration model="linear" max="16000">
+            -0.039 0.317992
+        </Calibration> </Channel>
+      <Channel number="9" type="ge" subtype="clover_high" >
+        <Calibration model="linear" max="16000">
+            -0.305 0.324447
+        </Calibration> </Channel>
+      <Channel number="10" type="ge" subtype="clover_high" >
+        <Calibration model="linear" max="16000">
+            -0.070 0.315348
+        </Calibration> </Channel>
+      <Channel number="11" type="ge" subtype="clover_high" >
+        <Calibration model="linear" max="16000">
+            0.150 0.306571
+        </Calibration> </Channel>
+      <Channel number="12" type="ge" subtype="clover_high" >
+        <Calibration model="linear" max="16000">
+            -0.167 0.287374
+        </Calibration> </Channel>
+      <Channel number="13" type="ge" subtype="clover_high" >
+        <Calibration model="linear" max="16000">
+            -0.425 0.303988
+        </Calibration> </Channel>
+      <Channel number="14" type="ge" subtype="clover_high" >
+        <Calibration model="linear" max="16000">
+            -0.035 0.300541
+        </Calibration> </Channel>
+      <Channel number="15" type="ge" subtype="clover_high" >
+        <Calibration model="linear" max="16000">
+            0.411 0.292997
+        </Calibration> </Channel>
     </Module>
     <Module number="2">
       <Channel number="0" type="vandle" subtype="medium" tags="left">
