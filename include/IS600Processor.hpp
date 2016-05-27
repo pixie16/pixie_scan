@@ -28,10 +28,6 @@ public:
     /** Declare the plots used in the analysis */
     virtual void DeclarePlots(void);
 
-    /** PreProcess does nothing since this is solely dependent on results
-     from other Processors*/
-    virtual bool PreProcess(RawEvent &event);
-
     /** Process the event
     * \param [in] event : the event to process
     * \return Returns true if the processing was successful */

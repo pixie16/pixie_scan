@@ -38,10 +38,7 @@ struct VandleRoot{
     unsigned int vid;
 };
 
-struct CloverRoot{
-    double gen0;
-    double gen1;
-};
+double cloverroot[4];
 
 struct TapeInfo{
     unsigned int move;
@@ -49,12 +46,12 @@ struct TapeInfo{
 };
 
 static VandleRoot vandleroot;
-static CloverRoot cloverroot;
 static HighResTimingData::HrtRoot leftside;
 static HighResTimingData::HrtRoot rightside;
 static TapeInfo tapeinfo;
 static unsigned int vsize_ = 0;
 static unsigned int evtnum_ = 0;
+static unsigned int numFills = 0;
 #endif //#ifdef useroot
 
 namespace dammIds {
@@ -88,20 +85,16 @@ void IS600Processor::DeclarePlots(void) {
     DeclareHistogram2D(DD_DEBUGGING2, SC, SC, "Cor ToF vs. Gamma E");
     DeclareHistogram2D(DD_DEBUGGING4, SC, SC, "QDC vs Cor Tof Mult1");
     DeclareHistogram2D(DD_DEBUGGING5, SC, SC, "Mult2 Sym Plot Tof ");
-    DeclareHistogram1D(DD_DEBUGGING6, SE, "LaBr3 RAW");
-    DeclareHistogram2D(DD_PROTONBETA2TDIFF_VS_BETA2EN, SD, SA,
-                       "BetaProton Tdiff vs. Beta Energy");
-
-    const int energyBins1  = SD;
-    DeclareHistogram1D(D_ENERGY, energyBins1,
-		       "Gamma singles ungated");
-    DeclareHistogram1D(D_ENERGYBETA, energyBins1,
-                       "Gamma singles beta gated");
+//    DeclareHistogram1D(DD_DEBUGGING6, SE, "LaBr3 Cal");
+//    DeclareHistogram2D(DD_PROTONBETA2TDIFF_VS_BETA2EN, SD, SA,
+//                       "BetaProton Tdiff vs. Beta Energy");
+//    DeclareHistogram1D(D_ENERGY, SD, "Gamma singles ungated");
+//    DeclareHistogram1D(D_ENERGYBETA, SD, "Gamma singles beta gated");
 //    DeclareHistogram2D(DD_PROTONGAMMATDIFF_VS_GAMMAEN,
 //		       SD, SB, "GammaProton TDIFF vs. Gamma Energy");
 }
 
-IS600Processor::IS600Processor() : EventProcessor(OFFSET, RANGE, "IS600PRocessor") {
+IS600Processor::IS600Processor() : EventProcessor(OFFSET, RANGE, "IS600Processor") {
     associatedTypes.insert("vandle");
     associatedTypes.insert("labr3");
     associatedTypes.insert("beta");
@@ -114,10 +107,10 @@ IS600Processor::IS600Processor() : EventProcessor(OFFSET, RANGE, "IS600PRocessor
 #ifdef useroot
     stringstream rootname;
     rootname << temp << ".root";
-    rootfile_ = new TFile(rootname.str().c_str(),"update");
+    rootfile_ = new TFile(rootname.str().c_str(),"RECREATE");
     roottree_ = new TTree("data","");
     roottree_->Branch("vandle", &vandleroot, "tof/D:qdc:ben:snrl:snrr:pos:tdiff:vid/I");
-    roottree_->Branch("clover", &cloverroot, "en0/D:en1");
+    roottree_->Branch("clover", &cloverroot, "en[4]/D");
     roottree_->Branch("tape", &tapeinfo,"move/b:beam");
     roottree_->Branch("evtnum",&evtnum_,"evtnum/I");
     roottree_->Branch("vsize",&vsize_,"vsize/I");
@@ -138,19 +131,14 @@ IS600Processor::~IS600Processor() {
     walkfile_->Write();
     walkfile_->Close();
     delete(rootfile_);
+    delete(walkfile_);
 #endif
-}
-
-///We do nothing here since we're completely dependent on the resutls of others
-bool IS600Processor::PreProcess(RawEvent &event){
-    if (!EventProcessor::PreProcess(event))
-        return(false);
-    return(true);
 }
 
 bool IS600Processor::Process(RawEvent &event) {
     if (!EventProcessor::Process(event))
         return(false);
+    bool useAddback = true;
     double plotMult_ = 2;
     double plotOffset_ = 1000;
 
@@ -179,17 +167,40 @@ bool IS600Processor::Process(RawEvent &event) {
 
 #ifdef useroot
     vsize_ = vbars.size();
-    if(geAddback.size() != 0) {
-        if(geAddback.at(0).size() != 0)
-            cloverroot.gen0 = geAddback.at(0).at(0).energy;
-        else
-            cloverroot.gen0 = 0;
-        if(geAddback.at(1).size() != 0)
-            cloverroot.gen1 = geAddback.at(1).at(0).energy;
-        else
-            cloverroot.gen1 = 0;
-    } else
-        cloverroot.gen0 = cloverroot.gen1 = 0;
+    if(useAddback) {
+        if(geAddback.size() != 0) {
+            if(geAddback.at(0).size() != 0)
+                cloverroot[0] = geAddback.at(0).at(0).energy;
+            if(geAddback.at(1).size() != 0)
+                cloverroot[1] = geAddback.at(1).at(0).energy;
+            if(geAddback.at(2).size() != 0)
+                cloverroot[2] = geAddback.at(2).at(0).energy;
+            if(geAddback.at(3).size() != 0)
+                cloverroot[3] = geAddback.at(3).at(0).energy;
+        }
+    } else {
+        if (geEvts.size() != 0) {
+            for (vector<ChanEvent *>::const_iterator itGe = geEvts.begin();
+                itGe != geEvts.end(); itGe++) {
+                switch((*itGe)->GetChanID().GetLocation()) {
+                    case(0):
+                        cloverroot[0] = (*itGe)->GetCalEnergy();
+                        break;
+                    case(1):
+                        cloverroot[1] = (*itGe)->GetCalEnergy();
+                        break;
+                    case(2):
+                        cloverroot[2] = (*itGe)->GetCalEnergy();
+                        break;
+                    case(3):
+                        cloverroot[3] = (*itGe)->GetCalEnergy();
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+    }
 
     if(TreeCorrelator::get()->place("TapeMove")->status())
         tapeinfo.move = 1;
@@ -201,13 +212,6 @@ bool IS600Processor::Process(RawEvent &event) {
         tapeinfo.beam = 0;
 #endif
 
-//    for(BarMap::iterator itStart = betas.begin();
-//	    itStart != betas.end(); itStart++) {
-//        (*itStart).second.GetRightSide().FillRootStructure(rightside);
-//        (*itStart).second.GetLeftSide().FillRootStructure(leftside);
-//        walktree_->Fill();
-//    }
-//
     //Obtain some useful logic statuses
     double lastProtonTime =
         TreeCorrelator::get()->place("logic_t1_0")->last().time;
@@ -242,8 +246,7 @@ bool IS600Processor::Process(RawEvent &event) {
             double tof = bar.GetCorTimeAve() -
                 start.GetCorTimeAve() + tofOffset;
 
-            double corTof =
-                ((VandleProcessor*)DetectorDriver::get()->
+            double corTof = ((VandleProcessor*)DetectorDriver::get()->
                 GetProcessor("VandleProcessor"))->
                 CorrectTOF(tof, bar.GetFlightPath(), cal.GetZ0());
 
@@ -257,60 +260,63 @@ bool IS600Processor::Process(RawEvent &event) {
             vandleroot.snrl  = bar.GetLeftSide().GetSignalToNoiseRatio();
             vandleroot.ben   = start.GetQdc();
             roottree_->Fill();
+            numFills++;
+            vandleroot.qdc = vandleroot.pos = vandleroot.tdiff =
+                vandleroot.tof = vandleroot.vid = vandleroot.snrr =
+                vandleroot.snrl = vandleroot.ben;
             #endif
 
             plot(DD_DEBUGGING1, tof*plotMult_+plotOffset_, bar.GetQdc());
-
-            if (geEvts.size() != 0) {
-                for (vector<ChanEvent *>::const_iterator itGe = geEvts.begin();
-                itGe != geEvts.end(); itGe++) {
-                    plot(DD_DEBUGGING2, (*itGe)->GetCalEnergy(),
-                        corTof*plotMult_+plotOffset_);
+            if (geAddback.size() != 0) {
+                for (unsigned int idx = 0; idx < geAddback.size(); idx++) {
+                    if(geAddback.at(idx).size() != 0)
+                        plot(DD_DEBUGGING2, geAddback.at(idx).at(0).energy,
+                            corTof*plotMult_+plotOffset_);
                 }
-                //plot(DD_TQDCAVEVSTOF_VETO+histTypeOffset, tof, bar.GetQdc());
-                //plot(DD_TOFBARS_VETO+histTypeOffset, tof, barPlusStartLoc);
             }
         } // for(TimingMap::iterator itStart
     } //(BarMap::iterator itBar
     //End processing for VANDLE bars
 
     //-------------- LaBr3 Processing ---------------
-    for(vector<ChanEvent*>::const_iterator it = labr3Evts.begin();
-	it != labr3Evts.end(); it++)
-	plot(DD_DEBUGGING6, (*it)->GetEnergy());
+//    for(vector<ChanEvent*>::const_iterator it = labr3Evts.begin();
+//	it != labr3Evts.end(); it++)
+//        plot(DD_DEBUGGING6, (*it)->GetCalEnergy());
 
 
     //------------------ Double Beta Processing --------------
-    for(map<unsigned int, pair<double,double> >::iterator it = lrtBetas.begin();
-	it != lrtBetas.end(); it++)
-        plot(DD_PROTONBETA2TDIFF_VS_BETA2EN, it->second.second,
-            (it->second.first - lastProtonTime) /
-            (10e-3/Globals::get()->clockInSeconds()) );
-
-    //----------------- GE Processing -------------------
-    bool hasBeta = TreeCorrelator::get()->place("Beta")->status();
-    double clockInSeconds = Globals::get()->clockInSeconds();
-    // plot with 10 ms bins
-    const double plotResolution = 10e-3 / clockInSeconds;
-
-    for (vector<ChanEvent*>::iterator it1 = geEvts.begin();
-	 it1 != geEvts.end(); ++it1) {
-        ChanEvent *chan = *it1;
-
-        double gEnergy = chan->GetCalEnergy();
-        double gTime   = chan->GetCorrectedTime();
-        if (gEnergy < 10.) //hard coded fix later.
-            continue;
-
-        plot(D_ENERGY, gEnergy);
-	if(hasBeta)
-	    plot(D_ENERGYBETA, gEnergy);
-	plot(DD_PROTONGAMMATDIFF_VS_GAMMAEN, gEnergy ,
-	     (gTime - lastProtonTime) / plotResolution) ;
-    }
+//    for(map<unsigned int, pair<double,double> >::iterator it = lrtBetas.begin();
+//	it != lrtBetas.end(); it++)
+//        plot(DD_PROTONBETA2TDIFF_VS_BETA2EN, it->second.second,
+//            (it->second.first - lastProtonTime) /
+//            (10e-3/Globals::get()->clockInSeconds()) );
+//
+//    //----------------- GE Processing -------------------
+//    bool hasBeta = TreeCorrelator::get()->place("Beta")->status();
+//    double clockInSeconds = Globals::get()->clockInSeconds();
+//    // plot with 10 ms bins
+//    const double plotResolution = 10e-3 / clockInSeconds;
+//
+//    for (vector<ChanEvent*>::iterator it1 = geEvts.begin();
+//	 it1 != geEvts.end(); ++it1) {
+//        ChanEvent *chan = *it1;
+//
+//        double gEnergy = chan->GetCalEnergy();
+//        double gTime   = chan->GetCorrectedTime();
+//        if (gEnergy < 10.) //hard coded fix later.
+//            continue;
+//
+//        plot(D_ENERGY, gEnergy);
+//	if(hasBeta)
+//	    plot(D_ENERGYBETA, gEnergy);
+//	plot(DD_PROTONGAMMATDIFF_VS_GAMMAEN, gEnergy ,
+//	     (gTime - lastProtonTime) / plotResolution) ;
+//    }
 
 #ifdef useroot
     evtnum_++;
+    cloverroot[0] = cloverroot[1] =
+        cloverroot[2] = cloverroot[3] = 0;
 #endif
     EndProcess();
     return(true);
