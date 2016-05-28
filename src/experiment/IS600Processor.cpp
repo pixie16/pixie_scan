@@ -259,11 +259,11 @@ bool IS600Processor::Process(RawEvent &event) {
             vandleroot.snrr  = bar.GetRightSide().GetSignalToNoiseRatio();
             vandleroot.snrl  = bar.GetLeftSide().GetSignalToNoiseRatio();
             vandleroot.ben   = start.GetQdc();
-            roottree_->Fill();
+            //roottree_->Fill();
             numFills++;
             vandleroot.qdc = vandleroot.pos = vandleroot.tdiff =
                 vandleroot.tof = vandleroot.vid = vandleroot.snrr =
-                vandleroot.snrl = vandleroot.ben;
+                vandleroot.snrl = vandleroot.ben = 0;
             #endif
 
             plot(DD_DEBUGGING1, tof*plotMult_+plotOffset_, bar.GetQdc());
@@ -277,41 +277,6 @@ bool IS600Processor::Process(RawEvent &event) {
         } // for(TimingMap::iterator itStart
     } //(BarMap::iterator itBar
     //End processing for VANDLE bars
-
-    //-------------- LaBr3 Processing ---------------
-//    for(vector<ChanEvent*>::const_iterator it = labr3Evts.begin();
-//	it != labr3Evts.end(); it++)
-//        plot(DD_DEBUGGING6, (*it)->GetCalEnergy());
-
-
-    //------------------ Double Beta Processing --------------
-//    for(map<unsigned int, pair<double,double> >::iterator it = lrtBetas.begin();
-//	it != lrtBetas.end(); it++)
-//        plot(DD_PROTONBETA2TDIFF_VS_BETA2EN, it->second.second,
-//            (it->second.first - lastProtonTime) /
-//            (10e-3/Globals::get()->clockInSeconds()) );
-//
-//    //----------------- GE Processing -------------------
-//    bool hasBeta = TreeCorrelator::get()->place("Beta")->status();
-//    double clockInSeconds = Globals::get()->clockInSeconds();
-//    // plot with 10 ms bins
-//    const double plotResolution = 10e-3 / clockInSeconds;
-//
-//    for (vector<ChanEvent*>::iterator it1 = geEvts.begin();
-//	 it1 != geEvts.end(); ++it1) {
-//        ChanEvent *chan = *it1;
-//
-//        double gEnergy = chan->GetCalEnergy();
-//        double gTime   = chan->GetCorrectedTime();
-//        if (gEnergy < 10.) //hard coded fix later.
-//            continue;
-//
-//        plot(D_ENERGY, gEnergy);
-//	if(hasBeta)
-//	    plot(D_ENERGYBETA, gEnergy);
-//	plot(DD_PROTONGAMMATDIFF_VS_GAMMAEN, gEnergy ,
-//	     (gTime - lastProtonTime) / plotResolution) ;
-//    }
 
 #ifdef useroot
     evtnum_++;
