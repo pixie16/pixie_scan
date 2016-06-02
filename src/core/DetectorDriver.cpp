@@ -37,17 +37,17 @@
 #include "PulserProcessor.hpp"
 #include "SsdProcessor.hpp"
 #include "TeenyVandleProcessor.hpp"
-#include "TraceFilterer.hpp"
 #include "TemplateProcessor.hpp"
 #include "VandleProcessor.hpp"
 #include "ValidProcessor.hpp"
 
 #include "CfdAnalyzer.hpp"
-#include "DoubleTraceAnalyzer.hpp"
+//#include "DoubleTraceAnalyzer.hpp"
 #include "FittingAnalyzer.hpp"
 #include "TauAnalyzer.hpp"
 #include "TraceAnalyzer.hpp"
 #include "TraceExtractor.hpp"
+#include "TraceFilterAnalyzer.hpp"
 #include "WaveformAnalyzer.hpp"
 
 #include "IS600Processor.hpp"
@@ -89,16 +89,13 @@ DetectorDriver::DetectorDriver() : histo(OFFSET, RANGE, "DetectorDriver") {
 
 DetectorDriver::~DetectorDriver() {
     for (vector<EventProcessor *>::iterator it = vecProcess.begin();
-	 it != vecProcess.end(); it++) {
-        delete *it;
-    }
-
+	 it != vecProcess.end(); it++)
+        delete(*it);
     vecProcess.clear();
 
     for (vector<TraceAnalyzer *>::iterator it = vecAnalyzer.begin();
-	 it != vecAnalyzer.end(); it++) {
-        delete *it;
-    }
+	 it != vecAnalyzer.end(); it++)
+        delete(*it);
     vecAnalyzer.clear();
     instance = NULL;
 }
@@ -248,7 +245,9 @@ void DetectorDriver::LoadProcessors(Messenger& m) {
         string name = analyzer.attribute("name").value();
         m.detail("Loading " + name);
 
-        if (name == "TraceFilterer" || name == "DoubleTraceAnalyzer") {
+	if(name == "TraceFilterAnalyzer") {
+	    vecAnalyzer.push_back(new TraceFilterAnalyzer());
+	}/* else if (name == "DoubleTraceAnalyzer") {
             double gain_match = analyzer.attribute("gain_match").as_double(1.0);
             if (gain_match == 1.0)
                 m.warning("Using gain_match = 1.0", 1);
@@ -278,20 +277,17 @@ void DetectorDriver::LoadProcessors(Messenger& m) {
                 analyzer.attribute("slow_threshold").as_int(10);
             if (slow_threshold == 10)
                 m.warning("Using slow_threshold = 10", 1);
-            if (name == "TraceFilterer")
-                vecAnalyzer.push_back(new TraceFilterer(gain_match, fast_rise,
-                    fast_gap, fast_threshold, energy_rise, energy_gap,
-                    slow_rise, slow_gap, slow_threshold));
             else if (name == "DoubleTraceAnalyzer")
                 vecAnalyzer.push_back(new DoubleTraceAnalyzer(gain_match,
                     fast_rise, fast_gap, fast_threshold, energy_rise,
                     energy_gap, slow_rise, slow_gap, slow_threshold));
-        } else if (name == "TauAnalyzer") {
+		    }*/ else if (name == "TauAnalyzer") {
             vecAnalyzer.push_back(new TauAnalyzer());
         } else if (name == "TraceExtractor") {
             string type = analyzer.attribute("type").as_string();
             string subtype = analyzer.attribute("subtype").as_string();
-            vecAnalyzer.push_back(new TraceExtractor(type, subtype));
+            string tag = analyzer.attribute("tag").as_string();
+            vecAnalyzer.push_back(new TraceExtractor(type, subtype,tag));
         } else if (name == "WaveformAnalyzer") {
             vecAnalyzer.push_back(new WaveformAnalyzer());
         } else if (name == "FittingAnalyzer") {
@@ -382,6 +378,12 @@ void DetectorDriver::ProcessEvent(RawEvent& rawev) {
         iProc != vecProcess.end(); iProc++)
             if ( (*iProc)->HasEvent() )
                 (*iProc)->Process(rawev);
+        // Clear all places in correlator (if of resetable type)
+	for (map<string, Place*>::iterator it = 
+		 TreeCorrelator::get()->places_.begin(); 
+	     it != TreeCorrelator::get()->places_.end(); ++it)
+	    if ((*it).second->resetable())
+                (*it).second->reset();
     } catch (GeneralException &e) {
         /// Any exception in activation of basic places, PreProcess and Process
         /// will be intercepted here
@@ -488,22 +490,10 @@ int DetectorDriver::ThreshAndCal(ChanEvent *chan, RawEvent& rawev) {
             if (trace.GetValue("filterEnergy") > 0) {
                 energy = trace.GetValue("filterEnergy");
                 plot(D_FILTER_ENERGY + id, energy);
-
-                /** These plots are used to determine (or check) the
-                 * gain_match parameter to match the filter
-                 * and onboard amplitudes
-                 */
-                using namespace dammIds::trace::tracefilterer;
-                double board_energy = chan->GetEnergy();
-                trace.plot(DD_ENERGY__BOARD_FILTER,
-                            board_energy / 10.0, energy / 10.0);
-                trace.plot(D_RATIO_BOARD_FILTER,
-                            board_energy / energy * 100.0);
-
                 trace.SetValue("filterEnergyCal",
                     cali.GetCalEnergy(chanId, trace.GetValue("filterEnergy")));
             } else {
-                energy = 2;
+                energy = 0.0;
             }
 
             /** Calibrate pulses numbered 2 and forth,
@@ -525,7 +515,6 @@ int DetectorDriver::ThreshAndCal(ChanEvent *chan, RawEvent& rawev) {
             chan->SetEnergy(energy);
         } else if (!trace.HasValue("filterEnergy")) {
             energy = chan->GetEnergy() + randoms->Get();
-            energy /= Globals::get()->energyContraction();
         }
 
         if (trace.HasValue("phase") ) {
@@ -535,14 +524,11 @@ int DetectorDriver::ThreshAndCal(ChanEvent *chan, RawEvent& rawev) {
 				 chan->GetTrigTime() *
 				  Globals::get()->filterClockInSeconds())*1.e9);
         }
-
     } else {
         /// otherwise, use the Pixie on-board calculated energy
         /// add a random number to convert an integer value to a
         ///   uniformly distributed floating point
-
         energy = chan->GetEnergy() + randoms->Get();
-        energy /= Globals::get()->energyContraction();
 	chan->SetHighResTime(0.0);
     }
 
@@ -572,25 +558,17 @@ int DetectorDriver::ThreshAndCal(ChanEvent *chan, RawEvent& rawev) {
         if (summary != NULL)
             summary->AddEvent(chan);
     }
-
     return(1);
 }
 
 int DetectorDriver::PlotRaw(const ChanEvent *chan) {
-    int id = chan->GetID();
-    float energy = chan->GetEnergy() / Globals::get()->energyContraction();
-
-    plot(D_RAW_ENERGY + id, energy);
-
-    return 0;
+    plot(D_RAW_ENERGY + chan->GetID(), chan->GetEnergy());
+    return(0);
 }
 
 int DetectorDriver::PlotCal(const ChanEvent *chan) {
-    int id = chan->GetID();
-    float calEnergy = chan->GetCalEnergy();
-
-    plot(D_CAL_ENERGY + id, calEnergy);
-    return 0;
+    plot(D_CAL_ENERGY + chan->GetID(), chan->GetCalEnergy());
+    return(0);
 }
 
 EventProcessor* DetectorDriver::GetProcessor(const std::string& name) const {
