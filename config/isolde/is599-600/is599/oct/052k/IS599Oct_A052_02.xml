@@ -13,7 +13,6 @@
   <Global>
     <Revision version="F"/>
     <EventWidth unit="s" value="1e-6"/>
-    <EnergyContraction value="1.0"/>
     <Path>config/</Path>
     <NumOfTraces value="50"/>
     <HasRaw value="false"/>
@@ -346,7 +345,6 @@
     </Vandle>
   </TimeCalibration>
 
-  <Timing>
     <Physical>
       <NeutronMass unit="MeV/c/c" value="939.565560"/>
       <SpeedOfLight unit="cm/ns" value="29.9792458"/>
@@ -383,7 +381,6 @@
 	</Pars>
       </Parameters>
     </Fitting>
-  </Timing>
 
   <Notebook file="notes.txt" mode="r"/>
 </Configuration>

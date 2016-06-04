@@ -24,34 +24,32 @@
 #include "VandleProcessor.hpp"
 
 #ifdef useroot
-TFile *rootfile_, *walkfile_;
+TFile *rootfile_;
 TTree *roottree_, *walktree_;
 
 struct VandleRoot{
-    double tof;
-    double qdc;
-    double ben;
-    double snrl;
-    double snrr;
-    double pos;
-    double tdiff;
-    unsigned int vid;
+    double tof[26];
+    double qdc[26];
+    double ben[26];
+    double snrl[26];
+    double snrr[26];
+    double pos[26];
+    double tdiff[26];
+    unsigned int vid[26];
 };
-
-double cloverroot[4];
 
 struct TapeInfo{
     unsigned int move;
     unsigned int beam;
 };
 
-static VandleRoot vandleroot;
+static double rclover[4];
+static VandleRoot rvandle;
 static HighResTimingData::HrtRoot leftside;
 static HighResTimingData::HrtRoot rightside;
 static TapeInfo tapeinfo;
 static unsigned int vsize_ = 0;
 static unsigned int evtnum_ = 0;
-static unsigned int numFills = 0;
 #endif //#ifdef useroot
 
 namespace dammIds {
@@ -80,11 +78,11 @@ using namespace std;
 using namespace dammIds::experiment;
 
 void IS600Processor::DeclarePlots(void) {
-    DeclareHistogram2D(DD_DEBUGGING0, SC, SD, "QDC CTof- No Tape Move");
-    DeclareHistogram2D(DD_DEBUGGING1, SC, SD, "QDC ToF Ungated");
-    DeclareHistogram2D(DD_DEBUGGING2, SC, SC, "Cor ToF vs. Gamma E");
-    DeclareHistogram2D(DD_DEBUGGING4, SC, SC, "QDC vs Cor Tof Mult1");
-    DeclareHistogram2D(DD_DEBUGGING5, SC, SC, "Mult2 Sym Plot Tof ");
+    // DeclareHistogram2D(DD_DEBUGGING0, SC, SD, "QDC CTof- No Tape Move");
+    // DeclareHistogram2D(DD_DEBUGGING1, SC, SD, "QDC ToF Ungated");
+    // DeclareHistogram2D(DD_DEBUGGING2, SC, SC, "Cor ToF vs. Gamma E");
+    // DeclareHistogram2D(DD_DEBUGGING4, SC, SC, "QDC vs Cor Tof Mult1");
+    // DeclareHistogram2D(DD_DEBUGGING5, SC, SC, "Mult2 Sym Plot Tof ");
 //    DeclareHistogram1D(DD_DEBUGGING6, SE, "LaBr3 Cal");
 //    DeclareHistogram2D(DD_PROTONBETA2TDIFF_VS_BETA2EN, SD, SA,
 //                       "BetaProton Tdiff vs. Beta Energy");
@@ -96,8 +94,6 @@ void IS600Processor::DeclarePlots(void) {
 
 IS600Processor::IS600Processor() : EventProcessor(OFFSET, RANGE, "IS600Processor") {
     associatedTypes.insert("vandle");
-    associatedTypes.insert("labr3");
-    associatedTypes.insert("beta");
     associatedTypes.insert("ge");
 
     char hisFileName[32];
@@ -109,18 +105,15 @@ IS600Processor::IS600Processor() : EventProcessor(OFFSET, RANGE, "IS600Processor
     rootname << temp << ".root";
     rootfile_ = new TFile(rootname.str().c_str(),"RECREATE");
     roottree_ = new TTree("data","");
-    roottree_->Branch("vandle", &vandleroot, "tof/D:qdc:ben:snrl:snrr:pos:tdiff:vid/I");
-    roottree_->Branch("clover", &cloverroot, "en[4]/D");
+    roottree_->Branch("vandle", &rvandle, "tof[26]/D:qdc[26]:ben[26]:snrl[26]:snrr[26]:pos[26]:tdiff[26]:vid[26]/I");
+    roottree_->Branch("clover", &rclover, "en[4]/D");
     roottree_->Branch("tape", &tapeinfo,"move/b:beam");
     roottree_->Branch("evtnum",&evtnum_,"evtnum/I");
     roottree_->Branch("vsize",&vsize_,"vsize/I");
 
-    rootname.str("");
-    rootname << temp << "-walk.root";
-    walkfile_ = new TFile(rootname.str().c_str(),"RECREATE");
-    walktree_ = new TTree("walk","");
-    walktree_->Branch("left",&leftside,"qdc/D:time:snr:wtime:phase:abase:sbase:id/b");
-    walktree_->Branch("right",&rightside,"qdc/D:time:snr:wtime:phase:abase:sbase:id/b");
+    // walktree_ = new TTree("walk","");
+    // walktree_->Branch("left",&leftside,"qdc/D:time:snr:wtime:phase:abase:sbase:id/b");
+    // walktree_->Branch("right",&rightside,"qdc/D:time:snr:wtime:phase:abase:sbase:id/b");
 #endif
 }
 
@@ -128,10 +121,7 @@ IS600Processor::~IS600Processor() {
 #ifdef useroot
     rootfile_->Write();
     rootfile_->Close();
-    walkfile_->Write();
-    walkfile_->Close();
     delete(rootfile_);
-    delete(walkfile_);
 #endif
 }
 
@@ -170,13 +160,13 @@ bool IS600Processor::Process(RawEvent &event) {
     if(useAddback) {
         if(geAddback.size() != 0) {
             if(geAddback.at(0).size() != 0)
-                cloverroot[0] = geAddback.at(0).at(0).energy;
+                rclover[0] = geAddback.at(0).at(0).energy;
             if(geAddback.at(1).size() != 0)
-                cloverroot[1] = geAddback.at(1).at(0).energy;
+                rclover[1] = geAddback.at(1).at(0).energy;
             if(geAddback.at(2).size() != 0)
-                cloverroot[2] = geAddback.at(2).at(0).energy;
+                rclover[2] = geAddback.at(2).at(0).energy;
             if(geAddback.at(3).size() != 0)
-                cloverroot[3] = geAddback.at(3).at(0).energy;
+                rclover[3] = geAddback.at(3).at(0).energy;
         }
     } else {
         if (geEvts.size() != 0) {
@@ -184,16 +174,16 @@ bool IS600Processor::Process(RawEvent &event) {
                 itGe != geEvts.end(); itGe++) {
                 switch((*itGe)->GetChanID().GetLocation()) {
                     case(0):
-                        cloverroot[0] = (*itGe)->GetCalEnergy();
+                        rclover[0] = (*itGe)->GetCalEnergy();
                         break;
                     case(1):
-                        cloverroot[1] = (*itGe)->GetCalEnergy();
+                        rclover[1] = (*itGe)->GetCalEnergy();
                         break;
                     case(2):
-                        cloverroot[2] = (*itGe)->GetCalEnergy();
+                        rclover[2] = (*itGe)->GetCalEnergy();
                         break;
                     case(3):
-                        cloverroot[3] = (*itGe)->GetCalEnergy();
+                        rclover[3] = (*itGe)->GetCalEnergy();
                         break;
                     default:
                         break;
@@ -221,13 +211,13 @@ bool IS600Processor::Process(RawEvent &event) {
         TimingDefs::TimingIdentifier barId = (*it).first;
         BarDetector bar = (*it).second;
 
-        if(bar.GetType() != "small") {
-            bar.GetRightSide().FillRootStructure(rightside);
-            bar.GetLeftSide().FillRootStructure(leftside);
-            walktree_->Fill();
-            bar.GetRightSide().ZeroRootStructure(rightside);
-            bar.GetLeftSide().ZeroRootStructure(leftside);
-        }
+        // if(bar.GetType() != "small") {
+        //     bar.GetRightSide().FillRootStructure(rightside);
+        //     bar.GetLeftSide().FillRootStructure(leftside);
+        //     walktree_->Fill();
+        //     bar.GetRightSide().ZeroRootStructure(rightside);
+        //     bar.GetLeftSide().ZeroRootStructure(leftside);
+        // }
 
         if(!bar.GetHasEvent() || bar.GetType() == "small")
             continue;
@@ -251,37 +241,38 @@ bool IS600Processor::Process(RawEvent &event) {
                 CorrectTOF(tof, bar.GetFlightPath(), cal.GetZ0());
 
             #ifdef useroot
-            vandleroot.qdc   = bar.GetQdc();
-            vandleroot.pos   = bar.GetQdcPosition();
-            vandleroot.tdiff = bar.GetTimeDifference();
-            vandleroot.tof   = corTof;
-            vandleroot.vid   = barLoc;
-            vandleroot.snrr  = bar.GetRightSide().GetSignalToNoiseRatio();
-            vandleroot.snrl  = bar.GetLeftSide().GetSignalToNoiseRatio();
-            vandleroot.ben   = start.GetQdc();
-            //roottree_->Fill();
-            numFills++;
-            vandleroot.qdc = vandleroot.pos = vandleroot.tdiff =
-                vandleroot.tof = vandleroot.vid = vandleroot.snrr =
-                vandleroot.snrl = vandleroot.ben = 0;
+            rvandle.qdc[barLoc]   = bar.GetQdc();
+            rvandle.pos[barLoc]   = bar.GetQdcPosition();
+            rvandle.tdiff[barLoc] = bar.GetTimeDifference();
+            rvandle.tof[barLoc]   = corTof;
+            rvandle.vid[barLoc]   = barLoc;
+            rvandle.snrr[barLoc]  = bar.GetRightSide().GetSignalToNoiseRatio();
+            rvandle.snrl[barLoc]  = bar.GetLeftSide().GetSignalToNoiseRatio();
+            rvandle.ben[barLoc]   = start.GetQdc();
             #endif
 
-            plot(DD_DEBUGGING1, tof*plotMult_+plotOffset_, bar.GetQdc());
-            if (geAddback.size() != 0) {
-                for (unsigned int idx = 0; idx < geAddback.size(); idx++) {
-                    if(geAddback.at(idx).size() != 0)
-                        plot(DD_DEBUGGING2, geAddback.at(idx).at(0).energy,
-                            corTof*plotMult_+plotOffset_);
-                }
-            }
+            //plot(DD_DEBUGGING1, tof*plotMult_+plotOffset_, bar.GetQdc());
+            // if (geAddback.size() != 0) {
+            //     for (unsigned int idx = 0; idx < geAddback.size(); idx++) {
+            //         if(geAddback.at(idx).size() != 0)
+            //             // plot(DD_DEBUGGING2, geAddback.at(idx).at(0).energy,
+            //             //     corTof*plotMult_+plotOffset_);
+            //     }
+            // }
         } // for(TimingMap::iterator itStart
     } //(BarMap::iterator itBar
     //End processing for VANDLE bars
 
 #ifdef useroot
+    roottree_->Fill();
     evtnum_++;
-    cloverroot[0] = cloverroot[1] =
-        cloverroot[2] = cloverroot[3] = 0;
+    for(unsigned int i = 0; i < 3; i++)
+	rclover[i] = 0;
+    for(unsigned int i = 0; i < 25; i++)
+	rvandle.qdc[i] = rvandle.pos[i] = rvandle.tdiff[i] =
+	    rvandle.tof[i] = rvandle.vid[i] = 
+	    rvandle.snrr[i] = rvandle.snrl[i] = 
+	    rvandle.ben[i] = -9999;
 #endif
     EndProcess();
     return(true);
