@@ -1,11 +1,14 @@
 var dir_d44c64559bbebec7f509842c48db8b23 =
 [
+    [ "Anl1471Processor.hpp", "db/da6/Anl1471Processor_8hpp.html", [
+      [ "Anl1471Processor", "d3/d84/classAnl1471Processor.html", "d3/d84/classAnl1471Processor" ]
+    ] ],
     [ "BarBuilder.hpp", "dd/d98/BarBuilder_8hpp.html", [
       [ "BarBuilder", "d1/d14/classBarBuilder.html", "d1/d14/classBarBuilder" ]
     ] ],
     [ "BarDetector.hpp", "de/d9d/BarDetector_8hpp.html", "de/d9d/BarDetector_8hpp" ],
-    [ "BeamLogicProcessor.hpp", "d9/dd1/BeamLogicProcessor_8hpp.html", [
-      [ "BeamLogicProcessor", "d8/dad/classBeamLogicProcessor.html", "d8/dad/classBeamLogicProcessor" ]
+    [ "Beta4Hen3Processor.hpp", "d4/d8e/Beta4Hen3Processor_8hpp.html", [
+      [ "Beta4Hen3Processor", "d0/d92/classBeta4Hen3Processor.html", "d0/d92/classBeta4Hen3Processor" ]
     ] ],
     [ "BetaProcessor.hpp", "dd/d65/BetaProcessor_8hpp.html", [
       [ "BetaProcessor", "d0/d43/classBetaProcessor.html", "d0/d43/classBetaProcessor" ]
@@ -37,14 +40,12 @@ var dir_d44c64559bbebec7f509842c48db8b23 =
     [ "DoubleBetaProcessor.hpp", "db/de2/DoubleBetaProcessor_8hpp.html", [
       [ "DoubleBetaProcessor", "d3/ddd/classDoubleBetaProcessor.html", "d3/ddd/classDoubleBetaProcessor" ]
     ] ],
-    [ "DoubleTraceAnalyzer.hpp", "d3/dc3/DoubleTraceAnalyzer_8hpp.html", [
-      [ "DoubleTraceAnalyzer", "df/dd8/classDoubleTraceAnalyzer.html", "df/dd8/classDoubleTraceAnalyzer" ]
-    ] ],
+    [ "Dssd4SHEProcessor.hpp", "d2/d42/Dssd4SHEProcessor_8hpp.html", "d2/d42/Dssd4SHEProcessor_8hpp" ],
     [ "DssdProcessor.hpp", "d6/d4f/DssdProcessor_8hpp.html", [
       [ "DssdProcessor", "d0/d59/classDssdProcessor.html", "d0/d59/classDssdProcessor" ]
     ] ],
     [ "E11006Processor.hpp", "df/de4/E11006Processor_8hpp.html", [
-      [ "ValidProcessor", "dd/d3f/classValidProcessor.html", "dd/d3f/classValidProcessor" ]
+      [ "E11006Processor", "d0/d28/classE11006Processor.html", "d0/d28/classE11006Processor" ]
     ] ],
     [ "EventData.hpp", "df/d76/EventData_8hpp.html", [
       [ "EventData", "df/dff/classEventData.html", "df/dff/classEventData" ]
@@ -88,6 +89,12 @@ var dir_d44c64559bbebec7f509842c48db8b23 =
       [ "IonChamberProcessor", "dd/da0/classIonChamberProcessor.html", "dd/da0/classIonChamberProcessor" ],
       [ "Data", "de/d5b/structIonChamberProcessor_1_1Data.html", "de/d5b/structIonChamberProcessor_1_1Data" ]
     ] ],
+    [ "IS600Processor.hpp", "d2/de1/IS600Processor_8hpp.html", [
+      [ "IS600Processor", "d3/db5/classIS600Processor.html", "d3/db5/classIS600Processor" ]
+    ] ],
+    [ "LaBr3TestProcessor.hpp", "dd/dbc/LaBr3TestProcessor_8hpp.html", [
+      [ "Labr3TestProcessor", "d6/d93/classLabr3TestProcessor.html", "d6/d93/classLabr3TestProcessor" ]
+    ] ],
     [ "LiquidProcessor.hpp", "d1/df1/LiquidProcessor_8hpp.html", [
       [ "LiquidProcessor", "d2/de3/classLiquidProcessor.html", "d2/de3/classLiquidProcessor" ]
     ] ],
@@ -106,9 +113,6 @@ var dir_d44c64559bbebec7f509842c48db8b23 =
     ] ],
     [ "Messenger.hpp", "d1/d64/Messenger_8hpp.html", [
       [ "Messenger", "dc/da6/classMessenger.html", "dc/da6/classMessenger" ]
-    ] ],
-    [ "MtcProcessor.hpp", "d6/d55/MtcProcessor_8hpp.html", [
-      [ "MtcProcessor", "d4/d20/classMtcProcessor.html", "d4/d20/classMtcProcessor" ]
     ] ],
     [ "NeutronProcessor.hpp", "df/dda/NeutronProcessor_8hpp.html", [
       [ "NeutronProcessor", "de/d0f/classNeutronProcessor.html", "de/d0f/classNeutronProcessor" ]
@@ -140,6 +144,10 @@ var dir_d44c64559bbebec7f509842c48db8b23 =
     [ "PositionProcessor.hpp", "db/dd5/PositionProcessor_8hpp.html", [
       [ "PositionProcessor", "d8/d3a/classPositionProcessor.html", "d8/d3a/classPositionProcessor" ]
     ] ],
+    [ "PspmtProcessor.hpp", "de/d4f/PspmtProcessor_8hpp.html", [
+      [ "PspmtProcessor", "dd/d15/classPspmtProcessor.html", "dd/d15/classPspmtProcessor" ],
+      [ "PspmtData", "dc/d8b/structPspmtProcessor_1_1PspmtData.html", "dc/d8b/structPspmtProcessor_1_1PspmtData" ]
+    ] ],
     [ "PulserProcessor.hpp", "db/d30/PulserProcessor_8hpp.html", [
       [ "PulserProcessor", "d7/d9f/classPulserProcessor.html", "d7/d9f/classPulserProcessor" ]
     ] ],
@@ -155,18 +163,24 @@ var dir_d44c64559bbebec7f509842c48db8b23 =
     [ "ScintProcessor.hpp", "d6/d1d/ScintProcessor_8hpp.html", [
       [ "ScintProcessor", "dd/dfe/classScintProcessor.html", "dd/dfe/classScintProcessor" ]
     ] ],
+    [ "SheCorrelator.hpp", "d3/d9b/SheCorrelator_8hpp.html", "d3/d9b/SheCorrelator_8hpp" ],
     [ "SsdBetaProcessor.hpp", "de/df4/SsdBetaProcessor_8hpp.html", [
       [ "SsdProcessor", "df/d3f/classSsdProcessor.html", "df/d3f/classSsdProcessor" ]
     ] ],
     [ "SsdProcessor.hpp", "dd/d49/SsdProcessor_8hpp.html", [
       [ "SsdProcessor", "df/d3f/classSsdProcessor.html", "df/d3f/classSsdProcessor" ]
     ] ],
-    [ "StatsData.hpp", "d3/df6/StatsData_8hpp_source.html", null ],
+    [ "StatsData.hpp", "d3/df6/StatsData_8hpp.html", [
+      [ "StatsData", "d0/d5a/classStatsData.html", "d0/d5a/classStatsData" ]
+    ] ],
     [ "TauAnalyzer.hpp", "d2/dfe/TauAnalyzer_8hpp.html", [
       [ "TauAnalyzer", "d2/d52/classTauAnalyzer.html", "d2/d52/classTauAnalyzer" ]
     ] ],
     [ "TeenyVandleProcessor.hpp", "d1/d6b/TeenyVandleProcessor_8hpp.html", [
       [ "TeenyVandleProcessor", "da/d7f/classTeenyVandleProcessor.html", "da/d7f/classTeenyVandleProcessor" ]
+    ] ],
+    [ "TemplateExpProcessor.hpp", "dd/dd0/TemplateExpProcessor_8hpp.html", [
+      [ "TemplateExpProcessor", "d5/dda/classTemplateExpProcessor.html", "d5/dda/classTemplateExpProcessor" ]
     ] ],
     [ "TemplateProcessor.hpp", "dc/deb/TemplateProcessor_8hpp.html", [
       [ "TemplateProcessor", "d4/d92/classTemplateProcessor.html", "d4/d92/classTemplateProcessor" ]
@@ -185,16 +199,16 @@ var dir_d44c64559bbebec7f509842c48db8b23 =
     [ "TraceExtractor.hpp", "d9/d26/TraceExtractor_8hpp.html", [
       [ "TraceExtractor", "d5/d42/classTraceExtractor.html", "d5/d42/classTraceExtractor" ]
     ] ],
-    [ "TraceFilterer.hpp", "d9/dd8/TraceFilterer_8hpp.html", [
-      [ "TraceFilterer", "d0/d77/classTraceFilterer.html", "d0/d77/classTraceFilterer" ],
-      [ "PulseInfo", "d0/d40/structTraceFilterer_1_1PulseInfo.html", "d0/d40/structTraceFilterer_1_1PulseInfo" ]
+    [ "TraceFilter.hpp", "d0/dcd/TraceFilter_8hpp.html", [
+      [ "TraceFilter", "d0/d30/classTraceFilter.html", "d0/d30/classTraceFilter" ]
     ] ],
+    [ "TraceFilterAnalyzer.hpp", "d6/dae/TraceFilterAnalyzer_8hpp.html", [
+      [ "TraceFilterAnalyzer", "de/dd1/classTraceFilterAnalyzer.html", "de/dd1/classTraceFilterAnalyzer" ]
+    ] ],
+    [ "TrapFilterParameters.hpp", "dc/df0/TrapFilterParameters_8hpp_source.html", null ],
     [ "TreeCorrelator.hpp", "d4/d49/TreeCorrelator_8hpp.html", [
       [ "Walker", "d9/d99/classWalker.html", "d9/d99/classWalker" ],
       [ "TreeCorrelator", "d2/da4/classTreeCorrelator.html", "d2/da4/classTreeCorrelator" ]
-    ] ],
-    [ "TriggerLogicProcessor.hpp", "dd/d8f/TriggerLogicProcessor_8hpp.html", [
-      [ "TriggerLogicProcessor", "d8/dea/classTriggerLogicProcessor.html", "d8/dea/classTriggerLogicProcessor" ]
     ] ],
     [ "ValidProcessor.hpp", "d2/d41/ValidProcessor_8hpp.html", [
       [ "ValidProcessor", "dd/d3f/classValidProcessor.html", "dd/d3f/classValidProcessor" ]
@@ -204,6 +218,9 @@ var dir_d44c64559bbebec7f509842c48db8b23 =
     ] ],
     [ "VandleProcessor.hpp", "d2/dfa/VandleProcessor_8hpp.html", [
       [ "VandleProcessor", "de/d92/classVandleProcessor.html", "de/d92/classVandleProcessor" ]
+    ] ],
+    [ "WaaAnalyzer.hpp", "dc/d2c/WaaAnalyzer_8hpp.html", [
+      [ "WaaAnalyzer", "d1/dd2/classWaaAnalyzer.html", "d1/dd2/classWaaAnalyzer" ]
     ] ],
     [ "WalkCorrector.hpp", "d9/d27/WalkCorrector_8hpp.html", "d9/d27/WalkCorrector_8hpp" ],
     [ "WalkVandleBetaProcessor.hpp", "db/d6a/WalkVandleBetaProcessor_8hpp.html", [

@@ -5,10 +5,11 @@ var NAVTREE =
     [ "Namespaces", null, [
       [ "Namespace List", "namespaces.html", "namespaces" ],
       [ "Namespace Members", "namespacemembers.html", [
-        [ "All", "namespacemembers.html", null ],
+        [ "All", "namespacemembers.html", "namespacemembers_dup" ],
         [ "Functions", "namespacemembers_func.html", null ],
-        [ "Variables", "namespacemembers_vars.html", null ],
-        [ "Typedefs", "namespacemembers_type.html", null ]
+        [ "Variables", "namespacemembers_vars.html", "namespacemembers_vars" ],
+        [ "Typedefs", "namespacemembers_type.html", null ],
+        [ "Enumerations", "namespacemembers_enum.html", null ]
       ] ]
     ] ],
     [ "Data Structures", "annotated.html", [
@@ -40,14 +41,17 @@ var NAVTREE =
 
 var NAVTREEINDEX =
 [
-"annotated.html",
-"d2/d1b/xmlconfig.html#xml-cals",
-"d2/ddd/classGlobals.html#a23de116a3e7495445ccc455d827acbe1",
-"d4/d92/classTemplateProcessor.html#a2961282ba4e4d5e118499cc7168cced1",
-"d7/df8/GeProcessor_8hpp.html#a70551e1076cae13c64031e4dfdaf310f",
-"d9/df1/classLitePositionProcessor.html#ad68a103a00ebfd4b765bc280f29cf8f9",
-"dd/d8f/TriggerLogicProcessor_8hpp_source.html",
-"df/dd7/DammPlotIds_8hpp.html#aae0e7d7c4228506b4a1911d1796b8834"
+"DetectorDriver.html",
+"d1/d90/classGeProcessor.html#a989fd4f3589cf001ad781ac6c78d37e6",
+"d2/d78/classHighResTimingData.html#ae030857390e4ad2262e30f896c9f03b3",
+"d3/de9/ImplantSsdProcessor_8hpp.html",
+"d5/dda/classTemplateExpProcessor.html#a328ae137611216601a6c665e2920e266",
+"d8/d74/NeutronScintProcessor_8hpp_source.html",
+"db/d17/TeenyVandleProcessor_8cpp.html#a0a526d2d0b18e1096db2418ffedb1a62",
+"dd/d74/ScintProcessor_8cpp.html#a0689003d4a903bf89f8f51ac2bd9c940",
+"de/dd1/classTraceFilterAnalyzer.html#a4709b9dd21871b213219f18ff7f29b50",
+"functions_0x7e.html",
+"xmlconfig.html#xml-tcal"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';
