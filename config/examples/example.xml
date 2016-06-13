@@ -57,7 +57,7 @@
 
     <!-- Instructions:
          Add
-            <Process name="SomethingProcessor"/>
+            <Processor name="SomethingProcessor"/>
          and
             <Analyzer name="SomethingAnalyzer"/>
          for each processor or analyzer you want to use.
