@@ -36,17 +36,12 @@ struct VandleRoot{
     double pos;
     double tdiff;
     unsigned int vid;
+    bool hasg;
 };
 
 struct TapeInfo{
     unsigned int move;
     unsigned int beam;
-};
-
-struct TwoN {
-    double tof;
-    double qdc;
-    unsigned int id;
 };
 
 static double rclover[16];
@@ -58,7 +53,6 @@ static TapeInfo tapeinfo;
 static unsigned int vsize_ = 0;
 static unsigned int evtnum_ = 0;
 static unsigned int v2nsize_ = 0;
-static TwoN twoneutron;
 
 TH1D *chit = new TH1D("chit","",20,0,20);
 TH2D *twon = new TH2D("twon","",260,-10,250,8000,0,32000);
@@ -117,7 +111,7 @@ IS600Processor::IS600Processor() : EventProcessor(OFFSET, RANGE, "IS600Processor
     rootname << temp << ".root";
     rootfile_ = new TFile(rootname.str().c_str(),"UPDATE");
     roottree_ = new TTree("data","");
-    roottree_->Branch("vandle", &rvandle, "tof/D:qdc:ben:snrl:snrr:pos:tdiff:vid/I");
+    roottree_->Branch("vandle", &rvandle, "tof/D:qdc:ben:snrl:snrr:pos:tdiff:vid/I:hasg/b");
 //    roottree_->Branch("clover", &rclover, "en[16]/D");
 //    roottree_->Branch("beta", &rbeta, "en/D");
     roottree_->Branch("tape", &tapeinfo,"move/b:beam");
@@ -220,7 +214,8 @@ bool IS600Processor::Process(RawEvent &event) {
     double lastProtonTime =
         TreeCorrelator::get()->place("logic_t1_0")->last().time;
 
-    bool isMaybeTwoN = has1027 && hasAtLeastTwoV;
+    //bool isMaybeTwoN = has1027 && hasAtLeastTwoV;
+    bool isMaybeTwoN = hasAtLeastTwoV;
     vector<VandleRoot> trueTwoN;
 
     //Begin processing for VANDLE bars
@@ -257,10 +252,10 @@ bool IS600Processor::Process(RawEvent &event) {
                 GetProcessor("VandleProcessor"))->
                 CorrectTOF(tof, bar.GetFlightPath(), cal.GetZ0());
 
-            //Only neutrons between 30 ns and 230 ns are likely to be real
+            //Only neutrons between 30 ns and 250 ns are likely to be real
             if(isMaybeTwoN) {
                 VandleRoot vroot;
-                if(corTof > 30 && corTof < 250) {
+                //if(corTof > 30 && corTof < 250) {
                     #ifdef useroot
                     vroot.qdc   = bar.GetQdc();
                     vroot.pos   = bar.GetQdcPosition();
@@ -270,9 +265,10 @@ bool IS600Processor::Process(RawEvent &event) {
                     vroot.snrr  = bar.GetRightSide().GetSignalToNoiseRatio();
                     vroot.snrl  = bar.GetLeftSide().GetSignalToNoiseRatio();
                     vroot.ben   = start.GetQdc();
+                    vroot.hasg  = has1027;
                     #endif
                     trueTwoN.push_back(vroot);
-                }
+                //}
             }
 
             //plot(DD_DEBUGGING1, tof*plotMult_+plotOffset_, bar.GetQdc());
@@ -291,7 +287,7 @@ bool IS600Processor::Process(RawEvent &event) {
         v2nsize_ = trueTwoN.size();
         for(vector<VandleRoot>::iterator it = trueTwoN.begin();
             it != trueTwoN.end(); it++) {
-            cout << it->tof << " " << it->qdc << " " << evtnum_ << endl;
+            //cout << it->tof << " " << it->qdc << " " << evtnum_ << endl;
             plot(DD_DEBUGGING0, it->tof*plotMult_+plotOffset_, it->qdc);
             twon->Fill(it->tof,it->qdc);
             rvandle = *it;
