@@ -346,7 +346,6 @@
     </Vandle>
   </TimeCalibration>
 
-  <Timing>
     <Physical>
       <NeutronMass unit="MeV/c/c" value="939.565560"/>
       <SpeedOfLight unit="cm/ns" value="29.9792458"/>
@@ -384,7 +383,6 @@
 	</Pars>
       </Parameters>
     </Fitting>
-  </Timing>
 
   <Notebook file="notes.txt" mode="r"/>
 </Configuration>

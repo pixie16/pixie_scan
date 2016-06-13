@@ -28,14 +28,14 @@ TFile *rootfile_;
 TTree *roottree_, *walktree_;
 
 struct VandleRoot{
-    double tof[26];
-    double qdc[26];
-    double ben[26];
-    double snrl[26];
-    double snrr[26];
-    double pos[26];
-    double tdiff[26];
-    unsigned int vid[26];
+    double tof;
+    double qdc;
+    double ben;
+    double snrl;
+    double snrr;
+    double pos;
+    double tdiff;
+    unsigned int vid;
 };
 
 struct TapeInfo{
@@ -43,13 +43,25 @@ struct TapeInfo{
     unsigned int beam;
 };
 
-static double rclover[4];
+struct TwoN {
+    double tof;
+    double qdc;
+    unsigned int id;
+};
+
+static double rclover[16];
+static double rbeta;
 static VandleRoot rvandle;
 static HighResTimingData::HrtRoot leftside;
 static HighResTimingData::HrtRoot rightside;
 static TapeInfo tapeinfo;
 static unsigned int vsize_ = 0;
 static unsigned int evtnum_ = 0;
+static unsigned int v2nsize_ = 0;
+static TwoN twoneutron;
+
+TH1D *chit = new TH1D("chit","",20,0,20);
+TH2D *twon = new TH2D("twon","",260,-10,250,8000,0,32000);
 #endif //#ifdef useroot
 
 namespace dammIds {
@@ -78,7 +90,7 @@ using namespace std;
 using namespace dammIds::experiment;
 
 void IS600Processor::DeclarePlots(void) {
-    // DeclareHistogram2D(DD_DEBUGGING0, SC, SD, "QDC CTof- No Tape Move");
+    DeclareHistogram2D(DD_DEBUGGING0, SC, SD, "QDC CTof- 2n");
     // DeclareHistogram2D(DD_DEBUGGING1, SC, SD, "QDC ToF Ungated");
     // DeclareHistogram2D(DD_DEBUGGING2, SC, SC, "Cor ToF vs. Gamma E");
     // DeclareHistogram2D(DD_DEBUGGING4, SC, SC, "QDC vs Cor Tof Mult1");
@@ -94,7 +106,7 @@ void IS600Processor::DeclarePlots(void) {
 
 IS600Processor::IS600Processor() : EventProcessor(OFFSET, RANGE, "IS600Processor") {
     associatedTypes.insert("vandle");
-    associatedTypes.insert("ge");
+    //associatedTypes.insert("ge");
 
     char hisFileName[32];
     GetArgument(1, hisFileName, 32);
@@ -103,13 +115,16 @@ IS600Processor::IS600Processor() : EventProcessor(OFFSET, RANGE, "IS600Processor
 #ifdef useroot
     stringstream rootname;
     rootname << temp << ".root";
-    rootfile_ = new TFile(rootname.str().c_str(),"RECREATE");
+    rootfile_ = new TFile(rootname.str().c_str(),"UPDATE");
     roottree_ = new TTree("data","");
-    roottree_->Branch("vandle", &rvandle, "tof[26]/D:qdc[26]:ben[26]:snrl[26]:snrr[26]:pos[26]:tdiff[26]:vid[26]/I");
-    roottree_->Branch("clover", &rclover, "en[4]/D");
+    roottree_->Branch("vandle", &rvandle, "tof/D:qdc:ben:snrl:snrr:pos:tdiff:vid/I");
+//    roottree_->Branch("clover", &rclover, "en[16]/D");
+//    roottree_->Branch("beta", &rbeta, "en/D");
     roottree_->Branch("tape", &tapeinfo,"move/b:beam");
     roottree_->Branch("evtnum",&evtnum_,"evtnum/I");
     roottree_->Branch("vsize",&vsize_,"vsize/I");
+    roottree_->Branch("v2nsize",&v2nsize_,"v2nsize/I");
+    //roottree_->Branch("twon",&twoneutron, "tof/D:qdc:id/I");
 
     // walktree_ = new TTree("walk","");
     // walktree_->Branch("left",&leftside,"qdc/D:time:snr:wtime:phase:abase:sbase:id/b");
@@ -119,6 +134,8 @@ IS600Processor::IS600Processor() : EventProcessor(OFFSET, RANGE, "IS600Processor
 
 IS600Processor::~IS600Processor() {
 #ifdef useroot
+    chit->Write();
+    twon->Write();
     rootfile_->Write();
     rootfile_->Close();
     delete(rootfile_);
@@ -128,7 +145,8 @@ IS600Processor::~IS600Processor() {
 bool IS600Processor::Process(RawEvent &event) {
     if (!EventProcessor::Process(event))
         return(false);
-    bool useAddback = true;
+    static const bool useAddback = false;
+    bool has1027 = false, hasAtLeastTwoV = false;
     double plotMult_ = 2;
     double plotOffset_ = 1000;
 
@@ -155,11 +173,18 @@ bool IS600Processor::Process(RawEvent &event) {
     static const vector<ChanEvent*> &labr3Evts =
 	event.GetSummary("labr3:mrbig")->GetList();
 
+    if(vbars.size() > 1)
+        hasAtLeastTwoV = true;
+
 #ifdef useroot
+    if(lrtBetas.size() == 1)
+        rbeta = lrtBetas.begin()->second.second;
+    else
+        rbeta = -9999;
     vsize_ = vbars.size();
     if(useAddback) {
         if(geAddback.size() != 0) {
-            if(geAddback.at(0).size() != 0)
+            if(geAddback.at(1).size() != 0)
                 rclover[0] = geAddback.at(0).at(0).energy;
             if(geAddback.at(1).size() != 0)
                 rclover[1] = geAddback.at(1).at(0).energy;
@@ -172,23 +197,12 @@ bool IS600Processor::Process(RawEvent &event) {
         if (geEvts.size() != 0) {
             for (vector<ChanEvent *>::const_iterator itGe = geEvts.begin();
                 itGe != geEvts.end(); itGe++) {
-                switch((*itGe)->GetChanID().GetLocation()) {
-                    case(0):
-                        rclover[0] = (*itGe)->GetCalEnergy();
-                        break;
-                    case(1):
-                        rclover[1] = (*itGe)->GetCalEnergy();
-                        break;
-                    case(2):
-                        rclover[2] = (*itGe)->GetCalEnergy();
-                        break;
-                    case(3):
-                        rclover[3] = (*itGe)->GetCalEnergy();
-                        break;
-                    default:
-                        break;
+                    double en = (*itGe)->GetCalEnergy();
+                    if(en >= 1024 && en <= 1030)
+                        has1027 = true;
+                    chit->Fill((*itGe)->GetChanID().GetLocation());
+                    rclover[(*itGe)->GetChanID().GetLocation()] = en;
                 }
-            }
         }
     }
 
@@ -205,6 +219,9 @@ bool IS600Processor::Process(RawEvent &event) {
     //Obtain some useful logic statuses
     double lastProtonTime =
         TreeCorrelator::get()->place("logic_t1_0")->last().time;
+
+    bool isMaybeTwoN = has1027 && hasAtLeastTwoV;
+    vector<VandleRoot> trueTwoN;
 
     //Begin processing for VANDLE bars
     for (BarMap::iterator it = vbars.begin(); it !=  vbars.end(); it++) {
@@ -240,16 +257,23 @@ bool IS600Processor::Process(RawEvent &event) {
                 GetProcessor("VandleProcessor"))->
                 CorrectTOF(tof, bar.GetFlightPath(), cal.GetZ0());
 
-            #ifdef useroot
-            rvandle.qdc[barLoc]   = bar.GetQdc();
-            rvandle.pos[barLoc]   = bar.GetQdcPosition();
-            rvandle.tdiff[barLoc] = bar.GetTimeDifference();
-            rvandle.tof[barLoc]   = corTof;
-            rvandle.vid[barLoc]   = barLoc;
-            rvandle.snrr[barLoc]  = bar.GetRightSide().GetSignalToNoiseRatio();
-            rvandle.snrl[barLoc]  = bar.GetLeftSide().GetSignalToNoiseRatio();
-            rvandle.ben[barLoc]   = start.GetQdc();
-            #endif
+            //Only neutrons between 30 ns and 230 ns are likely to be real
+            if(isMaybeTwoN) {
+                VandleRoot vroot;
+                if(corTof > 30 && corTof < 250) {
+                    #ifdef useroot
+                    vroot.qdc   = bar.GetQdc();
+                    vroot.pos   = bar.GetQdcPosition();
+                    vroot.tdiff = bar.GetTimeDifference();
+                    vroot.tof   = corTof;
+                    vroot.vid   = barLoc;
+                    vroot.snrr  = bar.GetRightSide().GetSignalToNoiseRatio();
+                    vroot.snrl  = bar.GetLeftSide().GetSignalToNoiseRatio();
+                    vroot.ben   = start.GetQdc();
+                    #endif
+                    trueTwoN.push_back(vroot);
+                }
+            }
 
             //plot(DD_DEBUGGING1, tof*plotMult_+plotOffset_, bar.GetQdc());
             // if (geAddback.size() != 0) {
@@ -263,16 +287,28 @@ bool IS600Processor::Process(RawEvent &event) {
     } //(BarMap::iterator itBar
     //End processing for VANDLE bars
 
+    if(trueTwoN.size() > 1) {
+        v2nsize_ = trueTwoN.size();
+        for(vector<VandleRoot>::iterator it = trueTwoN.begin();
+            it != trueTwoN.end(); it++) {
+            cout << it->tof << " " << it->qdc << " " << evtnum_ << endl;
+            plot(DD_DEBUGGING0, it->tof*plotMult_+plotOffset_, it->qdc);
+            twon->Fill(it->tof,it->qdc);
+            rvandle = *it;
+            roottree_->Fill();
+        }
+    }
+
 #ifdef useroot
-    roottree_->Fill();
+//    roottree_->Fill();
     evtnum_++;
-    for(unsigned int i = 0; i < 3; i++)
-	rclover[i] = 0;
-    for(unsigned int i = 0; i < 25; i++)
-	rvandle.qdc[i] = rvandle.pos[i] = rvandle.tdiff[i] =
-	    rvandle.tof[i] = rvandle.vid[i] = 
-	    rvandle.snrr[i] = rvandle.snrl[i] = 
-	    rvandle.ben[i] = -9999;
+//    for(unsigned int i = 0; i < 15; i++)
+//      rclover[i] = -9999;
+//    for(unsigned int i = 0; i < 25; i++)
+//	    rvandle.qdc[i] = rvandle.pos[i] = rvandle.tdiff[i] =
+//	    rvandle.tof[i] = rvandle.vid[i] =
+//	    rvandle.snrr[i] = rvandle.snrl[i] =
+//	    rvandle.ben[i] = -9999;
 #endif
     EndProcess();
     return(true);
