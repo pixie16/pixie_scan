@@ -257,7 +257,8 @@ void DetectorDriver::LoadProcessors(Messenger& m) {
         } else if (name == "WaveformAnalyzer") {
             vecAnalyzer.push_back(new WaveformAnalyzer());
         } else if (name == "FittingAnalyzer") {
-            vecAnalyzer.push_back(new FittingAnalyzer());
+            string type = analyzer.attribute("type").as_string();
+            vecAnalyzer.push_back(new FittingAnalyzer(type));
         } else if (name == "CfdAnalyzer") {
             vecAnalyzer.push_back(new CfdAnalyzer());
         } else {
