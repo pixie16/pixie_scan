@@ -2,6 +2,7 @@
 *.o
 pixie_ldf_*
 build/
+.idea
 
 #Backup files from various editors
 *.save
