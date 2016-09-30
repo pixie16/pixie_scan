@@ -355,6 +355,9 @@ void VandleProcessor::FillVandleOnlyHists(void) {
         BarDetector bar = (*it).second;
         unsigned int OFFSET = ReturnOffset(barId.second);
 
+        if(!bar.GetLeftSide().GetIsValid() && !bar.GetRightSide().GetIsValid())
+            continue;
+
         plot(DD_TQDCBARS + OFFSET,
              bar.GetLeftSide().GetTraceQdc(), barId.first*2);
         plot(DD_MAXIMUMBARS + OFFSET,

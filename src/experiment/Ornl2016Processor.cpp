@@ -56,7 +56,8 @@ void Ornl2016Processor::DeclarePlots(void) {
 
 }
 
-Ornl2016Processor::Ornl2016Processor() {
+Ornl2016Processor::Ornl2016Processor() : EventProcessor(OFFSET, RANGE,
+                                                        "Ornl2016Processor"){
     associatedTypes.insert("vandle");
     associatedTypes.insert("liglass");
     associatedTypes.insert("nai");
