@@ -49,7 +49,7 @@
 #include "TraceFilterAnalyzer.hpp"
 #include "WaveformAnalyzer.hpp"
 
-#include "TemplateExpProcessor.hpp"
+#include "Ornl2016Processor.hpp"
 
 #ifdef useroot
 #include "RootProcessor.hpp"
@@ -214,8 +214,8 @@ void DetectorDriver::LoadProcessors(Messenger& m) {
                 vecProcess.push_back(new PspmtProcessor());
         } else if (name == "TemplateProcessor") {
             vecProcess.push_back(new TemplateProcessor());
-        } else if (name == "TemplateExpProcessor") {
-            vecProcess.push_back(new TemplateExpProcessor());
+        } else if (name == "Ornl2016Processor") {
+            vecProcess.push_back(new Ornl2016Processor());
 	}
 #ifdef useroot
         else if (name == "RootProcessor") {
