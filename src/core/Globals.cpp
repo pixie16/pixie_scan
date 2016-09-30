@@ -97,7 +97,9 @@ Globals::Globals() {
                 configPath_ =  it->text().get();
                 m.detail("Path to other configuration files: " + configPath_);
             } else if (std::string(it->name()).compare("NumOfTraces") == 0) {
-                numTraces_ =  it->attribute("value").as_uint();
+                numTraces_ = it->attribute("value").as_uint();
+            } else if (std::string(it->name()).compare("BitResolution") == 0) {
+                    bitResolution_ = it->attribute("value").as_double(12);
             } else if (std::string(it->name()).compare("HasRaw") == 0) {
                 hasRaw_ = it->attribute("value").as_bool(true);
             } else

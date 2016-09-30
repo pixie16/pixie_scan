@@ -167,6 +167,8 @@ public:
     double bigLength() const {return(bigLength_);}
     /** \return the length of the big VANDLE bars in ns */
     double bigLengthTime() const {return(bigLength_/speedOfLightBig_);}
+    ///\return the bit resolution of the ADC (e.x. 12 bit = 4096)
+    double bitResolution() const { return pow(2, bitResolution_); }
     /** \return the pixie clock in seconds */
     double clockInSeconds() const {return(clockInSeconds_);}
     /** \return the starting point in the trace for the n-gamma discrimination */
@@ -275,6 +277,7 @@ private:
     bool hasRaw_; //!< True for plotting Raw Histograms in DAMM
 
     double adcClockInSeconds_; //!< adc clock in second
+    double bitResolution_;//!<The Bit resolution of the digitizer that we used.
     double clockInSeconds_;//!< the ACQ clock in seconds
     double discriminationStart_;//!< starting sample for the n-gamma discrimination
     double eventInSeconds_;//!< event width in seconds
