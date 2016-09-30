@@ -15,6 +15,7 @@
 
     <Global>
         <Revision version="F"/>
+        <BitResolution value="12"/>
         <EventWidth unit="s" value="1e-6"/>
         <EnergyContraction value="1.0"/>
         <Path>config/</Path>
@@ -43,7 +44,9 @@
         <Processor name="DoubleBetaProcessor"/>
         <Processor name="VandleProcessor" types="medium" res="2"
                    offset="1000" NumStarts="1"/>
+        <!--
         <Processor name="Ornl2016Processor"/>
+        -->
     </DetectorDriver>
 
     <Map verbose_calibration="False" verbose_map="False" verbose_walk="False">

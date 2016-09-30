@@ -38,6 +38,11 @@ void WaveformAnalyzer::Analyze(Trace &trace, const std::string &type,
         return;
     }
 
+    if(type == "liglass" || type == "labr3") {
+        EndAnalyze();
+        return;
+    }
+    
     mean_ = mval_ = 0;
 
     g_ = Globals::get();
@@ -48,6 +53,8 @@ void WaveformAnalyzer::Analyze(Trace &trace, const std::string &type,
     if (type == "beta" && subtype == "double" &&
         tags.find("timing") != tags.end())
         range = g_->waveformRange(type + ":" + subtype + ":timing");
+
+
 
     try {
         //First we find the waveform in the trace
