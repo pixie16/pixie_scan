@@ -1,8 +1,8 @@
 #Build files
 *.o
 pixie_ldf_*
-build/
-.idea
+*build-*/
+.idea/
 
 #Backup files from various editors
 *.save
@@ -36,4 +36,4 @@ HIS
 LDF
 HIS/*
 LDF/*
-data
+data/
