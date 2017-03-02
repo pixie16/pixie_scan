@@ -6,13 +6,13 @@
 find_path(UPAK_LIBRARY_DIR
   NAMES scanorlib.a orphlib.a
   HINTS $ENV{HHIRF_DIR}
-  PATHS /usr/hhirf
-  /opt/hhirf)
+  PATHS /usr/hhirf /opt/hhirf)
+
 find_path(ACQ2_LIBRARY_DIR
   NAMES acqlib.a ipclib.a
   HINTS $ENV{ACQ2_LIBDIR}
-  PATHS /usr/acq2
-  /opt/acq2)
+  PATHS /usr/acq2 /opt/acq2 /usr/hhirf /opt/hhirf)
+
 # Support the REQUIRED and QUIET arguments.
 include (FindPackageHandleStandardArgs)
 FIND_PACKAGE_HANDLE_STANDARD_ARGS(HRIBF DEFAULT_MSG 
